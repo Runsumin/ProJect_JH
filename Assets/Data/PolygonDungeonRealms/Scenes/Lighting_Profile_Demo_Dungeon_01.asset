@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09549af41255a3d46b8b500a63f93e23, type: 3}
+  m_Name: Lighting_Profile_Demo_Dungeon_01
+  m_EditorClassIdentifier: 
+  mainCameraName: Main Camera
+  objectName: LightingProfile
+  volumeProfile: {fileID: 11400000, guid: 65fe6f3a86c570b4f811e3393b525b84, type: 2}
+  lightingMode: 0
+  bakedResolution: 10
+  lightSettings: 2
+  colorSpace: 0
+  directSamples: 100
+  indirectSamples: 512
+  aoIntensityDirect: 0
+  aoIntensityIndirect: 1
+  aoEnabled: 0
+  aoDistance: 1
+  indirectBounce: 1
+  backfaceTolerance: 0.7
+  skyBox: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  ambientLight: 1
+  ambientColor: {r: 0.75645244, g: 0.8012364, b: 0.8396226, a: 1}
+  skyColor: {r: 1, g: 1, b: 1, a: 1}
+  skyIntensity: 1
+  equatorColor: {r: 1, g: 1, b: 1, a: 1}
+  groundColor: {r: 1, g: 1, b: 1, a: 1}
+  sunColor: {r: 1, g: 0.9161351, b: 0.7971698, a: 1}
+  sunIntensity: 1
+  sunFlare: {fileID: 12100000, guid: 70ff7d98b27dd54458e51a95f7984da3, type: 2}
+  indirectIntensity: 1.43
+  fogMode: 2
+  fogColor: {r: 1, g: 1, b: 1, a: 1}
+  fogIntensity: 0
+  linearStart: 0
+  linearEnd: 0
+  bIntensity: 1
+  bThreshould: 0.5
+  bColor: {r: 1, g: 1, b: 1, a: 1}
+  dirtTexture: {fileID: 0}
+  dirtIntensity: 0
+  mobileOptimizedBloom: 0
+  bRotation: 0
+  lightsShadow: 2
+  lightProbesMode: 0
+  automaticLightmap: 0
+  dofDistance: 1
+  dofFocusLength: 30
+  dofAperture: 5
+  exposureIntensity: 1.43
+  contrastValue: 1
+  temp: 0
+  colorMode: 0
+  saturation: 0
+  gamma: 0
+  colorGamma: {r: 0, g: 0, b: 0, a: 1}
+  colorLift: {r: 0, g: 0, b: 0, a: 1}
+  lut: {fileID: 0}
+  vignetteIntensity: 0.23
+  CA_Intensity: 0.1
+  aaMode: 0
+  enabled: 0
+  mbIntensity: 3.27
+  mbQuality: 0
+  Ambient_Enabled: 0
+  Scene_Enabled: 0
+  Sun_Enabled: 0
+  VL_Enabled: 0
+  Fog_Enabled: 1
+  DOF_Enabled: 0
+  Bloom_Enabled: 1
+  AA_Enabled: 0
+  AO_Enabled: 1
+  MotionBlur_Enabled: 0
+  Vignette_Enabled: 0
+  Chromattic_Enabled: 0
+  ambientState: 0
+  sunState: 0
+  lightSettingsState: 1
+  cameraState: 0
+  profileState: 1
+  buildState: 1
+  fogState: 1
+  dofState: 0
+  colorState: 1
+  bloomState: 1
+  aaState: 1
+  aoState: 0
+  motionBlurState: 0
+  vignetteState: 0
+  chromatticState: 0
+  OptionsState: 1
+  LightingBoxState: 1
