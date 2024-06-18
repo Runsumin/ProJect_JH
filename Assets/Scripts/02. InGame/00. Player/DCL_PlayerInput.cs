@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace HSM.Game
 {
@@ -13,40 +14,44 @@ namespace HSM.Game
 
     public class DCL_PlayerInput : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        private Vector3 moveDirection;
+        private float moveSpeed = 4f;
+        private Vector3 camforward;
+        private Vector3 camright;
 
+        public void Start()
+        {
+            camforward = Camera.main.transform.forward;
+            camforward.y = 0f;
+
+            camforward = Vector3.Normalize(camforward);
+            camright = Quaternion.Euler(new Vector3(0, 90, 0)) * camforward;
         }
 
-        // Update is called once per frame
-        void Update()
+        public void Update()
         {
-            float moveZ = 0f;
-            float moveX = 0f;
-            if (Input.GetKey(KeyCode.W))
+            bool hasControl = (moveDirection != Vector3.zero);
+            if (hasControl)
             {
-                moveX += 1f;
+                transform.rotation = Quaternion.LookRotation(moveDirection);
+                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
             }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                moveX -= 1f;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                moveZ -= 1f;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                moveZ += 1f;
-            }
-
-            transform.Translate(new Vector3(moveX, 0f, moveZ) * 0.1f);
-
         }
+
+        #region UNITY_EVENTS
+        public void OnMove(InputAction.CallbackContext context)   // Unity Event로 받을 경우
+        {
+            Vector2 input = context.ReadValue<Vector2>();
+            if (input != null)
+            {
+                Vector3 rightmov = camright * input.x;
+                Vector3 forwardmov = camforward * input.y;
+                moveDirection = rightmov + forwardmov;
+                Debug.Log($"UNITY_EVENTS : {input.magnitude}");
+            }
+        }
+        #endregion
     }
 
 }
+
