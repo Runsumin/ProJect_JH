@@ -12,7 +12,7 @@ namespace HSM.Game
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    public class ObjectBase : MonoBehaviour
+    public abstract class ObjectBase : MonoBehaviour
     {
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Nested Class
@@ -21,6 +21,20 @@ namespace HSM.Game
 
         #region [NestedClass] ObjectBase
         //------------------------------------------------------------------------------------------------------------------------------------------------------
+        #region [Nested] Status
+        public class DCL_Status
+        {
+            public float Attack_Power;      // 공격력
+            public float Attack_Speed;      // 공격속도
+            public int Cri_Percent;         // 치명타확률
+            public float Critical_Damage;   // 치명타데미지
+            public float Move_Speed;        // 이동속도
+            public float Defense;           // 방어력
+            public float HP;                // 체력
+            public float HP_Recovery;       // 체력재생량
+            public float Cleaning_Speed;    // 청소속도
+        }
+        #endregion
         #endregion
 
 

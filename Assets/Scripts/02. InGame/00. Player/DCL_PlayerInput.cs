@@ -12,15 +12,16 @@ namespace HSM.Game
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    public class DCL_PlayerInput : MonoBehaviour
+    public class DCL_PlayerInput : DCL_PlayerBase
     {
         private Vector3 moveDirection;
-        private float moveSpeed = 4f;
         private Vector3 camforward;
         private Vector3 camright;
 
-        public void Start()
+        public override void Start()
         {
+            base.Start();
+
             camforward = Camera.main.transform.forward;
             camforward.y = 0f;
 
@@ -34,7 +35,7 @@ namespace HSM.Game
             if (hasControl)
             {
                 transform.rotation = Quaternion.LookRotation(moveDirection);
-                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+                transform.Translate(Vector3.forward * Player_Status.Move_Speed * Time.deltaTime);
             }
         }
 
