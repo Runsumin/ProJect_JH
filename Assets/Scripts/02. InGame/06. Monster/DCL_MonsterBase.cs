@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace HSM.Game
 {
-    public class DCL_MonsterBase : ObjectBase, DCL_StatusBase
+    public class DCL_MonsterBase : ObjectBase
     {
 
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

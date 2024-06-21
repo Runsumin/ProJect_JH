@@ -170,6 +170,8 @@ namespace HSM.Game
 
             //transform.position = Vector3.Lerp(transform.position, followpos - (dis / 110), Time.deltaTime);
             transform.position = followpos;// - (dis / 100);
+
+            //CameraCom.transform.position = new Vector3(CameraCom.transform.position.x, CameraCom.transform.position.y, CameraCom.transform.position.z -100);
         }
         #endregion
 

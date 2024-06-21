@@ -32,9 +32,20 @@ namespace HSM.Game
 		[Serializable]
 		public class NSetting
 		{
-			
-		}
-		public NSetting Setting = new NSetting();
+            public DCL_Status Player_Status = new DCL_Status();     // 플레이어 스텟
+        }
+        public NSetting Setting = new NSetting();
+        #endregion
+
+        #region [InterAction] 상호작용
+        [Serializable]
+        public class NInterAction
+        {
+            public float InterAction_Range;
+            public float InterAction_Count;
+            public float InterAction_Time;
+        }
+        public NInterAction Player_InterAction = new NInterAction();
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -43,7 +54,6 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] Base
-        public DCL_Status Player_Status = new DCL_Status();     // 플레이어 스텟
         #endregion
 
 
@@ -53,8 +63,9 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Property] Base
+        #region [Property] Setting
         //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public DCL_Status PL_Status => Setting.Player_Status;       // 플레이어 스텟
         #endregion
 
 
@@ -71,15 +82,15 @@ namespace HSM.Game
         {
             base.Start();
             // 스텟 임시 초기화
-            Player_Status.HP = 100;
-            Player_Status.HP_Recovery = 1;
-            Player_Status.Move_Speed = 8f;
-            Player_Status.Defense = 5f;
-            Player_Status.Cri_Percent = 10;
-            Player_Status.Critical_Damage = 160;
-            Player_Status.Cleaning_Speed = 1;
-            Player_Status.Attack_Speed = 1;
-            Player_Status.Attack_Power = 1;
+            Setting.Player_Status.HP = 100;
+            Setting.Player_Status.HP_Recovery = 1;
+            Setting.Player_Status.Move_Speed = 8f;
+            Setting.Player_Status.Defense = 5f;
+            Setting.Player_Status.Cri_Percent = 10;
+            Setting.Player_Status.Critical_Damage = 160;
+            Setting.Player_Status.Cleaning_Speed = 1;
+            Setting.Player_Status.Attack_Speed = 1;
+            Setting.Player_Status.Attack_Power = 1;
         }
         #endregion
 
@@ -88,18 +99,25 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 2. Attack
+        // 2. Move
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 3. Attack
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 3. InterAction
+        // 4. InterAction
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 4. Death
+        // 5. Death
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

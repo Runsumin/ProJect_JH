@@ -22,6 +22,7 @@ namespace HSM.Game
         #region [NestedClass] ObjectBase
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         #region [Nested] Status
+        [Serializable]
         public class DCL_Status
         {
             public float Attack_Power;      // °ø°Ý·Â

@@ -35,7 +35,7 @@ namespace HSM.Game
             if (hasControl)
             {
                 transform.rotation = Quaternion.LookRotation(moveDirection);
-                transform.Translate(Vector3.forward * Player_Status.Move_Speed * Time.deltaTime);
+                transform.Translate(Vector3.forward * Setting.Player_Status.Move_Speed * Time.deltaTime);
             }
         }
 
