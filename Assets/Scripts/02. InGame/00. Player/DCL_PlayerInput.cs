@@ -12,15 +12,32 @@ namespace HSM.Game
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    public class DCL_PlayerInput : DCL_PlayerBase
+    public class DCL_PlayerInput : ObjectBase
     {
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Variable
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region[Variable] Move
         private Vector3 moveDirection;
         private Vector3 camforward;
         private Vector3 camright;
+        #endregion
 
+        #region[Variable] Player Data
+        private DCL_Status Player_Status; 
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 0. Base Methods
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Base Methods] Start
         public override void Start()
         {
-            base.Start();
+            Player_Status = this.GetComponent<DCL_PlayerBase>().Setting.Player_Status;
 
             camforward = Camera.main.transform.forward;
             camforward.y = 0f;
@@ -28,18 +45,29 @@ namespace HSM.Game
             camforward = Vector3.Normalize(camforward);
             camright = Quaternion.Euler(new Vector3(0, 90, 0)) * camforward;
         }
+        #endregion
 
+        #region [Base Methods] Update
         public void Update()
         {
+            // 일단 이런식으로 받아오기... 추후에 다른 방법 고려 필요해보임
+            Player_Status = this.GetComponent<DCL_PlayerBase>().Setting.Player_Status;
+
             bool hasControl = (moveDirection != Vector3.zero);
             if (hasControl)
             {
                 transform.rotation = Quaternion.LookRotation(moveDirection);
-                transform.Translate(Vector3.forward * Setting.Player_Status.Move_Speed * Time.deltaTime);
+                transform.Translate(Vector3.forward * Player_Status.Move_Speed * Time.deltaTime);
             }
         }
+        #endregion
 
-        #region UNITY_EVENTS
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 1. Input Control
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Input Control] Move
         public void OnMove(InputAction.CallbackContext context)   // Unity Event로 받을 경우
         {
             Vector2 input = context.ReadValue<Vector2>();
