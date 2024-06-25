@@ -3,18 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//
-// DCL_MonsterBase
-// 몬스터 베이스 클래스
-//
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 namespace HSM.Game
 {
-    public class DCL_MonsterBase : ObjectBase
-    {
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //
+    // DCL_MonsterGenerator
+    // 몬스터 생성기
+    //
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
+    public class DCL_MonsterGenerator : MonoBehaviour
+    {
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Nested Class
 		//
@@ -24,12 +24,14 @@ namespace HSM.Game
 		//------------------------------------------------------------------------------------------------------------------------------------------------------
 		[Serializable]
 		public class NSetting
-        {
-			public DCL_Status Monster_Status = new DCL_Status();     // 플레이어 스텟
-			public Collider Monster_OverLapColl;
+		{
+			public int MonsterCount;            // 생성 몬스터 개수
+			public List<GameObject> MonsterList;
 		}
 		public NSetting Setting = new NSetting();
 		#endregion
+
+
 
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Variable
@@ -37,7 +39,12 @@ namespace HSM.Game
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 		#region [Variable] Base
-
+		public List<DCL_MonsterBase> MonsterPool = new List<DCL_MonsterBase>();
+		public float DelayTime;			// 몬스터 생성 딜레이 지정타임
+		public float LoopTime;			// 몬스터 생성 딜레이 루프타임
+		public int GenerateCount;		// 한번에 생성할 몬스터 개수
+		public int DoubleSpeed;         // 배속
+		int[] PosArr = { 30, -30 };
 		#endregion
 
 
@@ -49,7 +56,6 @@ namespace HSM.Game
 
 		#region [Property] Base
 		//------------------------------------------------------------------------------------------------------------------------------------------------------
-		public DCL_Status Mon_Status => Setting.Monster_Status;       // 플레이어 스텟
 		#endregion
 
 
@@ -62,66 +68,55 @@ namespace HSM.Game
 
 		#region [Init] Start
 		//------------------------------------------------------------------------------------------------------------------------------------------------------
-		public override void Start()
+		void Start()
 		{
-			base.Start();
+			Setting.MonsterCount = 100;
+			DelayTime = 0;          // 첫 딜레이 타임은 2초
+			DoubleSpeed = 1;		// 배속
+		}
+		#endregion
 
+		#region [Init] Update
+		//------------------------------------------------------------------------------------------------------------------------------------------------------
+		void Update()
+		{
+			LoopTime += Time.deltaTime * DoubleSpeed;
+			if(LoopTime >= DelayTime)
+				GenerateMonster();
 		}
 		#endregion
 
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// 1. Move
+		// 1. GenerateMonster
 		//
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-		#region [Move] Monster_Move
+		#region [GenerateMonster]
 		//------------------------------------------------------------------------------------------------------------------------------------------------------
-		public virtual void Move()
+		public void GenerateMonster()
         {
+			LoopTime = 0;		// 루프타임 초기화
+			GenerateCount = UnityEngine.Random.Range(1, 4);
+			DelayTime = UnityEngine.Random.Range(2, 4);
 
-        }
-		#endregion
+			for(int i = 0; i < GenerateCount; i++)
+            {
+				int ranpos = UnityEngine.Random.Range(0, 3);
+				GameObject InstantMon = Instantiate(Setting.MonsterList[0], transform);
+				if(ranpos == 0)
+					InstantMon.transform.position = new Vector3(30, 0, UnityEngine.Random.Range(-30, 30));
+				else if (ranpos == 1)
+					InstantMon.transform.position = new Vector3(-30, 0, UnityEngine.Random.Range(-30, 30));
+				else if (ranpos == 2)
+					InstantMon.transform.position = new Vector3(UnityEngine.Random.Range(-30, 30), 0, 30);
+				else if (ranpos == 3)
+					InstantMon.transform.position = new Vector3(UnityEngine.Random.Range(-30, 30), 0, -30);
 
-
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// 2. Attack
-		//
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-		#region [Move] Monster_Attack
-		//------------------------------------------------------------------------------------------------------------------------------------------------------
-		public virtual void Attack()
-		{
-
-		}
-		#endregion
-
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// 3. Hit
-		//
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-		#region [Move] Monster_Hit
-		//------------------------------------------------------------------------------------------------------------------------------------------------------
-		public virtual void Hit()
-		{
+				MonsterPool.Add(InstantMon.GetComponent<DCL_MonsterBase>());
+			}
 
 		}
-		#endregion
-
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// 3. Death
-		//
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-		#region [Move] Monster_Death
-		//------------------------------------------------------------------------------------------------------------------------------------------------------
-		public virtual void Death()
-		{
-
-		}
-		#endregion
-
-	}
+        #endregion
+    }
 
 }
