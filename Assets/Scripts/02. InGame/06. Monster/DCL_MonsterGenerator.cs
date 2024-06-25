@@ -96,7 +96,7 @@ namespace HSM.Game
 		public void GenerateMonster()
         {
 			LoopTime = 0;		// 루프타임 초기화
-			GenerateCount = UnityEngine.Random.Range(1, 4);
+			GenerateCount = UnityEngine.Random.Range(8, 12);
 			DelayTime = UnityEngine.Random.Range(2, 4);
 
 			for(int i = 0; i < GenerateCount; i++)
