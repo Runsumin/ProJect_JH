@@ -96,13 +96,13 @@ namespace HSM.Game
 		public void GenerateMonster()
         {
 			LoopTime = 0;		// 루프타임 초기화
-			GenerateCount = UnityEngine.Random.Range(8, 12);
+			GenerateCount = UnityEngine.Random.Range(5, 8);
 			DelayTime = UnityEngine.Random.Range(2, 4);
-
-			for(int i = 0; i < GenerateCount; i++)
+			int tmp = UnityEngine.Random.Range(0, 2);
+			for (int i = 0; i < GenerateCount; i++)
             {
 				int ranpos = UnityEngine.Random.Range(0, 3);
-				GameObject InstantMon = Instantiate(Setting.MonsterList[0], transform);
+				GameObject InstantMon = Instantiate(Setting.MonsterList[tmp], transform);
 				if(ranpos == 0)
 					InstantMon.transform.position = new Vector3(30, 0, UnityEngine.Random.Range(-30, 30));
 				else if (ranpos == 1)
@@ -112,7 +112,7 @@ namespace HSM.Game
 				else if (ranpos == 3)
 					InstantMon.transform.position = new Vector3(UnityEngine.Random.Range(-30, 30), 0, -30);
 
-				MonsterPool.Add(InstantMon.GetComponent<DCL_MonsterBase>());
+				//MonsterPool.Add(InstantMon.GetComponent<DCL_MonsterBase>());
 			}
 
 		}

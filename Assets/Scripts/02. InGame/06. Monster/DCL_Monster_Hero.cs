@@ -11,7 +11,7 @@ namespace HSM.Game
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public class DCL_Monster_Hero : DCL_MonsterBase
-	{
+    {
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Nested Class
         //
@@ -89,7 +89,10 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Move()
         {
-            transform.position = Vector3.Lerp(transform.position, PlayerPos.position,Time.deltaTime * Mon_Status.Move_Speed);
+            // Y값 보정 - 테스트 위해
+            Vector3 Pos = new Vector3(PlayerPos.position.x, 0, PlayerPos.position.z);
+            transform.position = Vector3.Lerp(transform.position, Pos, Time.deltaTime * Mon_Status.Move_Speed);
+            transform.LookAt(PlayerPos);
         }
         #endregion
 
@@ -122,7 +125,7 @@ namespace HSM.Game
 
         public void OnTriggerEnter(Collider coll)
         {
-            if(coll.gameObject.name == "Collider")
+            if (coll.gameObject.name == "Collider")
             {
                 Death();
             }

@@ -20,6 +20,9 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [NestedClass] ObjectBase
+
+        #endregion
+
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         #region [Nested] Status
         [Serializable]
@@ -35,7 +38,6 @@ namespace HSM.Game
             public float HP_Recovery;       // 체력재생량
             public float Cleaning_Speed;    // 청소속도
         }
-        #endregion
         #endregion
 
 
