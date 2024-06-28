@@ -102,7 +102,7 @@ namespace HSM.Game
         {
             Setting.MainTitleRoot.SetActive(true);
             Setting.StageSelectRoot.SetActive(false);
-            SceneManager.Instance.LoadScene("BamGame_InGame_Hex");
+            SceneManager.Instance.LoadScene("TestScene");
             SceneManager.Instance.NowStageIndex = stage;
             CloseWindow(true);
         }

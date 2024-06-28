@@ -40,8 +40,8 @@ namespace HSM.Game
         public override void Start()
         {
             base.Start();
-           // var win = SceneBase.Window_InGame.GetComponent<WindowBase>();
-           // WindowManager.Instance.GenerateWindow(win);
+            var win = SceneBase.Window_InGame.GetComponent<WindowBase>();
+            WindowManager.Instance.GenerateWindow(win);
 
             //int sel = 0;
 

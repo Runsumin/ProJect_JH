@@ -115,7 +115,7 @@ namespace HSM.Game
         public void OnClick_GoToMainMenu()
         {
             Time.timeScale = 1f;
-            SceneManager.Instance.LoadScene("BamGame_Lobby");
+            SceneManager.Instance.LoadScene("DCL_Lobby");
             CloseWindow(true);
         }
         #endregion
@@ -124,7 +124,7 @@ namespace HSM.Game
         public void OnClick_LevelSelect()
         {
             Time.timeScale = 1f;
-            SceneManager.Instance.LoadScene("BamGame_Lobby");
+            SceneManager.Instance.LoadScene("DCL_Lobby");
             CloseWindow(true);
         }
         #endregion
