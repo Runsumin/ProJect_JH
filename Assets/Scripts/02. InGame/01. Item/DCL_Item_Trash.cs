@@ -35,6 +35,7 @@ namespace HSM.Game
             public Collider Inter_Range;        // 상호작용 범위
             public float Inter_Maxtime;         // 상호작용 걸리는 시간
             public float Inter_DelayTime;       // 딜레이
+            public GameObject InGameWorldUI;    // 아이콘
         }
         public Trash_Setting TrashSetting = new Trash_Setting();
         #endregion
@@ -85,6 +86,8 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Update()
         {
+            if (TrashSetting.Trash_State == TrashState.END)
+                Death();
 
         }
         #endregion
@@ -104,9 +107,10 @@ namespace HSM.Game
 
         #region [InterAction] TriggerEnter
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void OnTriggerEnter()
+        public void OnTriggerEnter(Collider coll)
         {
-            if (TrashSetting.Trash_State == TrashState.ONFIELD)
+            if (coll.gameObject.name == "Inter_Range" &&
+                TrashSetting.Trash_State == TrashState.ONFIELD)
             {
                 TrashSetting.Trash_State = TrashState.INTERACTION;
                 Inter_inTime = 0;
@@ -116,9 +120,10 @@ namespace HSM.Game
 
         #region [InterAction] TriggerEnter
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void OnTriggerStay()
+        public void OnTriggerStay(Collider coll)
         {
-            if (TrashSetting.Trash_State == TrashState.INTERACTION)
+            if (coll.gameObject.name == "Inter_Range" && 
+                TrashSetting.Trash_State == TrashState.INTERACTION)
             {
                 Inter_inTime += Time.deltaTime;
 
@@ -132,14 +137,20 @@ namespace HSM.Game
 
         #region [InterAction] TriggerEnter
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void OnTriggerExit()
+        public void OnTriggerExit(Collider coll)
         {
-            if (TrashSetting.Trash_State != TrashState.END)
+            if(coll.gameObject.name == "Inter_Range")
             {
-                TrashSetting.Trash_State = TrashState.ONFIELD;
+                if (TrashSetting.Trash_State != TrashState.END)
+                {
+                    TrashSetting.Trash_State = TrashState.ONFIELD;
+                }
+                else 
+                {
+                    Death(); 
+                }
+                Inter_inTime = 0;
             }
-            else { Death(); }
-            Inter_inTime = 0;
         }
         #endregion
 
@@ -166,6 +177,7 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Death()
         {
+            Window_InGame.Instance.Show_ChoiceList();
             Destroy(gameObject);
         }
         #endregion
