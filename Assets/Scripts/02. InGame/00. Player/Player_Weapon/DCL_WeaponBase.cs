@@ -21,6 +21,7 @@ namespace HSM.Game
 
 		public enum AttackType { MELEE, RANGE }
         public enum AttackState { ATTACKING, COOLTIME }
+        public enum WeaponLevel { LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_4, LEVEL_5, LEVEL_6, LEVEL_7, LEVEL_8, LEVEL_9, LEVEL_10 }
 
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Nested Class
@@ -39,8 +40,10 @@ namespace HSM.Game
 			public float AttackRange;                   // 공격범위
 			public AttackType Weapon_AttackType;        // 공격타입
 			public AttackState Weapon_AttackState;      // 공격상태
-		}
-		public NSetting Setting = new NSetting();
+
+            public WeaponLevel NowWeaponLevel;                  // 무기 레벨
+        }
+        public NSetting Setting = new NSetting();
         #endregion
 
 

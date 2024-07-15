@@ -48,6 +48,7 @@ namespace HSM.Game
         public NInterAction Player_InterAction = new NInterAction();
         #endregion
 
+        //#region []
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //

@@ -34,14 +34,15 @@ namespace HSM.Game
         // 0. Base Methods
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
+
         #region [Init] 
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Start()
         {
             base.Start();
             var win = SceneBase.Window_InGame.GetComponent<WindowBase>();
-            WindowManager.Instance.GenerateWindow(win);
+            if (win != null)
+                WindowManager.Instance.GenerateWindow(win);
 
             //int sel = 0;
 
