@@ -5,7 +5,7 @@ using UnityEngine;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
-// DCL_WeaponBase
+// DCL_Weapon_Sword
 // 근접무기 - 검 클래스
 // 
 //
@@ -70,12 +70,41 @@ namespace HSM.Game
         public NSword_Level_3 Sword_Lv3 = new NSword_Level_3();
         #endregion
 
+
+        #region [Sword] Level_4
+        [Serializable]
+        public class NSword_Level_4
+        {
+            public Transform[] _target;
+            public float Speed;
+            public float InsideRad, OutsideRad; //반지름
+            public float Degree; //각도
+        }
+        public NSword_Level_4 Sword_Lv4 = new NSword_Level_4();
+        #endregion
+
+        #region [Sword] Level_5
+        [Serializable]
+        public class NSword_Level_5
+        {
+            // 회전
+            public Transform[] _target;
+            public float Speed;
+            public float InsideRad, OutsideRad; //반지름
+            public float Degree; //각도
+
+            // 검기
+            public GameObject SwordAura;
+        }
+        public NSword_Level_5 Sword_Lv5 = new NSword_Level_5();
+        #endregion
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Variable] Sword SwingBase
+        #region [Variable] PlayerTransform
+        public Transform PlayerPos;
         #endregion
 
         #region [Variable] Rotation
@@ -112,7 +141,11 @@ namespace HSM.Game
             // 무기 레벨 1로 초기화
             Setting.NowWeaponLevel = WeaponLevel.LEVEL_1;
 
-            StartCoroutine(Sword_Level_3());
+            PlayerPos = GameObject.FindWithTag("Player").transform;
+
+            StartCoroutine(Sword_Level_5());
+
+
         }
         #endregion
 
@@ -120,6 +153,8 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public new void Update()
         {
+            PlayerPos = GameObject.FindWithTag("Player").transform;
+
             transform.localRotation = InitRotation;
         }
         #endregion
@@ -237,7 +272,7 @@ namespace HSM.Game
                 Sword_Lv3.Degree += Time.deltaTime * Sword_Lv3.Speed;
                 if (Sword_Lv3.Degree < 360)
                 {
-                    for(int i = 0; i < 3; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         var rad = Mathf.Deg2Rad * (Sword_Lv3.Degree + i * (360 / 3));
                         var x = Sword_Lv3.Radius * Mathf.Sin(rad);
@@ -255,6 +290,128 @@ namespace HSM.Game
             }
         }
         #endregion
+
+        #region [Attack] Sword_Level_4
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        IEnumerator Sword_Level_4(float duration = 1.0f)
+        {
+            //float time = 0f;
+
+            while (true)
+            {
+                Sword_Lv4.Degree += Time.deltaTime * Sword_Lv4.Speed;
+                if (Sword_Lv4.Degree < 360)
+                {
+                    for (int i = 0; i < 6; i++)
+                    {
+                        var rad = Mathf.Deg2Rad * (Sword_Lv4.Degree + i * (360 / 6));
+                        if (i % 2 == 0)
+                        {
+                            var x = Sword_Lv4.InsideRad * Mathf.Sin(rad);
+                            var z = Sword_Lv4.InsideRad * Mathf.Cos(rad);
+                            Sword_Lv4._target[i].position = transform.position + new Vector3(x, 0, z);
+                            Sword_Lv4._target[i].rotation = Quaternion.Euler(0, 0, ((Sword_Lv4.Degree + i * (360 / 6))) * -1); //가운데를 바라보게 각도 조절
+                        }
+                        else
+                        {
+                            var x = Sword_Lv4.OutsideRad * Mathf.Sin(rad);
+                            var z = Sword_Lv4.OutsideRad * Mathf.Cos(rad);
+                            Sword_Lv4._target[i].position = transform.position + new Vector3(z, 0, x);
+                            Sword_Lv4._target[i].rotation = Quaternion.Euler(0, 0, ((Sword_Lv4.Degree + i * (360 / 6))) * -1); //가운데를 바라보게 각도 조절
+                        }
+                    }
+                }
+                else
+                {
+                    Sword_Lv4.Degree = 0;
+                }
+
+                yield return null;
+            }
+        }
+        #endregion
+
+        #region [Attack] Sword_Level_5
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        IEnumerator Sword_Level_5(float duration = 1.0f)
+        {
+            float time = 0f;
+
+            while (true)
+            {
+                // 플레이어 바라보는방향 검기 발사
+                if (time > 2)
+                {
+                    ChangeAttackState(AttackState.COOLTIME);
+                    if (time > 2 + Setting.AttackCoolTime)
+                    {
+                        time = 0f;
+                        ChangeAttackState(AttackState.ATTACKING);
+                        GameObject InstantMon = Instantiate(Sword_Lv5.SwordAura, PlayerPos.position, PlayerPos.rotation);
+                    }
+                }
+
+                time += Time.deltaTime * Setting.AttackSpeed;
+
+                // 검 회전 공격
+                Sword_Lv5.Degree += Time.deltaTime * Sword_Lv5.Speed;
+                if (Sword_Lv5.Degree < 360)
+                {
+                    for (int i = 0; i < 6; i++)
+                    {
+                        var rad = Mathf.Deg2Rad * (Sword_Lv5.Degree + i * (360 / 6));
+                        if (i % 2 == 0)
+                        {
+                            var x = Sword_Lv5.InsideRad * Mathf.Sin(rad);
+                            var z = Sword_Lv5.InsideRad * Mathf.Cos(rad);
+                            Sword_Lv5._target[i].position = transform.position + new Vector3(x, 0, z);
+                            Sword_Lv5._target[i].rotation = Quaternion.Euler(0, 0, ((Sword_Lv5.Degree + i * (360 / 6))) * -1); //가운데를 바라보게 각도 조절
+                        }
+                        else
+                        {
+                            var x = Sword_Lv5.OutsideRad * Mathf.Sin(rad);
+                            var z = Sword_Lv5.OutsideRad * Mathf.Cos(rad);
+                            Sword_Lv5._target[i].position = transform.position + new Vector3(z, 0, x);
+                            Sword_Lv5._target[i].rotation = Quaternion.Euler(0, 0, ((Sword_Lv5.Degree + i * (360 / 6))) * -1); //가운데를 바라보게 각도 조절
+                        }
+                    }
+                }
+                else
+                {
+                    Sword_Lv5.Degree = 0;
+                }
+
+                yield return null;
+            }
+        }
+        #endregion
+
+        #region [Attack] Level_5_SwordAura
+        IEnumerator Level_5_SwordAura(GameObject aura)
+        {
+            float time = 0f;
+            //Vector3 camforward = Camera.main.transform.forward;
+            //camforward.y = 0f;
+
+            //camforward = Vector3.Normalize(camforward);
+            //Vector3 camright = Quaternion.Euler(new Vector3(0, 90, 0)) * camforward;
+
+            //Vector3 direction = (aura.transform.forward + camforward) + aura.transform.right * camright;
+            while (true)
+            {
+                // 플레이어 바라보는방향 검기 발사
+                if (time > 2)
+                {
+                    Destroy(aura);
+                    break;
+                }
+                aura.transform.Translate(Vector3.forward * 15 * Time.deltaTime);
+                //aura.GetComponent<Rigidbody>().AddForce(direction * 100);
+                yield return null;
+            }
+        }
+        #endregion
+
     }
 
 }
