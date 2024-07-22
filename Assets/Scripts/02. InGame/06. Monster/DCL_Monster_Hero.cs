@@ -59,7 +59,8 @@ namespace HSM.Game
             // 스텟 임시 초기화
             Mon_Status.HP = 10;
             Mon_Status.HP_Recovery = 0;
-            Mon_Status.Move_Speed = 0.3f;
+            //Mon_Status.Move_Speed = 0.3f;
+            Mon_Status.Move_Speed = 0f;
             Mon_Status.Defense = 5f;
             Mon_Status.Cri_Percent = 0;
             Mon_Status.Critical_Damage = 100;
@@ -125,7 +126,8 @@ namespace HSM.Game
 
         public void OnTriggerEnter(Collider coll)
         {
-            if (coll.gameObject.name == "Collider")
+            if (coll.gameObject.name == "Collider" ||
+                coll.gameObject.name == "MagicBall")
             {
                 Death();
             }

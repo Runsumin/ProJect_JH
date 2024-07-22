@@ -104,7 +104,6 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] PlayerTransform
-        public Transform PlayerPos;
         #endregion
 
         #region [Variable] Rotation
@@ -140,9 +139,10 @@ namespace HSM.Game
 
             // 무기 레벨 1로 초기화
             Setting.NowWeaponLevel = WeaponLevel.LEVEL_1;
-
-            PlayerPos = GameObject.FindWithTag("Player").transform;
-
+            StartCoroutine(Sword_Level_1());
+            StartCoroutine(Sword_Level_2());
+            StartCoroutine(Sword_Level_3());
+            StartCoroutine(Sword_Level_4());
             StartCoroutine(Sword_Level_5());
 
 
@@ -156,6 +156,8 @@ namespace HSM.Game
             PlayerPos = GameObject.FindWithTag("Player").transform;
 
             transform.localRotation = InitRotation;
+            transform.rotation = InitRotation;
+            //transform.position = PlayerPos.position;
         }
         #endregion
 
@@ -194,27 +196,33 @@ namespace HSM.Game
 
         #endregion
 
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 1. Attack
-        //
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
         #region [Attack] Sword_Level_1
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         IEnumerator Sword_Level_1(float duration = 1.0f)
         {
             float time = 0f;
+            bool flip = false;
+            Vector3 p2localpos = Sword_Lv1._p2.localPosition;
 
             while (true)
             {
                 if (time > 1)
                 {
-                    ChangeAttackState(AttackState.COOLTIME);
+                    //ChangeAttackState(AttackState.COOLTIME);
                     if (time > 1 + Setting.AttackCoolTime)
                     {
                         time = 0f;
-                        ChangeAttackState(AttackState.ATTACKING);
-                        Sword_Lv1._p2.position = new Vector3(Sword_Lv1._p2.position.x * -1, Sword_Lv1._p2.position.y, Sword_Lv1._p2.position.z);
+                       // ChangeAttackState(AttackState.ATTACKING);
+                        if (flip == false)
+                        {
+                            flip = true;
+                            Sword_Lv1._p2.localPosition = new Vector3(p2localpos.x * -1, p2localpos.y, p2localpos.z);
+                        }   
+                        else
+                        {
+                            flip = false;
+                            Sword_Lv1._p2.localPosition = new Vector3(p2localpos.x, p2localpos.y, p2localpos.z);
+                        }
                     }
                 }
 
@@ -381,32 +389,6 @@ namespace HSM.Game
                     Sword_Lv5.Degree = 0;
                 }
 
-                yield return null;
-            }
-        }
-        #endregion
-
-        #region [Attack] Level_5_SwordAura
-        IEnumerator Level_5_SwordAura(GameObject aura)
-        {
-            float time = 0f;
-            //Vector3 camforward = Camera.main.transform.forward;
-            //camforward.y = 0f;
-
-            //camforward = Vector3.Normalize(camforward);
-            //Vector3 camright = Quaternion.Euler(new Vector3(0, 90, 0)) * camforward;
-
-            //Vector3 direction = (aura.transform.forward + camforward) + aura.transform.right * camright;
-            while (true)
-            {
-                // 플레이어 바라보는방향 검기 발사
-                if (time > 2)
-                {
-                    Destroy(aura);
-                    break;
-                }
-                aura.transform.Translate(Vector3.forward * 15 * Time.deltaTime);
-                //aura.GetComponent<Rigidbody>().AddForce(direction * 100);
                 yield return null;
             }
         }

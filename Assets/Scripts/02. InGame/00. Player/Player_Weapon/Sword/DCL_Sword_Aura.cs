@@ -15,12 +15,16 @@ namespace HSM.Game
     public class DCL_Sword_Aura : MonoBehaviour
     {
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Nested Class
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] PlayerTransform
-
         public float LimitTime;
         public float ingtm;
         public float AuraSpeed;

@@ -54,6 +54,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] Base
+        public Transform PlayerPos;
         #endregion
 
 
@@ -78,14 +79,16 @@ namespace HSM.Game
         public override void Start()
         {
             base.Start();
+            PlayerPos = GameObject.FindWithTag("Player").transform;
+
         }
         #endregion
 
         #region [Init] 
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void Update()
+        public virtual void Update()
         {
-
+            PlayerPos = GameObject.FindWithTag("Player").transform;
         }
         #endregion
 
