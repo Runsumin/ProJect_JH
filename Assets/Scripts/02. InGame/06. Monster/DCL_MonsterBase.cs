@@ -14,6 +14,12 @@ namespace HSM.Game
 {
     public class DCL_MonsterBase : ObjectBase
     {
+		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// enum Class
+		//
+		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		public enum MonsterState { MOVING, CHARGING, ATTACK, DIE }
 
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Nested Class
@@ -25,8 +31,9 @@ namespace HSM.Game
 		[Serializable]
 		public class NSetting
         {
-			public DCL_Status Monster_Status = new DCL_Status();     // 플레이어 스텟
-			public Collider Monster_OverLapColl;
+			public DCL_Status Monster_Status = new DCL_Status();     // 몬스터 스텟
+			public Collider Monster_OverLapColl;					 // 충돌 방지 
+			public MonsterState Monster_State;						 // 몬스터 상태
 		}
 		public NSetting Setting = new NSetting();
 		#endregion
@@ -37,7 +44,7 @@ namespace HSM.Game
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 		#region [Variable] Base
-
+		public Transform PlayerPos;
 		#endregion
 
 
@@ -65,9 +72,19 @@ namespace HSM.Game
 		public override void Start()
 		{
 			base.Start();
+			PlayerPos = GameObject.FindWithTag("Player").transform;
 
 		}
 		#endregion
+
+		#region [Init] Update
+		//------------------------------------------------------------------------------------------------------------------------------------------------------
+		public virtual void Update()
+		{
+			PlayerPos = GameObject.FindWithTag("Player").transform;
+		}
+		#endregion
+
 
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// 1. Move
@@ -82,6 +99,13 @@ namespace HSM.Game
         }
 		#endregion
 
+		#region [Move] SetDestination
+		//------------------------------------------------------------------------------------------------------------------------------------------------------
+		public Vector3 SetDirection(Vector3 me, Vector3 target)
+		{
+			return (me - target).normalized;
+		}
+		#endregion
 
 		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// 2. Attack

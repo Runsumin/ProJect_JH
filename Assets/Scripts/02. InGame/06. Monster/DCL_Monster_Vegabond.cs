@@ -6,14 +6,12 @@ namespace HSM.Game
 {
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //
-    // DCL_Monster_Hero
-    // 몬스터 - 용사 클래스
-    //
-    // Step.1 : 단순히 플레이어 목표로 따라가기만 한다               - 완료
-    // Step.2 : 네비메쉬 위에 태워서 장애물 피하면서 목표 따라가기.
+    // DCL_Monster_Vegabond
+    // 몬스터 - 방랑자 클래스
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public class DCL_Monster_Hero : DCL_MonsterBase
+
+    public class DCL_Monster_Vegabond : DCL_MonsterBase
     {
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Nested Class
@@ -22,6 +20,12 @@ namespace HSM.Game
 
         #region [NestedClass] Setting
         //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public class NVegaBondSetting
+        {
+
+        }
+
+        public NVegaBondSetting VegaBond_Setting = new NVegaBondSetting();
         #endregion
 
 
@@ -32,6 +36,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] Base
+        public Transform Destination;
         #endregion
 
 
@@ -61,13 +66,15 @@ namespace HSM.Game
             // 스텟 임시 초기화
             Mon_Status.HP = 10;
             Mon_Status.HP_Recovery = 0;
-            Mon_Status.Move_Speed = 3f;
+            Mon_Status.Move_Speed = 5f;
             Mon_Status.Defense = 5f;
             Mon_Status.Cri_Percent = 0;
             Mon_Status.Critical_Damage = 100;
             Mon_Status.Cleaning_Speed = 0;
             Mon_Status.Attack_Speed = 1;
             Mon_Status.Attack_Power = 1;
+            transform.LookAt(Vector3.forward);
+
         }
         #endregion
 
@@ -85,21 +92,22 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Move] Set Destination
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void SetDestination()
+        {
+            //생성된 위치에 따라
+        }
+        #endregion
         #region [Move] Monster_Move
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Move()
         {
             // Y값 보정 - 테스트 위해
-            //Vector3 Pos = new Vector3(PlayerPos.position.x, 0, PlayerPos.position.z);
-
-            Vector3 dir = SetDirection(transform.position, PlayerPos.position);
-
-            transform.position += -dir * Mon_Status.Move_Speed * Time.deltaTime;
-
-            transform.LookAt(PlayerPos);
-
+            transform.position += transform.forward * Time.deltaTime * Mon_Status.Move_Speed;
         }
         #endregion
+
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 2. Attack
@@ -156,7 +164,5 @@ namespace HSM.Game
             Destroy(gameObject);
         }
         #endregion
-
     }
-
 }

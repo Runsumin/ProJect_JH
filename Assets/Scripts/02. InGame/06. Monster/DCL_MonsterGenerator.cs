@@ -102,7 +102,7 @@ namespace HSM.Game
 			for (int i = 0; i < GenerateCount; i++)
             {
 				int ranpos = UnityEngine.Random.Range(0, 3);
-				GameObject InstantMon = Instantiate(Setting.MonsterList[tmp], transform);
+				GameObject InstantMon = Instantiate(Setting.MonsterList[0], transform);
 				if(ranpos == 0)
 					InstantMon.transform.position = new Vector3(30, 0, UnityEngine.Random.Range(-30, 30));
 				else if (ranpos == 1)

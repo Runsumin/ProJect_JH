@@ -72,7 +72,8 @@ namespace HSM.Game
             ingtm = 0;
             LimitTime = 2;
             MagicBallSpeed = 20;
-            MagicBallSetting.EndPorisionEffect.gameObject.SetActive(false);
+            if (MagicBallSetting.EndPorisionEffect != null)
+                MagicBallSetting.EndPorisionEffect.gameObject.SetActive(false);
             StopMoving = false;
         }
         #endregion
@@ -181,7 +182,7 @@ namespace HSM.Game
                 }
             }
 
-            if(StopMoving == false)
+            if (StopMoving == false)
             {
                 transform.position = new Vector3(
                     FourPointBezier(point[0].x, point[1].x, point[2].x, point[3].x),
