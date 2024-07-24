@@ -34,6 +34,7 @@ namespace HSM.Game
         public float ChargingTime;
         public float ingTime;
         public GameObject FireEffect;
+        public Transform AttackPoint;
         #endregion
 
 
@@ -152,7 +153,7 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public bool Charging()
         {
-            transform.LookAt(PlayerPos);
+            //transform.LookAt(PlayerPos);
             ingTime += Time.deltaTime;
             if (ChargingTime < ingTime)
             {
@@ -177,9 +178,9 @@ namespace HSM.Game
             // 이때 충돌처리
             Vector3 dir = SetDirection(PlayerPos.position, transform.position);
 
-            GameObject InstantMagicball = Instantiate(FireEffect, transform);
+            GameObject InstantMagicball = Instantiate(FireEffect, AttackPoint.position, AttackPoint.rotation);
             // 매직볼 셋팅
-            InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(dir);
+            InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
             Setting.Monster_State = MonsterState.MOVING;
         }
         #endregion
