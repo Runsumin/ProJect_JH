@@ -37,6 +37,7 @@ namespace HSM.Game
             public float HP;                // 체력
             public float HP_Recovery;       // 체력재생량
             public float Cleaning_Speed;    // 청소속도
+            public float Gain_Range;        // 획득범위
         }
         #endregion
 
