@@ -1,0 +1,12 @@
+{
+    "Attack_Power": 1.0,
+    "Attack_Speed": 1.0,
+    "Cri_Percent": 10,
+    "Critical_Damage": 160.0,
+    "Move_Speed": 8.0,
+    "Defense": 5.0,
+    "HP": 100.0,
+    "HP_Recovery": 1.0,
+    "Cleaning_Speed": 1.0,
+    "Gain_Range": 5.0
+}
