@@ -52,22 +52,22 @@ namespace HSM.Game
         // 0. Base Methods
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        #region [Init] Awake
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public override void Awake()
+        {
+            base.Awake();
+
+            //Json_Utility_Extend.FileSave(Mon_Status, "Data/Json_Data/Monster/Monster_Hero.Json");
+            Setting.Monster_Status = Json_Utility_Extend.FileLoad<DCL_Status>("Data/Json_Data/Monster/Monster_Hero.Json");
+        }
+        #endregion
 
         #region [Init] start
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Start()
         {
-            base.Start();
-            // 스텟 임시 초기화
-            Mon_Status.HP = 10;
-            Mon_Status.HP_Recovery = 0;
-            Mon_Status.Move_Speed = 3f;
-            Mon_Status.Defense = 5f;
-            Mon_Status.Cri_Percent = 0;
-            Mon_Status.Critical_Damage = 100;
-            Mon_Status.Cleaning_Speed = 0;
-            Mon_Status.Attack_Speed = 1;
-            Mon_Status.Attack_Power = 1;
+            base.Start();           
         }
         #endregion
 

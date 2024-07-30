@@ -1,12 +1,304 @@
 {
-    "Attack_Power": 1.0,
-    "Attack_Speed": 1.0,
-    "Cri_Percent": 10,
-    "Critical_Damage": 160.0,
-    "Move_Speed": 8.0,
-    "Defense": 5.0,
-    "HP": 100.0,
-    "HP_Recovery": 1.0,
-    "Cleaning_Speed": 1.0,
-    "Gain_Range": 5.0
+    "datas": [
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 0
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 1
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 2
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 3
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 4
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 5
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 6
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 7
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 8
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 9
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 10
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 11
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 12
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 13
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 14
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 15
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 16
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 17
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 18
+        },
+        {
+            "Pl_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 160.0,
+                "Move_Speed": 8.0,
+                "Defense": 5.0,
+                "HP": 100.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 5.0
+            },
+            "Level": 19
+        }
+    ]
 }

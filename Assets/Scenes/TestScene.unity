@@ -6444,6 +6444,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b46b5f66618acf43ba5706998ac886f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Setting:
+    NowMapIndex: 0
+    NowLevelIndex: 0
+    StageTime:
+      StageStreamToTalTime: 0
+      StageStreamNowTime: 0
+    SubQuest:
+      EventCount: 0
+      EventTime: []
 --- !u!1001 &1514247751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8340,6 +8349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f096147c74ae7cf4cb39fc5f675ac335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &1955626580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8400,20 +8410,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Setting:
-    Player_Status:
-      Attack_Power: 0
-      Attack_Speed: 0
-      Cri_Percent: 0
-      Critical_Damage: 0
-      Move_Speed: 0
-      Defense: 0
-      HP: 0
-      HP_Recovery: 0
-      Cleaning_Speed: 0
+    Player_Status_Level: []
   Player_InterAction:
     InterAction_Range: 0
     InterAction_Count: 0
     InterAction_Time: 0
+  NowHP: 0
+  NowPlayerLevel: 0
 --- !u!54 &1955626583
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9247,7 +9250,7 @@ PrefabInstance:
     - target: {fileID: 6580638884809741832, guid: df2664db4206b384296e91108494d321,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9334,7 +9337,7 @@ PrefabInstance:
     - target: {fileID: 736993742340574682, guid: 9ca1e78c3fcaac343a85787e016be5e4,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9110469756464878978, guid: 9ca1e78c3fcaac343a85787e016be5e4,
         type: 3}

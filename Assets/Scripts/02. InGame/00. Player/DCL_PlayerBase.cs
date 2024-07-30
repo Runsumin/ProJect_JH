@@ -32,7 +32,8 @@ namespace HSM.Game
         [Serializable]
         public class NSetting
         {
-            public DCL_Status Player_Status = new DCL_Status();     // 플레이어 스텟
+            //public DCL_Status Player_Status = new DCL_Status();                         // 플레이어 스텟
+            public List<NPlayerLevle> Player_Status_Level = new List<NPlayerLevle>();   // 
         }
         public NSetting Setting = new NSetting();
         #endregion
@@ -48,6 +49,35 @@ namespace HSM.Game
         public NInterAction Player_InterAction = new NInterAction();
         #endregion
 
+        #region [Level] 플레이어 레벨
+        [Serializable]
+        public class NPlayerLevle
+        {
+            public DCL_Status Pl_Status;
+            public int Level;
+
+            public NPlayerLevle(DCL_Status status, int lv)
+            {
+                this.Pl_Status = status;
+                this.Level = lv;
+            }
+        }
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Parsing
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Parsing] PlayerStatus_Level
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class PlayerStatus_Level
+        {
+            public List<NPlayerLevle> Player_Status_Level;
+        }
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
@@ -58,6 +88,9 @@ namespace HSM.Game
         private float HPRecoveryTime;
         #endregion
 
+        #region [Variable] Level
+        public int NowPlayerLevel;
+        #endregion
 
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -67,7 +100,7 @@ namespace HSM.Game
 
         #region [Property] Setting
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public DCL_Status PL_Status => Setting.Player_Status;       // 플레이어 스텟
+        public DCL_Status PL_Status => Setting.Player_Status_Level[NowPlayerLevel].Pl_Status;       // 플레이어 스텟
         #endregion
 
 
@@ -78,18 +111,25 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Init] Awake
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public override void Awake()
+        {
+            base.Awake();
+            //Json_Utility_Extend.FileSaveList(Setting.Player_Status_Level, "Data/Json_Data/Player/Player_Status.Json");
+            Setting.Player_Status_Level = Json_Utility_Extend.FileLoadList<NPlayerLevle>("Data/Json_Data/Player/Player_Status.Json");
+        }
+        #endregion
+
         #region [Init] Start
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Start()
         {
             base.Start();
-            DCL_Status data = Json_Utility.instance.LoadJsonFile<DCL_Status>(Json_Utility.instance.filepath, "Player_Status");
-            Setting.Player_Status = data;
-            NowHP = Setting.Player_Status.HP;
         }
         #endregion
 
-        #region [Update]
+        #region [Update]    
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Update()
         {
@@ -111,9 +151,9 @@ namespace HSM.Game
             HPRecoveryTime += Time.deltaTime;
             if (HPRecoveryTime > 3)
             {
-                if (NowHP < Setting.Player_Status.HP)
+                if (NowHP < PL_Status.HP)
                 {
-                    NowHP += Setting.Player_Status.HP_Recovery;
+                    NowHP += PL_Status.HP_Recovery;
                     HPRecoveryTime = 0;
                 }
             }

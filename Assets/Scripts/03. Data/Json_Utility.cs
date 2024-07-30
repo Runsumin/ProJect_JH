@@ -12,7 +12,7 @@ namespace HSM.Game
 {
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //
-    // Json_Utility
+    // Json_Utility_InUnity
     //
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -27,6 +27,12 @@ namespace HSM.Game
         private void Awake()
         {
             instance = this;
+        }
+
+        [Serializable]
+        private class JsonWrapper<T>
+        {
+            public List<T> datas;
         }
 
         public string ObjectToJson(object obj)
