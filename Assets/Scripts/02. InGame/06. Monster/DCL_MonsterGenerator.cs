@@ -9,7 +9,13 @@ namespace HSM.Game
     //
     // DCL_MonsterGenerator
     // 몬스터 생성기
-    //
+	// 웨이브 기반 생성
+    // 어느 정도의 무작위성, 특정 시간대에 특정 패턴 몬스터 등장
+	// 화면 모든 방향에서 등장, 
+	// 게임이 진행될수록 강력한 몬스터 등장
+	// 게임이 진행될수록 몬스터의 종류나 출현 방식 변화
+	// 특정 시간, 조건에 엘리트나 보스 등장
+	//
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -96,27 +102,30 @@ namespace HSM.Game
 		public void GenerateMonster()
         {
 			LoopTime = 0;		// 루프타임 초기화
-			GenerateCount = UnityEngine.Random.Range(5, 8);
-			DelayTime = UnityEngine.Random.Range(2, 4);
-			int tmp = UnityEngine.Random.Range(0, 2);
+			GenerateCount = UnityEngine.Random.Range(1, 4);
+			DelayTime = UnityEngine.Random.Range(4, 6);
+			
 			for (int i = 0; i < GenerateCount; i++)
-            {
-				int ranpos = UnityEngine.Random.Range(0, 3);
+            {				
 				GameObject InstantMon = Instantiate(Setting.MonsterList[0], transform);
-				if(ranpos == 0)
-					InstantMon.transform.position = new Vector3(30, 0, UnityEngine.Random.Range(-30, 30));
-				else if (ranpos == 1)
-					InstantMon.transform.position = new Vector3(-30, 0, UnityEngine.Random.Range(-30, 30));
-				else if (ranpos == 2)
-					InstantMon.transform.position = new Vector3(UnityEngine.Random.Range(-30, 30), 0, 30);
-				else if (ranpos == 3)
-					InstantMon.transform.position = new Vector3(UnityEngine.Random.Range(-30, 30), 0, -30);
-
-				//MonsterPool.Add(InstantMon.GetComponent<DCL_MonsterBase>());
 			}
 
 		}
         #endregion
     }
+
+	#region [BackUp]
+	//int tmp = UnityEngine.Random.Range(0, 1);
+	//int ranpos = UnityEngine.Random.Range(0, 3);
+	//if (ranpos == 0)
+	//	InstantMon.transform.position = new Vector3(30, 0, UnityEngine.Random.Range(-30, 30));
+	//else if (ranpos == 1)
+	//	InstantMon.transform.position = new Vector3(-30, 0, UnityEngine.Random.Range(-30, 30));
+	//else if (ranpos == 2)
+	//	InstantMon.transform.position = new Vector3(UnityEngine.Random.Range(-30, 30), 0, 30);
+	//else if (ranpos == 3)
+	//	InstantMon.transform.position = new Vector3(UnityEngine.Random.Range(-30, 30), 0, -30);
+	//MonsterPool.Add(InstantMon.GetComponent<DCL_MonsterBase>());
+	#endregion
 
 }

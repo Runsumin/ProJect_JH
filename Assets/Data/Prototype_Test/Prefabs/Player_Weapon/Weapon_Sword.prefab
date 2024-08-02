@@ -15699,7 +15699,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1619466208794171396
 Transform:
   m_ObjectHideFlags: 0
@@ -32051,7 +32051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4208049124239563190
 Transform:
   m_ObjectHideFlags: 0
@@ -32162,14 +32162,14 @@ MonoBehaviour:
     Weapon_AttackType: 0
     Weapon_AttackState: 0
     NowWeaponLevel: 0
+  PlayerPos: {fileID: 0}
   SwordSetting:
     SwordLevelRoot:
     - {fileID: 2742928811541117801}
     - {fileID: 1568701724857346853}
     - {fileID: 5098764759910605428}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 4294956584624286599}
+    - {fileID: 1338387797899017874}
   Sword_Lv1:
     _target: {fileID: 440416837981158479}
     _p1: {fileID: 2146640586604452081}
@@ -32216,7 +32216,6 @@ MonoBehaviour:
     Degree: 0
     SwordAura: {fileID: 936693104595907555, guid: cbb4031a40603dd4297a33f349eb6e09,
       type: 3}
-  PlayerPos: {fileID: 0}
   InitRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &5196527130110270540
 GameObject:

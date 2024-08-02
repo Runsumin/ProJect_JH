@@ -72,3 +72,9 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Assets/Google Sheets to Unity/Resources/GSTU_Config.asset
 Assets/Google Sheets to Unity/Resources/GSTU_Config.asset.meta
+Assets/Google Sheets to Unity/Scripts/v3/OAuth2.cs
+Assets/Google Sheets to Unity/Scripts/v3/OAuth2.cs.meta
+Assets/Package/Google Sheets to Unity/Scripts/v3/OAuth2.cs
+Assets/Package/Google Sheets to Unity/Scripts/v3/OAuth2.cs.meta
+Assets/Package/Google Sheets to Unity/Resources/GSTU_Config.asset
+Assets/Package/Google Sheets to Unity/Resources/GSTU_Config.asset.meta

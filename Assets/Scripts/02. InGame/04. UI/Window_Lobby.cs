@@ -29,6 +29,7 @@ namespace HSM.Game
             public GameObject StageSelectRoot;
             public GameObject LevelSelectRoot;
             public GameObject Notification_Window;
+            public GameObject UpgradeWindow;
         }
         public NSetting Setting = new NSetting();
         #endregion
@@ -134,6 +135,7 @@ namespace HSM.Game
             {
                 Setting.StageSelectRoot.SetActive(false);
                 Setting.LevelSelectRoot.SetActive(true);
+                SceneManager.Instance.NowStageIndex = stage;
             }
         }
         #endregion

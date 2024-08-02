@@ -140,10 +140,10 @@ namespace HSM.Game
             // 무기 레벨 1로 초기화
             Setting.NowWeaponLevel = WeaponLevel.LEVEL_1;
             StartCoroutine(Sword_Level_1());
-            StartCoroutine(Sword_Level_2());
-            StartCoroutine(Sword_Level_3());
-            StartCoroutine(Sword_Level_4());
-            StartCoroutine(Sword_Level_5());
+            //StartCoroutine(Sword_Level_2());
+            //StartCoroutine(Sword_Level_3());
+            //StartCoroutine(Sword_Level_4());
+            //StartCoroutine(Sword_Level_5());
 
 
         }
