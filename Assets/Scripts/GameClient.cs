@@ -72,7 +72,7 @@ namespace HSM.Game
         #region [Init] [Start]
         public void Start()
         {
-            SceneManager.Instance.LoadScene("BamGame_Lobby");
+            SceneManager.Instance.LoadScene("DCL_Lobby");
         }
         #endregion
     }

@@ -7,7 +7,10 @@ namespace HSM.Game
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //
     // DCL_Monster_Hero
-    // 몬스터 - 히어로 클래스
+    // 몬스터 - 용사 클래스
+    //
+    // Step.1 : 단순히 플레이어 목표로 따라가기만 한다               - 완료
+    // Step.2 : 네비메쉬 위에 태워서 장애물 피하면서 목표 따라가기.
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public class DCL_Monster_Hero : DCL_MonsterBase
@@ -29,7 +32,6 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] Base
-        public Transform PlayerPos;
         #endregion
 
 
@@ -50,32 +52,30 @@ namespace HSM.Game
         // 0. Base Methods
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        #region [Init] Awake
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public override void Awake()
+        {
+            base.Awake();
+
+            //Json_Utility_Extend.FileSave(Mon_Status, "Data/Json_Data/Monster/Monster_Hero.Json");
+            Setting.Monster_Status = Json_Utility_Extend.FileLoad<DCL_Status>("Data/Json_Data/Monster/Monster_Hero.Json");
+        }
+        #endregion
 
         #region [Init] start
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Start()
         {
-            base.Start();
-            // 스텟 임시 초기화
-            Mon_Status.HP = 10;
-            Mon_Status.HP_Recovery = 0;
-            Mon_Status.Move_Speed = 0.3f;
-            Mon_Status.Defense = 5f;
-            Mon_Status.Cri_Percent = 0;
-            Mon_Status.Critical_Damage = 100;
-            Mon_Status.Cleaning_Speed = 0;
-            Mon_Status.Attack_Speed = 1;
-            Mon_Status.Attack_Power = 1;
-
-            PlayerPos = GameObject.FindWithTag("Player").transform;
+            base.Start();           
         }
         #endregion
 
         #region [Init] Update
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void Update()
+        public override void Update()
         {
-            PlayerPos = GameObject.FindWithTag("Player").transform;
+            base.Update();
             Move();
         }
         #endregion
@@ -90,12 +90,16 @@ namespace HSM.Game
         public override void Move()
         {
             // Y값 보정 - 테스트 위해
-            Vector3 Pos = new Vector3(PlayerPos.position.x, 0, PlayerPos.position.z);
-            transform.position = Vector3.Lerp(transform.position, Pos, Time.deltaTime * Mon_Status.Move_Speed);
+            //Vector3 Pos = new Vector3(PlayerPos.position.x, 0, PlayerPos.position.z);
+
+            Vector3 dir = SetDirection(transform.position, PlayerPos.position);
+
+            transform.position += -dir * Mon_Status.Move_Speed * Time.deltaTime;
+
             transform.LookAt(PlayerPos);
+
         }
         #endregion
-
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 2. Attack
@@ -125,7 +129,8 @@ namespace HSM.Game
 
         public void OnTriggerEnter(Collider coll)
         {
-            if (coll.gameObject.name == "Collider")
+            if (coll.gameObject.name == "Collider" ||
+                coll.gameObject.name == "MagicBall")
             {
                 Death();
             }

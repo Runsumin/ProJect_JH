@@ -20,7 +20,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region[Variable] Move
-        private Vector3 moveDirection;
+        public Vector3 moveDirection;
         private Vector3 camforward;
         private Vector3 camright;
         #endregion
@@ -37,7 +37,7 @@ namespace HSM.Game
         #region [Base Methods] Start
         public override void Start()
         {
-            Player_Status = this.GetComponent<DCL_PlayerBase>().Setting.Player_Status;
+            Player_Status = this.GetComponent<DCL_PlayerBase>().PL_Status;
 
             camforward = Camera.main.transform.forward;
             camforward.y = 0f;
@@ -51,7 +51,7 @@ namespace HSM.Game
         public void Update()
         {
             // 일단 이런식으로 받아오기... 추후에 다른 방법 고려 필요해보임
-            Player_Status = this.GetComponent<DCL_PlayerBase>().Setting.Player_Status;
+            Player_Status = this.GetComponent<DCL_PlayerBase>().PL_Status;
 
             bool hasControl = (moveDirection != Vector3.zero);
             if (hasControl)
@@ -59,6 +59,21 @@ namespace HSM.Game
                 transform.rotation = Quaternion.LookRotation(moveDirection);
                 transform.Translate(Vector3.forward * Player_Status.Move_Speed * Time.deltaTime);
             }
+        }
+        #endregion
+
+        #region [Base Methods] Update
+        public void FixedUpdate()
+        {
+            //// 일단 이런식으로 받아오기... 추후에 다른 방법 고려 필요해보임
+            //Player_Status = this.GetComponent<DCL_PlayerBase>().PL_Status;
+
+            //bool hasControl = (moveDirection != Vector3.zero);
+            //if (hasControl)
+            //{
+            //    transform.rotation = Quaternion.LookRotation(moveDirection);
+            //    transform.Translate(Vector3.forward * Player_Status.Move_Speed * Time.deltaTime);
+            //}
         }
         #endregion
 

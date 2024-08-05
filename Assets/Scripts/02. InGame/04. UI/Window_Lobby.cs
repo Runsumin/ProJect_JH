@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HSM.Game
 {
@@ -26,11 +27,12 @@ namespace HSM.Game
         {
             public GameObject MainTitleRoot;
             public GameObject StageSelectRoot;
+            public GameObject LevelSelectRoot;
+            public GameObject Notification_Window;
+            public GameObject UpgradeWindow;
         }
         public NSetting Setting = new NSetting();
         #endregion
-
-
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
@@ -64,7 +66,7 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Awake()
         {
-            base.Start();
+            //base.Start();
         }
 
         public override void Start()
@@ -80,6 +82,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Button] GameStart
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnClick_GameStart()
         {
             Setting.MainTitleRoot.SetActive(false);
@@ -87,7 +90,24 @@ namespace HSM.Game
         }
         #endregion
 
+        #region [Button] Upgrade
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnClick_Upgrade()
+        {
+
+        }
+        #endregion
+
+        #region [Button] Setting
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnClick_Setting()
+        {
+
+        }
+        #endregion
+
         #region [Button] GameEnd
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnClick_GameEnd()
         {
 #if UNITY_EDITOR
@@ -97,16 +117,61 @@ namespace HSM.Game
         }
         #endregion
 
-        #region [Button] StageSelect
-        public void OnClick_StageSelect(int stage)
+        #region [Button] Notofication_Window
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnClick_Close_NotifyWin()
         {
-            Setting.MainTitleRoot.SetActive(true);
-            Setting.StageSelectRoot.SetActive(false);
-            SceneManager.Instance.LoadScene("BamGame_InGame_Hex");
-            SceneManager.Instance.NowStageIndex = stage;
-            CloseWindow(true);
+            Setting.Notification_Window.SetActive(false);
         }
         #endregion
+
+        #region [Button] StageSelect
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnClick_StageSelect(int stage)
+        {
+            if(stage > 1)
+                Open_NotifyWindow();
+            else
+            {
+                Setting.StageSelectRoot.SetActive(false);
+                Setting.LevelSelectRoot.SetActive(true);
+                SceneManager.Instance.NowStageIndex = stage;
+            }
+        }
+        #endregion
+
+        #region [Button] StageSelect
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnClick_LevelSelect(int Level)
+        {
+            if (Level > 1)
+                Open_NotifyWindow();
+            else
+            {
+                // 스테이지, 레벨 정보에 따라서 난이도 밸런스 조절.
+                Setting.MainTitleRoot.SetActive(true);
+                Setting.StageSelectRoot.SetActive(false);
+                SceneManager.Instance.LoadScene("TestScene");
+                SceneManager.Instance.NowLevelIndex = Level;
+                CloseWindow(true);
+            }
+        }
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 2. Window
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Window] OpenWindow
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Open_NotifyWindow()
+        {
+            Setting.Notification_Window.SetActive(true);
+        }
+        #endregion
+
+
     }
 
 }

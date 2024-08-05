@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace HSM.Game
 {
@@ -36,6 +38,7 @@ namespace HSM.Game
         #endregion
 
         #region [Nested] Popup_Result
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         [Serializable]
         public class NPopupResult : NPopUpBase
         {
@@ -47,6 +50,7 @@ namespace HSM.Game
 
 
         #region [Nested] Popup_Pause
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         [Serializable]
         public class NPopupPause : NPopUpBase
         {
@@ -54,11 +58,38 @@ namespace HSM.Game
         }
         public NPopupPause Popup_Pause = new NPopupPause();
         #endregion
+
+        #region [Nested] InGame_Trash
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        //[Serializable]
+        public class NInGame_Trash : NPopUpBase
+        {
+            public GameObject TrashIcon;
+        }
+        public NInGame_Trash InGame_Trash = new NInGame_Trash();
+        #endregion
+
+        #region [Nested] InGame_Choice
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class NInGame_Choice : NPopUpBase
+        {
+            public TextMeshProUGUI Timer;
+            public TextMeshProUGUI[] ExPlanationTextArr;
+            public Image[] ChoiceIconArr;
+        }
+        public NInGame_Choice InGame_Choice = new NInGame_Choice();
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Item_Trash] Icon
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public List<NInGame_Trash> InGame_TrashList = new List<NInGame_Trash>();
+        #endregion
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Property
         //
@@ -84,11 +115,12 @@ namespace HSM.Game
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 1. Button
+        // 1. GamePlay
         //  
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Button] Pause
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnClick_Pause()
         {
             Time.timeScale = 0f;
@@ -97,6 +129,7 @@ namespace HSM.Game
 
         #endregion
         #region [Button] RePlay
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnClick_Replay()
         {
             ObjectManager.Instance.ResetAllObject();
@@ -112,24 +145,27 @@ namespace HSM.Game
         #endregion
 
         #region [Button] GoToMainMenu
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnClick_GoToMainMenu()
         {
             Time.timeScale = 1f;
-            SceneManager.Instance.LoadScene("BamGame_Lobby");
+            SceneManager.Instance.LoadScene("DCL_Lobby");
             CloseWindow(true);
         }
         #endregion
 
         #region [Button] LevelSelect
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnClick_LevelSelect()
         {
             Time.timeScale = 1f;
-            SceneManager.Instance.LoadScene("BamGame_Lobby");
+            SceneManager.Instance.LoadScene("DCL_Lobby");
             CloseWindow(true);
         }
         #endregion
 
         #region [Button] Continue
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnClick_Continue()
         {
             Time.timeScale = 1f;
@@ -138,10 +174,12 @@ namespace HSM.Game
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 1. Button
+        // 1. Result
         //  
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Button] ShowResult
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void ShowResult(bool result)
         {
 
@@ -155,5 +193,43 @@ namespace HSM.Game
                 Popup_Result.Text_Fail.SetActive(true);
             }
         }
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 2. Item_Trash
+        //  
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Item_Trash] Generate Icon
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void GenerateIcon()
+        {
+
+        }
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 3. Choice Item & Status
+        //  
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Button] Select
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnClick_ChoiceStatus_Item()
+        {
+            Time.timeScale = 1f;
+            InGame_Choice.Root.SetActive(false);
+        }
+        #endregion
+
+        #region [Choice] ShowChoiceList
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Show_ChoiceList()
+        {
+            Time.timeScale = 0f;
+            InGame_Choice.Root.SetActive(true);
+        }
+        #endregion
+
     }
 }

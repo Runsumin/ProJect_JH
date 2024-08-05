@@ -15,24 +15,25 @@ namespace HSM.Game
 
     public class DCL_PlayerBase : ObjectBase
     {
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// Enum
-		//
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Enum
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-		public enum PlayerState { IDLE, RUN, INTERACTION, DEATH };
+        public enum PlayerState { IDLE, RUN, INTERACTION, DEATH };
 
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// Nested Class
-		//
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Nested Class
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-		#region [NestedClass] Setting
-		//------------------------------------------------------------------------------------------------------------------------------------------------------
-		[Serializable]
-		public class NSetting
-		{
-            public DCL_Status Player_Status = new DCL_Status();     // 플레이어 스텟
+        #region [NestedClass] Setting
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class NSetting
+        {
+            //public DCL_Status Player_Status = new DCL_Status();                         // 플레이어 스텟
+            public List<NPlayerLevle> Player_Status_Level = new List<NPlayerLevle>();   // 
         }
         public NSetting Setting = new NSetting();
         #endregion
@@ -48,14 +49,48 @@ namespace HSM.Game
         public NInterAction Player_InterAction = new NInterAction();
         #endregion
 
+        #region [Level] 플레이어 레벨
+        [Serializable]
+        public class NPlayerLevle
+        {
+            public DCL_Status Pl_Status;
+            public int Level;
+
+            public NPlayerLevle(DCL_Status status, int lv)
+            {
+                this.Pl_Status = status;
+                this.Level = lv;
+            }
+        }
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Parsing
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Parsing] PlayerStatus_Level
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class PlayerStatus_Level
+        {
+            public List<NPlayerLevle> Player_Status_Level;
+        }
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] Base
+        public float NowHP;
+        private float HPRecoveryTime;
         #endregion
 
+        #region [Variable] Level
+        public int NowPlayerLevel;
+        #endregion
 
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -65,7 +100,7 @@ namespace HSM.Game
 
         #region [Property] Setting
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public DCL_Status PL_Status => Setting.Player_Status;       // 플레이어 스텟
+        public DCL_Status PL_Status => Setting.Player_Status_Level[NowPlayerLevel].Pl_Status;       // 플레이어 스텟
         #endregion
 
 
@@ -76,29 +111,54 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Init] Awake
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public override void Awake()
+        {
+            base.Awake();
+            //Json_Utility_Extend.FileSaveList(Setting.Player_Status_Level, "Data/Json_Data/Player/Player_Status.Json");
+            Setting.Player_Status_Level = Json_Utility_Extend.FileLoadList<NPlayerLevle>("Data/Json_Data/Player/Player_Status.Json");
+        }
+        #endregion
+
         #region [Init] Start
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Start()
         {
             base.Start();
-            // 스텟 임시 초기화
-            Setting.Player_Status.HP = 100;
-            Setting.Player_Status.HP_Recovery = 1;
-            Setting.Player_Status.Move_Speed = 8f;
-            Setting.Player_Status.Defense = 5f;
-            Setting.Player_Status.Cri_Percent = 10;
-            Setting.Player_Status.Critical_Damage = 160;
-            Setting.Player_Status.Cleaning_Speed = 1;
-            Setting.Player_Status.Attack_Speed = 1;
-            Setting.Player_Status.Attack_Power = 1;
         }
         #endregion
 
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        #region [Update]    
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Update()
+        {
+            Auto_HP_Recovery();
+        }
+        #endregion
+
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 1. Status_Change
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Status_Change] HP Recovery
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Auto_HP_Recovery()
+        {
+            HPRecoveryTime += Time.deltaTime;
+            if (HPRecoveryTime > 3)
+            {
+                if (NowHP < PL_Status.HP)
+                {
+                    NowHP += PL_Status.HP_Recovery;
+                    HPRecoveryTime = 0;
+                }
+            }
+        }
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 2. Move
