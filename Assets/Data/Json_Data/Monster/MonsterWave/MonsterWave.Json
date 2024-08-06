@@ -1,0 +1,40 @@
+{
+    "datas": [
+        {
+            "WaveType": 0,
+            "WaveTime": 5
+        },
+        {
+            "WaveType": 1,
+            "WaveTime": 37
+        },
+        {
+            "WaveType": 2,
+            "WaveTime": 77
+        },
+        {
+            "WaveType": 0,
+            "WaveTime": 107
+        },
+        {
+            "WaveType": 1,
+            "WaveTime": 140
+        },
+        {
+            "WaveType": 2,
+            "WaveTime": 150
+        },
+        {
+            "WaveType": 0,
+            "WaveTime": 209
+        },
+        {
+            "WaveType": 1,
+            "WaveTime": 229
+        },
+        {
+            "WaveType": 2,
+            "WaveTime": 258
+        }
+    ]
+}

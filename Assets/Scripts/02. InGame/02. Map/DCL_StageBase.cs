@@ -18,7 +18,10 @@ namespace HSM.Game
     //	서브퀘스트
     //  - 서브 퀘스트 종류
     //  - 서브 퀘스트 발생 시간
-    // 
+    //
+    //  이벤트 - 게임 내 큰 분기점
+    //  웨이브 - 게임 내 몬스터 생성 패턴
+    //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public class DCL_StageBase : MonoBehaviour
     {
@@ -30,6 +33,7 @@ namespace HSM.Game
         public enum eStageDifficulty { EASY, NORMAL, HARD, HELL }   // 스테이지 난이도
         public enum eEventType { BIGWAVE, ELITE, MINIGAME, BOSS }   // 분기점(이벤트 종류)
         public enum eSubQuestType { MARATHON, CLEANING }            // 서브퀘스트 종류
+        public enum eWaveType { CountUp, StatUp, TypeUp }           // 웨이브 종류
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Nested Class
@@ -48,6 +52,8 @@ namespace HSM.Game
 
             public NStageStreamtime StageTime;
             public NStageSubQuest SubQuest;
+            public List<NMonsterWave> WaveArr = new List<NMonsterWave>();
+            public eWaveType NowMonsterWaveType;
 
         }
         public NSetting Setting = new NSetting();
@@ -70,10 +76,19 @@ namespace HSM.Game
         public class NStageSubQuest
         {
             public int EventCount;
-            public float[] EventTime;
+            public int[] EventTime;
         }
         #endregion
 
+        #region [NestedClass] Monster Wave
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class NMonsterWave
+        {
+            public eWaveType WaveType;
+            public int WaveTime;
+        }
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
@@ -81,7 +96,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] Base
-
+        private int MonsterWaveIndex;
         #endregion
 
 
@@ -93,6 +108,7 @@ namespace HSM.Game
 
         #region [Property] Base
         //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public int NowWaveType => ((int)Setting.NowMonsterWaveType);
         #endregion
 
 
@@ -113,7 +129,10 @@ namespace HSM.Game
                 Setting.NowStageIndex = SceneManager.Instance.NowStageIndex;
             }
 
+            //Setting.NowMonsterWave.WaveTime = 0;
+            //Setting.NowMonsterWave.WaveType = eWaveType.CountUp;
             SetStageData();
+            SetWaveData();
         }
         #endregion
 
@@ -135,7 +154,6 @@ namespace HSM.Game
                 case 4:
                     Setting.NowStageDifficulty = eStageDifficulty.HELL;
                     break;
-
             }
 
             // Time
@@ -151,11 +169,29 @@ namespace HSM.Game
         }
         #endregion
 
+        #region [Init] SetStageData
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void SetWaveData()
+        {
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    NMonsterWave data = new NMonsterWave();
+            //    data.WaveType = Random_WaveType(i);
+            //    data.WaveTime = UnityEngine.Random.Range(30 * i, 30 + (30 * i));
+            //    Setting.WaveArr.Add(data);
+            //}
+
+            //Json_Utility_Extend.FileSaveList(Setting.WaveArr, "Data/Json_Data/Monster/MonsterWave/MonsterWave.Json");
+            Setting.WaveArr = Json_Utility_Extend.FileLoadList<NMonsterWave>("Data/Json_Data/Monster/MonsterWave/MonsterWave.Json");
+        }
+        #endregion
+
         #region [Update]
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Update()
         {
             Setting.StageTime.StageStreamNowTime += Time.deltaTime;
+            WaveTimeSetting(Setting.StageTime.StageStreamNowTime);
         }
         #endregion
 
@@ -164,13 +200,44 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [GameTimer] InGameTime Setting
-        public void InGameTimer(float time)
+        #region [GameTimer] WaveTimeSetting
+        public void WaveTimeSetting(float time)
         {
-
+            if ((int)time == Setting.WaveArr[MonsterWaveIndex].WaveTime)
+            {
+                Setting.NowMonsterWaveType = Setting.WaveArr[MonsterWaveIndex].WaveType;
+                MonsterWaveIndex++;
+            }
         }
         #endregion
 
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 2. Random Data
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [RandomData] Random WaveType
+        public eWaveType Random_WaveType(int rof)
+        {
+            eWaveType data = eWaveType.CountUp;
+            //int rnd = UnityEngine.Random.Range(0, 3);
+            int rnd = rof % 3;
+            switch (rnd)
+            {
+                case 0:
+                    data = eWaveType.CountUp;
+                    break;
+                case 1:
+                    data = eWaveType.StatUp;
+                    break;
+                case 2:
+                    data = eWaveType.TypeUp;
+                    break;
+            }
+
+            return data;
+        }
+        #endregion
     }
 
 }
