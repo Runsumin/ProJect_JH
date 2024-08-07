@@ -38,15 +38,21 @@ namespace HSM.Game
         public NSetting Setting = new NSetting();
         #endregion
 
+        #region [NestedClass] Generator Data
         public class NGenData
         {
             public float DelayTime;         // 몬스터 생성 딜레이 지정타임
             public float LoopTime;          // 몬스터 생성 딜레이 루프타임
             public int GenerateCount;       // 한번에 생성할 몬스터 개수
             public int DoubleSpeed;         // 배속
+            /////////////////////////////////////////////////
+            public int MonsterMaxCount;
+            public int MonsterMinCount;
+            public int MonsterTypeCount;
+            public int MonsterLevel;
         }
         public NGenData GenData = new NGenData();
-
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
@@ -55,7 +61,9 @@ namespace HSM.Game
 
         #region [Variable] Base
         public List<DCL_MonsterBase> MonsterPool = new List<DCL_MonsterBase>();
-                                        //int[] PosArr = { 30, -30 };
+        //int[] PosArr = { 30, -30 };
+
+        private DCL_StageBase StageBaseScript;
         #endregion
 
 
@@ -84,6 +92,9 @@ namespace HSM.Game
             Setting.MonsterCount = 100;
             GenData.DelayTime = 0;          // 첫 딜레이 타임은 2초
             GenData.DoubleSpeed = 1;        // 배속
+
+            StageBaseScript = gameObject.GetComponentInParent<DCL_StageBase>();
+            StageBaseScript.SetCallback(Gen_Data_Setting);
         }
         #endregion
 
@@ -91,8 +102,6 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         void Update()
         {
-            // 0 : CountUp, 1 : StatUp, 2: TypeUp
-            int type = gameObject.GetComponentInParent<DCL_StageBase>().NowWaveType;
             GenData.LoopTime += Time.deltaTime * GenData.DoubleSpeed;
             if (GenData.LoopTime >= GenData.DelayTime)
                 GenerateMonster();
@@ -109,12 +118,13 @@ namespace HSM.Game
         public void GenerateMonster()
         {
             GenData.LoopTime = 0;       // 루프타임 초기화
-            GenData.GenerateCount = UnityEngine.Random.Range(1, 4);
+            GenData.GenerateCount = UnityEngine.Random.Range(GenData.MonsterMinCount, GenData.MonsterMaxCount);
             GenData.DelayTime = UnityEngine.Random.Range(4, 6);
 
             for (int i = 0; i < GenData.GenerateCount; i++)
             {
-                GameObject InstantMon = Instantiate(Setting.MonsterList[0], transform);
+                GameObject InstantMon = Instantiate(Setting.MonsterList[0], Setting.GeneratePointArr[i]);
+                InstantMon.GetComponent<DCL_MonsterBase>().SetMonsterLevel(GenData.MonsterLevel);
             }
 
         }
@@ -129,8 +139,13 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Gen_Data_Setting()
         {
-
-
+            // 0 : CountUp, 1 : StatUp, 2: TypeUp
+            var root = gameObject.GetComponentInParent<DCL_StageBase>();
+            int type = root.NowWaveType;
+            GenData.MonsterMaxCount = root.WaveMonMaxCount;
+            GenData.MonsterMinCount = root.WaveMonMinCount;
+            GenData.MonsterTypeCount = root.WaveMonTypeCnt;
+            GenData.MonsterLevel = root.WaveMonLevel;
         }
         #endregion
 

@@ -29,11 +29,12 @@ namespace HSM.Game
         // Enum class
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+        #region [Enum]
         public enum eStageDifficulty { EASY, NORMAL, HARD, HELL }   // 스테이지 난이도
         public enum eEventType { BIGWAVE, ELITE, MINIGAME, BOSS }   // 분기점(이벤트 종류)
         public enum eSubQuestType { MARATHON, CLEANING }            // 서브퀘스트 종류
         public enum eWaveType { CountUp, StatUp, TypeUp }           // 웨이브 종류
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Nested Class
@@ -87,6 +88,12 @@ namespace HSM.Game
         {
             public eWaveType WaveType;
             public int WaveTime;
+            public int MonsterLevel;
+            public int MonsterMinCount;
+            public int MonsterMaxCount;
+            public int GenDelayMaxCount;
+            public int GenDelayMinCount;
+            public int MonsterTypeCnt;
         }
         #endregion
 
@@ -99,7 +106,15 @@ namespace HSM.Game
         private int MonsterWaveIndex;
         #endregion
 
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // CallBack
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [CallBack]
+        public delegate void WaveChangeCallBack();
+        private WaveChangeCallBack WC_CallBack = null;
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Property
@@ -109,6 +124,12 @@ namespace HSM.Game
         #region [Property] Base
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public int NowWaveType => ((int)Setting.NowMonsterWaveType);
+        public int NowWaveIndex => MonsterWaveIndex;
+        public int WaveMonMaxCount => Setting.WaveArr[MonsterWaveIndex].MonsterMaxCount;
+        public int WaveMonMinCount => Setting.WaveArr[MonsterWaveIndex].MonsterMinCount;
+        public int WaveMonTypeCnt => Setting.WaveArr[MonsterWaveIndex].MonsterTypeCnt;
+        public int WaveMonLevel => Setting.WaveArr[MonsterWaveIndex].MonsterLevel;
+        public float NowInGameTime => Setting.StageTime.StageStreamNowTime;
         #endregion
 
 
@@ -178,6 +199,10 @@ namespace HSM.Game
             //    NMonsterWave data = new NMonsterWave();
             //    data.WaveType = Random_WaveType(i);
             //    data.WaveTime = UnityEngine.Random.Range(30 * i, 30 + (30 * i));
+            //    data.MonsterMinCount = i;
+            //    data.MonsterMaxCount = i;
+            //    data.MonsterLevel = i;
+            //    data.MonsterTypeCnt = i;
             //    Setting.WaveArr.Add(data);
             //}
 
@@ -207,9 +232,15 @@ namespace HSM.Game
             {
                 Setting.NowMonsterWaveType = Setting.WaveArr[MonsterWaveIndex].WaveType;
                 MonsterWaveIndex++;
+                WC_CallBack();
             }
         }
         #endregion
+
+        public void SetCallback(WaveChangeCallBack cal)
+        {
+            WC_CallBack = cal;
+        }
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 2. Random Data

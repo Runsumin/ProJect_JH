@@ -62,7 +62,7 @@ namespace HSM.Game
         {
             base.Awake();
             //Json_Utility_Extend.FileSave(Mon_Status, "Data/Json_Data/Monster/Monster_Magicion.Json");
-            Setting.Monster_Status = Json_Utility_Extend.FileLoad<DCL_Status>("Data/Json_Data/Monster/Monster_Magicion.Json");
+            Setting.Monster_Status = Json_Utility_Extend.FileLoadList<DCL_Status>("Data/Json_Data/Monster/Monster_Magicion.Json");
         }
         #endregion
 

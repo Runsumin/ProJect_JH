@@ -60,8 +60,22 @@ namespace HSM.Game
         public override void Awake()
         {
             base.Awake();
-            //Json_Utility_Extend.FileSave(Mon_Status, "Data/Json_Data/Monster/Monster_BomberMan.Json");
-            Setting.Monster_Status = Json_Utility_Extend.FileLoad<DCL_Status>("Data/Json_Data/Monster/Monster_BomberMan.Json");
+            //for(int i = 0; i < 5; i++)
+            //{
+            //    DCL_Status statbase = new DCL_Status();
+            //    statbase.Attack_Power = 1f;
+            //    statbase.Attack_Speed = 1f;
+            //    statbase.Cri_Percent = 0;
+            //    statbase.Defense= 5f;
+            //    statbase.Critical_Damage= 100f;
+            //    statbase.HP = 10f;
+            //    statbase.HP_Recovery = 0f;
+            //    statbase.Gain_Range = 0f;
+            //    statbase.Move_Speed = 1f;
+            //    Setting.Monster_Status.Add(statbase);
+            //}
+            //Json_Utility_Extend.FileSaveList<DCL_Status>(Setting.Monster_Status, "Data/Json_Data/Monster/Monster_BomberMan.Json");
+            Setting.Monster_Status = Json_Utility_Extend.FileLoadList<DCL_Status>("Data/Json_Data/Monster/Monster_BomberMan.Json");
         }
         #endregion
 
@@ -213,6 +227,8 @@ namespace HSM.Game
         }
         #endregion
 
+        #region [Collider] OnTriggerEnter
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnTriggerEnter(Collider coll)
         {
             if (coll.gameObject.name == "Collider" ||
@@ -221,6 +237,7 @@ namespace HSM.Game
                 Death();
             }
         }
+        #endregion
 
         #region [Collider] 몬스터 겹침 방지
         //------------------------------------------------------------------------------------------------------------------------------------------------------

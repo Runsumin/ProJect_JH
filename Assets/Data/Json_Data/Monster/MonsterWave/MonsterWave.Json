@@ -1,40 +1,84 @@
-{
+{// 0 : CountUp, 1 : StatUp, 2: TypeUp
     "datas": [
         {
             "WaveType": 0,
-            "WaveTime": 5
+            "WaveTime": 27,
+            "MonsterLevel": 0,
+            "MonsterMinCount": 1,
+            "MonsterMaxCount": 2,
+            "MonsterTypeCnt": 1
         },
         {
             "WaveType": 1,
-            "WaveTime": 37
+            "WaveTime": 51,
+            "MonsterLevel": 1,
+            "MonsterMinCount": 1,
+            "MonsterMaxCount": 2,
+            "MonsterTypeCnt": 1
         },
         {
             "WaveType": 2,
-            "WaveTime": 77
+            "WaveTime": 71,
+            "MonsterLevel": 1,
+            "MonsterMinCount": 1,
+            "MonsterMaxCount": 2,
+            "MonsterTypeCnt": 2
         },
         {
             "WaveType": 0,
-            "WaveTime": 107
+            "WaveTime": 95,
+            "MonsterLevel": 1,
+            "MonsterMinCount": 2,
+            "MonsterMaxCount": 4,
+            "MonsterTypeCnt": 2
         },
         {
             "WaveType": 1,
-            "WaveTime": 140
+            "WaveTime": 126,
+            "MonsterLevel": 2,
+            "MonsterMinCount": 2,
+            "MonsterMaxCount": 4,
+            "MonsterTypeCnt": 2
         },
         {
             "WaveType": 2,
-            "WaveTime": 150
+            "WaveTime": 160,
+            "MonsterLevel": 2,
+            "MonsterMinCount": 2,
+            "MonsterMaxCount": 4,
+            "MonsterTypeCnt": 3
         },
         {
             "WaveType": 0,
-            "WaveTime": 209
+            "WaveTime": 184,
+            "MonsterLevel": 3,
+            "MonsterMinCount": 3,
+            "MonsterMaxCount": 5,
+            "MonsterTypeCnt": 3
         },
         {
             "WaveType": 1,
-            "WaveTime": 229
+            "WaveTime": 236,
+            "MonsterLevel": 4,
+            "MonsterMinCount": 3,
+            "MonsterMaxCount": 5,
+            "MonsterTypeCnt": 3
         },
         {
             "WaveType": 2,
-            "WaveTime": 258
+            "WaveTime": 244,
+            "MonsterLevel": 5,
+            "MonsterMinCount": 3,
+            "MonsterMaxCount": 5,
+            "MonsterTypeCnt": 4
+        },
+        {
+            "WaveType": 0,
+            "WaveTime": 294,
+            "MonsterLevel": 5,
+            "MonsterMinCount": 3,
+            "MonsterMaxCount": 5,
+            "MonsterTypeCnt": 4
         }
     ]
 }
