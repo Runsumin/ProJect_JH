@@ -41,6 +41,8 @@ namespace HSM.Game
         #region [NestedClass] Generator Data
         public class NGenData
         {
+            public float DelayMinTime;         // 몬스터 생성 딜레이 지정타임
+            public float DelayMaxTime;         // 몬스터 생성 딜레이 지정타임
             public float DelayTime;         // 몬스터 생성 딜레이 지정타임
             public float LoopTime;          // 몬스터 생성 딜레이 루프타임
             public int GenerateCount;       // 한번에 생성할 몬스터 개수
@@ -95,6 +97,9 @@ namespace HSM.Game
 
             StageBaseScript = gameObject.GetComponentInParent<DCL_StageBase>();
             StageBaseScript.SetCallback(Gen_Data_Setting);
+
+            // 젠 데이터 초기화
+            Gen_Data_Setting();
         }
         #endregion
 
@@ -119,11 +124,11 @@ namespace HSM.Game
         {
             GenData.LoopTime = 0;       // 루프타임 초기화
             GenData.GenerateCount = UnityEngine.Random.Range(GenData.MonsterMinCount, GenData.MonsterMaxCount);
-            GenData.DelayTime = UnityEngine.Random.Range(4, 6);
-
+            GenData.DelayTime = UnityEngine.Random.Range(GenData.DelayMinTime, GenData.DelayMaxTime);
+            int rndmontype = UnityEngine.Random.Range(0, GenData.MonsterTypeCount);
             for (int i = 0; i < GenData.GenerateCount; i++)
             {
-                GameObject InstantMon = Instantiate(Setting.MonsterList[0], Setting.GeneratePointArr[i]);
+                GameObject InstantMon = Instantiate(Setting.MonsterList[rndmontype], Setting.GeneratePointArr[i]);
                 InstantMon.GetComponent<DCL_MonsterBase>().SetMonsterLevel(GenData.MonsterLevel);
             }
 
@@ -146,6 +151,8 @@ namespace HSM.Game
             GenData.MonsterMinCount = root.WaveMonMinCount;
             GenData.MonsterTypeCount = root.WaveMonTypeCnt;
             GenData.MonsterLevel = root.WaveMonLevel;
+            GenData.DelayMaxTime = root.WaveMaxGenDelay;
+            GenData.DelayMinTime = root.WaveMinGenDelay;
         }
         #endregion
 
