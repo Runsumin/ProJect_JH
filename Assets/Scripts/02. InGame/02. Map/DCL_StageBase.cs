@@ -87,7 +87,7 @@ namespace HSM.Game
         public class NMonsterWave
         {
             public eWaveType WaveType;
-            public int WaveTime;
+            public int NextWaveTime;
             public int MonsterLevel;
             public int MonsterMinCount;
             public int MonsterMaxCount;
@@ -129,6 +129,8 @@ namespace HSM.Game
         public int WaveMonMinCount => Setting.WaveArr[MonsterWaveIndex].MonsterMinCount;
         public int WaveMonTypeCnt => Setting.WaveArr[MonsterWaveIndex].MonsterTypeCnt;
         public int WaveMonLevel => Setting.WaveArr[MonsterWaveIndex].MonsterLevel;
+        public int WaveMaxGenDelay => Setting.WaveArr[MonsterWaveIndex].GenDelayMaxCount;
+        public int WaveMinGenDelay => Setting.WaveArr[MonsterWaveIndex].GenDelayMinCount;
         public float NowInGameTime => Setting.StageTime.StageStreamNowTime;
         #endregion
 
@@ -139,6 +141,14 @@ namespace HSM.Game
         // 0. Base Methods
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Init] Awake
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Awake()
+        {
+            SetWaveData(); 
+        }
+        #endregion
 
         #region [Init] Start
         //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -153,7 +163,6 @@ namespace HSM.Game
             //Setting.NowMonsterWave.WaveTime = 0;
             //Setting.NowMonsterWave.WaveType = eWaveType.CountUp;
             SetStageData();
-            SetWaveData();
         }
         #endregion
 
@@ -198,11 +207,13 @@ namespace HSM.Game
             //{
             //    NMonsterWave data = new NMonsterWave();
             //    data.WaveType = Random_WaveType(i);
-            //    data.WaveTime = UnityEngine.Random.Range(30 * i, 30 + (30 * i));
+            //    data.NextWaveTime = UnityEngine.Random.Range(30 * i, 30 + (30 * i));
             //    data.MonsterMinCount = i;
             //    data.MonsterMaxCount = i;
             //    data.MonsterLevel = i;
             //    data.MonsterTypeCnt = i;
+            //    data.GenDelayMaxCount = 4;
+            //    data.GenDelayMinCount = 6;
             //    Setting.WaveArr.Add(data);
             //}
 
@@ -228,10 +239,10 @@ namespace HSM.Game
         #region [GameTimer] WaveTimeSetting
         public void WaveTimeSetting(float time)
         {
-            if ((int)time == Setting.WaveArr[MonsterWaveIndex].WaveTime)
+            if ((int)time == Setting.WaveArr[MonsterWaveIndex].NextWaveTime)
             {
-                Setting.NowMonsterWaveType = Setting.WaveArr[MonsterWaveIndex].WaveType;
                 MonsterWaveIndex++;
+                Setting.NowMonsterWaveType = Setting.WaveArr[MonsterWaveIndex].WaveType;
                 WC_CallBack();
             }
         }

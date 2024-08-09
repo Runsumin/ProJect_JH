@@ -1,84 +1,105 @@
-{// 0 : CountUp, 1 : StatUp, 2: TypeUp
-    "datas": [
-        {
-            "WaveType": 0,
-            "WaveTime": 27,
-            "MonsterLevel": 0,
-            "MonsterMinCount": 1,
-            "MonsterMaxCount": 2,
-            "MonsterTypeCnt": 1
-        },
-        {
-            "WaveType": 1,
-            "WaveTime": 51,
-            "MonsterLevel": 1,
-            "MonsterMinCount": 1,
-            "MonsterMaxCount": 2,
-            "MonsterTypeCnt": 1
-        },
-        {
-            "WaveType": 2,
-            "WaveTime": 71,
-            "MonsterLevel": 1,
-            "MonsterMinCount": 1,
-            "MonsterMaxCount": 2,
-            "MonsterTypeCnt": 2
-        },
-        {
-            "WaveType": 0,
-            "WaveTime": 95,
-            "MonsterLevel": 1,
-            "MonsterMinCount": 2,
-            "MonsterMaxCount": 4,
-            "MonsterTypeCnt": 2
-        },
-        {
-            "WaveType": 1,
-            "WaveTime": 126,
-            "MonsterLevel": 2,
-            "MonsterMinCount": 2,
-            "MonsterMaxCount": 4,
-            "MonsterTypeCnt": 2
-        },
-        {
-            "WaveType": 2,
-            "WaveTime": 160,
-            "MonsterLevel": 2,
-            "MonsterMinCount": 2,
-            "MonsterMaxCount": 4,
-            "MonsterTypeCnt": 3
-        },
-        {
-            "WaveType": 0,
-            "WaveTime": 184,
-            "MonsterLevel": 3,
-            "MonsterMinCount": 3,
-            "MonsterMaxCount": 5,
-            "MonsterTypeCnt": 3
-        },
-        {
-            "WaveType": 1,
-            "WaveTime": 236,
-            "MonsterLevel": 4,
-            "MonsterMinCount": 3,
-            "MonsterMaxCount": 5,
-            "MonsterTypeCnt": 3
-        },
-        {
-            "WaveType": 2,
-            "WaveTime": 244,
-            "MonsterLevel": 5,
-            "MonsterMinCount": 3,
-            "MonsterMaxCount": 5,
-            "MonsterTypeCnt": 4
-        },
-        {
-            "WaveType": 0,
-            "WaveTime": 294,
-            "MonsterLevel": 5,
-            "MonsterMinCount": 3,
-            "MonsterMaxCount": 5,
-            "MonsterTypeCnt": 4
-        }
-    ]
+{
+  "datas": [
+    {
+      "WaveType": 0,
+      "NextWaveTime": 16,
+      "MonsterLevel": 0,
+      "MonsterMinCount": 0,
+      "MonsterMaxCount": 2,
+      "GenDelayMaxCount": 6,
+      "GenDelayMinCount": 4,
+      "MonsterTypeCnt": 1
+    },
+    {
+      "WaveType": 1,
+      "NextWaveTime": 42,
+      "MonsterLevel": 0,
+      "MonsterMinCount": 1,
+      "MonsterMaxCount": 3,
+      "GenDelayMaxCount": 6,
+      "GenDelayMinCount": 4,
+      "MonsterTypeCnt": 1
+
+    },
+    {
+      "WaveType": 2,
+      "NextWaveTime": 87,
+      "MonsterLevel": 1,
+      "MonsterMinCount": 1,
+      "MonsterMaxCount": 3,
+      "GenDelayMaxCount": 6,
+      "GenDelayMinCount": 4,
+      "MonsterTypeCnt": 1
+    },
+    {
+      "WaveType": 0,
+      "NextWaveTime": 111,
+      "MonsterLevel": 1,
+      "MonsterMinCount": 1,
+      "MonsterMaxCount": 3,
+      "GenDelayMaxCount": 6,
+      "GenDelayMinCount": 4,
+      "MonsterTypeCnt": 2
+    },
+    {
+      "WaveType": 1,
+      "NextWaveTime": 143,
+      "MonsterLevel": 2,
+      "MonsterMinCount": 2,
+      "MonsterMaxCount": 4,
+      "GenDelayMaxCount": 6,
+      "GenDelayMinCount": 4,
+      "MonsterTypeCnt": 2
+    },
+    {
+      "WaveType": 2,
+      "NextWaveTime": 150,
+      "MonsterLevel": 2,
+      "MonsterMinCount": 2,
+      "MonsterMaxCount": 4,
+      "GenDelayMaxCount": 6,
+      "GenDelayMinCount": 4,
+      "MonsterTypeCnt": 2
+    },
+    {
+      "WaveType": 0,
+      "NextWaveTime": 204,
+      "MonsterLevel": 3,
+      "MonsterMinCount": 2,
+      "MonsterMaxCount": 4,
+      "GenDelayMaxCount": 6,
+      "GenDelayMinCount": 4,
+      "MonsterTypeCnt": 3
+    },
+    {
+      "WaveType": 1,
+      "NextWaveTime": 237,
+      "MonsterLevel": 3,
+      "MonsterMinCount": 3,
+      "MonsterMaxCount": 5,
+      "GenDelayMaxCount": 6,
+      "GenDelayMinCount": 4,
+      "MonsterTypeCnt": 3
+    },
+    {
+      "WaveType": 2,
+      "NextWaveTime": 254,
+      "MonsterLevel": 4,
+      "MonsterMinCount": 3,
+      "MonsterMaxCount": 5,
+      "GenDelayMaxCount": 6,
+      "GenDelayMinCount": 4,
+      "MonsterTypeCnt": 3
+    },
+    {
+      "WaveType": 0,
+      "NextWaveTime": 279,
+      "MonsterLevel": 4,
+      "MonsterMinCount": 3,
+      "MonsterMaxCount": 5,
+      "GenDelayMaxCount": 6,
+      "GenDelayMinCount": 4,
+      "MonsterTypeCnt": 3
+    }
+  ]
 }

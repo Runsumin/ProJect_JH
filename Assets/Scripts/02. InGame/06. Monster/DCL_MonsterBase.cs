@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -39,6 +40,13 @@ namespace HSM.Game
         public NSetting Setting = new NSetting();
         #endregion
 
+        #region [Nested] NaviMesh
+        public class NNavMeshSetting
+        {
+            public NavMeshAgent Agent;
+        }
+        public NNavMeshSetting NavSetting = new NNavMeshSetting();
+        #endregion
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
@@ -58,6 +66,7 @@ namespace HSM.Game
         #region [Property] Base
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public DCL_Status Mon_Status => Setting.Monster_Status[Setting.Monster_Level];       // 플레이어 스텟
+        public NavMeshAgent Nav_Agent => NavSetting.Agent;
         public void SetMonsterLevel(int lv) => Setting.Monster_Level = lv;
         #endregion
 
@@ -75,6 +84,7 @@ namespace HSM.Game
         {
             base.Start();
             PlayerPos = GameObject.FindWithTag("Player").transform;
+            NavSetting.Agent = this.GetComponent<NavMeshAgent>();
 
         }
         #endregion
@@ -134,6 +144,15 @@ namespace HSM.Game
 
         }
         #endregion
+
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.name == "Collider" ||
+                other.gameObject.name == "MagicBall(Clone)")
+            {
+                Death();
+            }
+        }
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 3. Death

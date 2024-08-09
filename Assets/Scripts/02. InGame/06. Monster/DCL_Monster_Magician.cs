@@ -138,13 +138,17 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Move()
         {
+            //Ver_1 Default
             // Y값 보정 - 테스트 위해
             //Vector3 Pos = new Vector3(PlayerPos.position.x, 0, PlayerPos.position.z);
 
-            Vector3 dir = SetDirection(transform.position, PlayerPos.position);
+            //Vector3 dir = SetDirection(transform.position, PlayerPos.position);
 
-            transform.position += -dir * Mon_Status.Move_Speed * Time.deltaTime;
+            //transform.position += -dir * Mon_Status.Move_Speed * Time.deltaTime;
 
+            // Ver_2 NavMesh
+            Nav_Agent.speed = Mon_Status.Move_Speed;
+            Nav_Agent.SetDestination(PlayerPos.position);
             transform.LookAt(PlayerPos);
         }
         #endregion
