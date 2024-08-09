@@ -5930,6 +5930,7 @@ GameObject:
   - component: {fileID: 7924711825822178831}
   - component: {fileID: 8186064171899601077}
   - component: {fileID: 3848952206360574475}
+  - component: {fileID: -3372680597006717580}
   m_Layer: 0
   m_Name: Mon_Magician
   m_TagString: Untagged
@@ -6012,7 +6013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Setting:
     Monster_Status:
-      Attack_Power: 0
+    - Attack_Power: 0
       Attack_Speed: 0
       Cri_Percent: 0
       Critical_Damage: 0
@@ -6021,8 +6022,90 @@ MonoBehaviour:
       HP: 0
       HP_Recovery: 0
       Cleaning_Speed: 0
+      Gain_Range: 0
+    - Attack_Power: 0
+      Attack_Speed: 0
+      Cri_Percent: 0
+      Critical_Damage: 0
+      Move_Speed: 0
+      Defense: 0
+      HP: 0
+      HP_Recovery: 0
+      Cleaning_Speed: 0
+      Gain_Range: 0
+    - Attack_Power: 0
+      Attack_Speed: 0
+      Cri_Percent: 0
+      Critical_Damage: 0
+      Move_Speed: 0
+      Defense: 0
+      HP: 0
+      HP_Recovery: 0
+      Cleaning_Speed: 0
+      Gain_Range: 0
+    - Attack_Power: 0
+      Attack_Speed: 0
+      Cri_Percent: 0
+      Critical_Damage: 0
+      Move_Speed: 0
+      Defense: 0
+      HP: 0
+      HP_Recovery: 0
+      Cleaning_Speed: 0
+      Gain_Range: 0
+    - Attack_Power: 0
+      Attack_Speed: 0
+      Cri_Percent: 0
+      Critical_Damage: 0
+      Move_Speed: 0
+      Defense: 0
+      HP: 0
+      HP_Recovery: 0
+      Cleaning_Speed: 0
+      Gain_Range: 0
+    - Attack_Power: 0
+      Attack_Speed: 0
+      Cri_Percent: 0
+      Critical_Damage: 0
+      Move_Speed: 0
+      Defense: 0
+      HP: 0
+      HP_Recovery: 0
+      Cleaning_Speed: 0
+      Gain_Range: 0
+    - Attack_Power: 0
+      Attack_Speed: 0
+      Cri_Percent: 0
+      Critical_Damage: 0
+      Move_Speed: 0
+      Defense: 0
+      HP: 0
+      HP_Recovery: 0
+      Cleaning_Speed: 0
+      Gain_Range: 0
+    - Attack_Power: 0
+      Attack_Speed: 0
+      Cri_Percent: 0
+      Critical_Damage: 0
+      Move_Speed: 0
+      Defense: 0
+      HP: 0
+      HP_Recovery: 0
+      Cleaning_Speed: 0
+      Gain_Range: 0
+    - Attack_Power: 0
+      Attack_Speed: 0
+      Cri_Percent: 0
+      Critical_Damage: 0
+      Move_Speed: 0
+      Defense: 0
+      HP: 0
+      HP_Recovery: 0
+      Cleaning_Speed: 0
+      Gain_Range: 0
     Monster_OverLapColl: {fileID: 0}
     Monster_State: 0
+    Monster_Level: 0
   PlayerPos: {fileID: 0}
   Attack_Range: 0
   ChargingTime: 0
@@ -6051,6 +6134,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &-3372680597006717580
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713309492032581148}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2722613792755116772
 GameObject:
   m_ObjectHideFlags: 0
