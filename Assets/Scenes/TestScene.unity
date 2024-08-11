@@ -56327,7 +56327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1933619051
 Transform:
   m_ObjectHideFlags: 0
@@ -57346,6 +57346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
+  AttackDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &1955626580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57388,8 +57389,12 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 499c30fe-02ba-4748-9ace-a724979b918b
     m_ActionName: PlayerAction/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8187bf72-5677-4692-92a0-c099b2bd2d4b
+    m_ActionName: PlayerActions/AttackDirection[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: PC
+  m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerActions
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

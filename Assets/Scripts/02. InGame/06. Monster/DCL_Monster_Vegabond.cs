@@ -136,13 +136,13 @@ namespace HSM.Game
         }
         #endregion
 
-        public void OnTriggerEnter(Collider coll)
+        public new void OnTriggerEnter(Collider coll)
         {
-            if (coll.gameObject.name == "Collider" ||
-                coll.gameObject.name == "MagicBall")
-            {
-                Death();
-            }
+            //if (coll.gameObject.name == "Collider" ||
+            //    coll.gameObject.name == "MagicBall")
+            //{
+            //    Death();
+            //}
         }
 
         #region [Collider] 몬스터 겹침 방지

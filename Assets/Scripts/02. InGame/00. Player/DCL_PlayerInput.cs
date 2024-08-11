@@ -25,8 +25,12 @@ namespace HSM.Game
         private Vector3 camright;
         #endregion
 
+        #region[Variable] Attack
+        public Vector3 AttackDirection;
+        #endregion
+
         #region[Variable] Player Data
-        private DCL_Status Player_Status; 
+        private DCL_Status Player_Status;
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -53,7 +57,7 @@ namespace HSM.Game
             // 일단 이런식으로 받아오기... 추후에 다른 방법 고려 필요해보임
             Player_Status = this.GetComponent<DCL_PlayerBase>().PL_Status;
 
-            moveDirection = SetDirction(moveDirection); 
+            //moveDirection = SetDirction(moveDirection);
 
             bool hasControl = (moveDirection != Vector3.zero);
             if (hasControl)
@@ -90,9 +94,22 @@ namespace HSM.Game
             Vector2 input = context.ReadValue<Vector2>();
             if (input != null)
             {
-                //Vector3 rightmov = camright * input.x;
-                //Vector3 forwardmov = camforward * input.y;
-                //moveDirection = rightmov + forwardmov;
+                Vector3 rightmov = camright * input.x;
+                Vector3 forwardmov = camforward * input.y;
+                moveDirection = rightmov + forwardmov;
+            }
+        }
+        #endregion
+
+        #region [Input Control] AttackDir - InputAction
+        public void OnAttackDirection(InputAction.CallbackContext context)   // Unity Event로 받을 경우
+        {
+            Vector2 input = context.ReadValue<Vector2>();
+            if (input != null)
+            {
+                Vector3 WorldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(input.x, 0, input.y));
+                Vector3 plpos = this.GetComponent<DCL_PlayerBase>().transform.position;
+                AttackDirection = (WorldMousePosition - plpos).normalized;
             }
         }
         #endregion
@@ -100,7 +117,7 @@ namespace HSM.Game
         #region [Input Control] Move - Legacy
         public Vector3 SetDirction(Vector3 dir)   // Unity Event로 받을 경우
         {
-            float h = Input.GetAxis("Horizontal");  
+            float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
 
             Vector3 rightmov = camright * h;

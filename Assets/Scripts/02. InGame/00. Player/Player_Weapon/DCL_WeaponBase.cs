@@ -55,6 +55,7 @@ namespace HSM.Game
 
         #region [Variable] Base
         public Transform PlayerPos;
+        public Vector3 PlayerAttackDirection;
         #endregion
 
 
@@ -80,6 +81,7 @@ namespace HSM.Game
         {
             base.Start();
             PlayerPos = GameObject.FindWithTag("Player").transform;
+            PlayerAttackDirection = GameObject.FindWithTag("Player").GetComponent<DCL_PlayerInput>().AttackDirection;
 
         }
         #endregion
@@ -89,6 +91,7 @@ namespace HSM.Game
         public virtual void Update()
         {
             PlayerPos = GameObject.FindWithTag("Player").transform;
+            PlayerAttackDirection = GameObject.FindWithTag("Player").GetComponent<DCL_PlayerInput>().AttackDirection;
         }
         #endregion
 

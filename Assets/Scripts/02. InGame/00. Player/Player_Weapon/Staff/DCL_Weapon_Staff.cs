@@ -155,7 +155,7 @@ namespace HSM.Game
                 Staff_Lv_1.IngTime = 0f;
                 GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, Staff_Lv_1.ShootingPoint[0].position, PlayerPos.rotation);
                 // 古送瑳 実特
-                InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(PlayerAttackDirection);
             }
 
             Staff_Lv_1.IngTime += Time.deltaTime * Setting.AttackSpeed;
