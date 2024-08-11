@@ -83,9 +83,16 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Variable] Base
+        #region [Variable] HP
         public float NowHP;
         private float HPRecoveryTime;
+        private float HPRecoveryCoolTime;
+        #endregion
+
+        #region [Variable] Hit
+        private float NowHitCoolTime;  // 히트 쿨타임 -> 무적시간
+        private float HitCoolTime;  // 히트 쿨타임 -> 무적시간
+        private bool HitAble;
         #endregion
 
         #region [Variable] Level
@@ -126,6 +133,9 @@ namespace HSM.Game
         public override void Start()
         {
             base.Start();
+            NowHP = PL_Status.HP;
+            HitCoolTime = 2;
+            HitAble = true;
         }
         #endregion
 
@@ -134,12 +144,11 @@ namespace HSM.Game
         public void Update()
         {
             Auto_HP_Recovery();
+            Debug.Log(NowHP);
         }
         #endregion
 
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 1. Status_Change
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -160,6 +169,32 @@ namespace HSM.Game
         }
         #endregion
 
+        #region [Status_Change] Hit
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Hit_HP_Reduce(float monatt)
+        {
+            NowHP -= monatt;
+            StartCoroutine(HitCoolTimeChange());
+        }
+        #endregion
+
+        #region [Status_Change] HitCoolTime
+        IEnumerator HitCoolTimeChange()
+        {
+            float cooltime = 0;
+            while(true)
+            {
+                cooltime += Time.deltaTime;
+                if (cooltime > HitCoolTime)
+                {
+                    HitAble = true;
+                    break;
+                }
+            }
+            yield return null;
+        }
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 2. Move
         //
@@ -177,6 +212,19 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [InterAction] - Collision - MonsterBody
+        public void OnTriggerEnter(Collider coll)
+        {
+            // Layer = 7 : monstercoll, 8 = MonsterWeaponcoll
+            if(HitAble && coll.gameObject.layer == 7)
+            {
+                HitAble = false;
+                float att = coll.gameObject.GetComponent<DCL_MonsterBase>().Mon_Status.Attack_Power;
+                Hit_HP_Reduce(att);
+            }
+
+        }
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 5. Death

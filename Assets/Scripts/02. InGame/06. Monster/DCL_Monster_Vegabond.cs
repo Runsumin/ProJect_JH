@@ -130,9 +130,9 @@ namespace HSM.Game
 
         #region [Collider] Monster_Hit
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public override void Hit()
+        public override void Hit(float att)
         {
-
+            base.Hit(att);
         }
         #endregion
 

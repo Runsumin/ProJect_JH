@@ -53,6 +53,8 @@ namespace HSM.Game
             // 일단 이런식으로 받아오기... 추후에 다른 방법 고려 필요해보임
             Player_Status = this.GetComponent<DCL_PlayerBase>().PL_Status;
 
+            moveDirection = SetDirction(moveDirection); 
+
             bool hasControl = (moveDirection != Vector3.zero);
             if (hasControl)
             {
@@ -82,19 +84,33 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Input Control] Move
+        #region [Input Control] Move - InputAction
         public void OnMove(InputAction.CallbackContext context)   // Unity Event로 받을 경우
         {
             Vector2 input = context.ReadValue<Vector2>();
             if (input != null)
             {
-                Vector3 rightmov = camright * input.x;
-                Vector3 forwardmov = camforward * input.y;
-                moveDirection = rightmov + forwardmov;
-                Debug.Log($"UNITY_EVENTS : {input.magnitude}");
+                //Vector3 rightmov = camright * input.x;
+                //Vector3 forwardmov = camforward * input.y;
+                //moveDirection = rightmov + forwardmov;
             }
         }
         #endregion
+
+        #region [Input Control] Move - Legacy
+        public Vector3 SetDirction(Vector3 dir)   // Unity Event로 받을 경우
+        {
+            float h = Input.GetAxis("Horizontal");  
+            float v = Input.GetAxis("Vertical");
+
+            Vector3 rightmov = camright * h;
+            Vector3 forwardmov = camforward * v;
+            dir = rightmov + forwardmov;
+
+            return dir;
+        }
+        #endregion
+
     }
 
 }

@@ -23435,7 +23435,7 @@ GameObject:
   - component: {fileID: 84290362725402884}
   - component: {fileID: 7475746731004424429}
   - component: {fileID: 805131624903351727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mon_BomberMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}

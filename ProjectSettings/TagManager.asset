@@ -12,11 +12,11 @@ TagManager:
   - 
   - Water
   - UI
-  - PlayerWeaponCollider
-  - MonsterWeaponCollider
+  - PlayerCollider
   - MonsterCollider
-  - 
-  - 
+  - MonsterWeaponCollider
+  - PlayerWeaponCollider
+  - Item
   - 
   - 
   - 

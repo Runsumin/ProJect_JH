@@ -210,7 +210,11 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnTriggerEnter(Collider other)
         {
-            
+            if(other.gameObject.layer == 7)
+            {
+                other.gameObject.GetComponent<DCL_MonsterBase>().Hit(5);
+                Destroy(gameObject);
+            }
         }
         #endregion
 

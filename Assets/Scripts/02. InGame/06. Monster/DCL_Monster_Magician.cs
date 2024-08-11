@@ -196,13 +196,13 @@ namespace HSM.Game
 
         #region [Collider] Monster_Hit
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public override void Hit()
+        public override void Hit(float att)
         {
-
+            base.Hit(att);
         }
         #endregion
 
-        public void OnTriggerEnter(Collider coll)
+        public new void OnTriggerEnter(Collider coll)
         {
             if (coll.gameObject.name == "Collider" ||
                 coll.gameObject.name == "MagicBall")

@@ -5931,7 +5931,7 @@ GameObject:
   - component: {fileID: 8186064171899601077}
   - component: {fileID: 3848952206360574475}
   - component: {fileID: -3372680597006717580}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mon_Magician
   m_TagString: Untagged
   m_Icon: {fileID: 0}

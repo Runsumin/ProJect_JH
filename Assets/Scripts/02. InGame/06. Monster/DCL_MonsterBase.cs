@@ -56,6 +56,9 @@ namespace HSM.Game
         public Transform PlayerPos;
         #endregion
 
+        #region [Variable]
+        private float NowHP;
+        #endregion
 
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -85,6 +88,7 @@ namespace HSM.Game
             base.Start();
             PlayerPos = GameObject.FindWithTag("Player").transform;
             NavSetting.Agent = this.GetComponent<NavMeshAgent>();
+            NowHP = Mon_Status.HP;
 
         }
         #endregion
@@ -139,19 +143,21 @@ namespace HSM.Game
 
         #region [Move] Monster_Hit
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public virtual void Hit()
+        public virtual void Hit(float att)
         {
-
+            NowHP -= att;
+            if (NowHP <= 0)
+                Death();
         }
         #endregion
 
         public void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.name == "Collider" ||
-                other.gameObject.name == "MagicBall(Clone)")
-            {
-                Death();
-            }
+            //if (other.gameObject.name == "Collider" ||
+            //    other.gameObject.name == "MagicBall(Clone)")
+            //{
+            //    Death();
+            //}
         }
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

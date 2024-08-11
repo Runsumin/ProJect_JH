@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5268190797463964406}
   - component: {fileID: 8030574634542673526}
   - component: {fileID: 4295150148561274315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireGlowTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4781,7 +4781,7 @@ GameObject:
   - component: {fileID: 1791028040206806951}
   - component: {fileID: 8824927394046613416}
   - component: {fileID: 5418083475146391260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mon_Magician_FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9623,7 +9623,7 @@ GameObject:
   - component: {fileID: 2310604889747913196}
   - component: {fileID: 4759027525936367339}
   - component: {fileID: 5510989382103701717}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SparkTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14427,7 +14427,7 @@ GameObject:
   - component: {fileID: 3865440973230105997}
   - component: {fileID: 6861040279172180022}
   - component: {fileID: 3206641256313680118}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmokeTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15223,7 +15223,7 @@ GameObject:
   - component: {fileID: 2231616529829812194}
   - component: {fileID: 6845248603132496099}
   - component: {fileID: 5746893937383202554}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mon_VegaBond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
