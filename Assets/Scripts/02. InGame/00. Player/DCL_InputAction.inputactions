@@ -15,9 +15,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "AttackDirection",
+                    "name": "AttDIr",
                     "type": "Value",
-                    "id": "8187bf72-5677-4692-92a0-c099b2bd2d4b",
+                    "id": "4bcaff4f-9fbc-4bfc-a375-5c1c071e645e",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -82,12 +82,12 @@
                 },
                 {
                     "name": "",
-                    "id": "7c46017d-e8fb-4038-8b42-62fd98c96d88",
+                    "id": "62669514-b943-499a-adf3-ef35b1ffb181",
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PC",
-                    "action": "AttackDirection",
+                    "groups": "",
+                    "action": "AttDIr",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

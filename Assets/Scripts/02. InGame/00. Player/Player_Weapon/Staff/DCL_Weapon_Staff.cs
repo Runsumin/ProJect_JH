@@ -137,6 +137,7 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public new void Update()
         {
+            base.Update();
             Staff_Level_1();
         }
         #endregion
@@ -155,7 +156,8 @@ namespace HSM.Game
                 Staff_Lv_1.IngTime = 0f;
                 GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, Staff_Lv_1.ShootingPoint[0].position, PlayerPos.rotation);
                 // 古送瑳 実特
-                InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(PlayerAttackDirection);
+                InstantMagicball.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
+                InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
             }
 
             Staff_Lv_1.IngTime += Time.deltaTime * Setting.AttackSpeed;
@@ -173,6 +175,7 @@ namespace HSM.Game
                 {
                     GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, Staff_Lv_2.ShootingPoint[i].position, PlayerPos.rotation);
                     // 古送瑳 実特
+                    InstantMagicball.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
                     InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
                 }
             }

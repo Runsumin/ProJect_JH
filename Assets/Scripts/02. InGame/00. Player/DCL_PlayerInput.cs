@@ -14,10 +14,18 @@ namespace HSM.Game
 
     public class DCL_PlayerInput : ObjectBase
     {
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        [Header("Asset")]
+        public InputActionAsset actionAsset;
+
+        [Header("Action")]
+        public InputActionReference MoveAction;
+        public InputActionReference AttackDirectionAction;
 
         #region[Variable] Move
         public Vector3 moveDirection;
@@ -39,6 +47,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Base Methods] Start
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Start()
         {
             Player_Status = this.GetComponent<DCL_PlayerBase>().PL_Status;
@@ -52,6 +61,7 @@ namespace HSM.Game
         #endregion
 
         #region [Base Methods] Update
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Update()
         {
             // 일단 이런식으로 받아오기... 추후에 다른 방법 고려 필요해보임
@@ -65,10 +75,12 @@ namespace HSM.Game
                 transform.rotation = Quaternion.LookRotation(moveDirection);
                 transform.Translate(Vector3.forward * Player_Status.Move_Speed * Time.deltaTime);
             }
+
         }
         #endregion
 
         #region [Base Methods] Update
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void FixedUpdate()
         {
             //// 일단 이런식으로 받아오기... 추후에 다른 방법 고려 필요해보임
@@ -83,12 +95,37 @@ namespace HSM.Game
         }
         #endregion
 
+        #region [Base Methods] OnEnable
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        private new void OnEnable()
+        {
+            actionAsset.Enable();
+
+            MoveAction.action.performed += OnMove;
+            AttackDirectionAction.action.performed += OnAttDIr;
+            //MoveAction.action.canceled += OnMove;
+        }
+        #endregion
+
+        #region [Base Methods] OnDisable
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        private new void OnDisable()
+        {
+            actionAsset.Disable();
+
+            MoveAction.action.performed -= OnMove;
+            AttackDirectionAction.action.performed -= OnAttDIr;
+            //MoveAction.action.canceled -= OnMove;
+        }
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 1. Input Control
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Input Control] Move - InputAction
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnMove(InputAction.CallbackContext context)   // Unity Event로 받을 경우
         {
             Vector2 input = context.ReadValue<Vector2>();
@@ -102,15 +139,33 @@ namespace HSM.Game
         #endregion
 
         #region [Input Control] AttackDir - InputAction
-        public void OnAttackDirection(InputAction.CallbackContext context)   // Unity Event로 받을 경우
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnAttDIr(InputAction.CallbackContext context)   // Unity Event로 받을 경우
         {
+            //Vector2 input = context.ReadValue<Vector2>();
+            //if (input != null)
+            //{
+            //    Vector3 WorldMousePosition = Camera.main.ScreenToWorldPoint(/*new Vector3(input.x,0,input.y)*/input);
+            //    Vector3 plpos = this.GetComponent<DCL_PlayerBase>().transform.position;
+            //    AttackDirection = (plpos - WorldMousePosition).normalized;
+            //    AttackDirection.y = 0;
+            //    Debug.Log(input);
+            //}
+            Vector3 plpos = this.GetComponent<DCL_PlayerBase>().transform.position;
+
+            Vector3 playerscreenpos = Camera.main.WorldToScreenPoint(plpos);
             Vector2 input = context.ReadValue<Vector2>();
-            if (input != null)
-            {
-                Vector3 WorldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(input.x, 0, input.y));
-                Vector3 plpos = this.GetComponent<DCL_PlayerBase>().transform.position;
-                AttackDirection = (WorldMousePosition - plpos).normalized;
-            }
+
+            var mousedir = new Vector3(input.x, input.y);
+
+            var attdir = Vector3.Normalize(mousedir - playerscreenpos);
+
+            Vector3 rightmov = camright * attdir.x;
+            Vector3 forwardmov = camforward * attdir.y;
+
+            var final = Vector3.Normalize(rightmov + forwardmov);
+
+            AttackDirection = final;
         }
         #endregion
 

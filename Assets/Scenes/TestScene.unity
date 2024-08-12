@@ -19391,7 +19391,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676052045}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56327,7 +56327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1933619051
 Transform:
   m_ObjectHideFlags: 0
@@ -57345,6 +57345,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f096147c74ae7cf4cb39fc5f675ac335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionAsset: {fileID: -944628639613478452, guid: dfa3fc92d0b539541be83da4b1890d29,
+    type: 3}
+  MoveAction: {fileID: 8930077309943863785, guid: dfa3fc92d0b539541be83da4b1890d29,
+    type: 3}
+  AttackDirectionAction: {fileID: 2328830121998067547, guid: dfa3fc92d0b539541be83da4b1890d29,
+    type: 3}
   moveDirection: {x: 0, y: 0, z: 0}
   AttackDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &1955626580
@@ -57391,8 +57397,8 @@ MonoBehaviour:
     m_ActionName: PlayerAction/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 8187bf72-5677-4692-92a0-c099b2bd2d4b
-    m_ActionName: PlayerActions/AttackDirection[/Mouse/position]
+    m_ActionId: 4bcaff4f-9fbc-4bfc-a375-5c1c071e645e
+    m_ActionName: PlayerActions/AttDIr[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerActions
