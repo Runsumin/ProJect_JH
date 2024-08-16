@@ -2251,6 +2251,17 @@ Transform:
   - {fileID: 882874932}
   - {fileID: 1945157846}
   - {fileID: 82166902}
+  - {fileID: 1775723323}
+  - {fileID: 1051248650}
+  - {fileID: 611616112}
+  - {fileID: 963093734}
+  - {fileID: 252380275}
+  - {fileID: 1945970552}
+  - {fileID: 1263192223}
+  - {fileID: 641864462}
+  - {fileID: 2129682254}
+  - {fileID: 486842730}
+  - {fileID: 1492558450}
   m_Father: {fileID: 1713526289}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7553,15 +7564,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1176943662939856, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Hell_Fence_02
       objectReference: {fileID: 0}
+    - target: {fileID: 1176943662939856, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7608,6 +7623,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
+--- !u!4 &252380275 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be,
+    type: 3}
+  m_PrefabInstance: {fileID: 252380274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &253440046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15040,15 +15061,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1958254872529288, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Hell_Fence_05 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1958254872529288, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15095,6 +15120,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
+--- !u!4 &486842730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a,
+    type: 3}
+  m_PrefabInstance: {fileID: 486842729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &488284378
 GameObject:
   m_ObjectHideFlags: 0
@@ -18807,15 +18838,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1150811771533210, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Barrel_02 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1150811771533210, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18835,7 +18870,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_LocalRotation.y
@@ -18862,6 +18897,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
+--- !u!4 &611616112 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 611616111}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &615118793
 GameObject:
   m_ObjectHideFlags: 0
@@ -19575,15 +19616,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1176943662939856, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Hell_Fence_02 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1176943662939856, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19630,6 +19675,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
+--- !u!4 &641864462 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be,
+    type: 3}
+  m_PrefabInstance: {fileID: 641864461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &644476358
 GameObject:
   m_ObjectHideFlags: 0
@@ -29365,15 +29416,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1150811771533210, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Barrel_02 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1150811771533210, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29393,7 +29448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_LocalRotation.y
@@ -29420,6 +29475,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
+--- !u!4 &963093734 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 963093733}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963577694
 GameObject:
   m_ObjectHideFlags: 0
@@ -32514,15 +32575,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1176943662939856, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Hell_Fence_02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1176943662939856, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32542,7 +32607,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
       propertyPath: m_LocalRotation.y
@@ -32569,6 +32634,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8cde05d3b3923f4eb04c10b580724be, type: 3}
+--- !u!4 &1051248650 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4771077916931534, guid: b8cde05d3b3923f4eb04c10b580724be,
+    type: 3}
+  m_PrefabInstance: {fileID: 1051248649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1053210349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40377,15 +40448,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1958254872529288, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Hell_Fence_05
       objectReference: {fileID: 0}
+    - target: {fileID: 1958254872529288, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40432,6 +40507,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
+--- !u!4 &1263192223 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1263192222}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1272368522
 GameObject:
   m_ObjectHideFlags: 0
@@ -44307,6 +44388,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 499c30fe-02ba-4748-9ace-a724979b918b
     m_ActionName: PlayerAction/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4bcaff4f-9fbc-4bfc-a375-5c1c071e645e
+    m_ActionName: PlayerActions/AttDIr[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
   m_DefaultActionMap: PlayerActions
@@ -47361,15 +47446,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1958254872529288, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Hell_Fence_05 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1958254872529288, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -47416,6 +47505,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
+--- !u!4 &1492558450 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1492558449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1493112543
 GameObject:
   m_ObjectHideFlags: 0
@@ -56609,15 +56704,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1150811771533210, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Barrel_02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1150811771533210, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56637,7 +56736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
       propertyPath: m_LocalRotation.y
@@ -56664,6 +56763,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfbf80f11af891f48b75afe0f5e3f7f6, type: 3}
+--- !u!4 &1775723323 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4708646236492310, guid: dfbf80f11af891f48b75afe0f5e3f7f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1775723322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1776750546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62887,15 +62992,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1517218323854974, guid: 12bd8bff6be77394fb7fff71abb0c8b4, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Hell_Fence_04
       objectReference: {fileID: 0}
+    - target: {fileID: 1517218323854974, guid: 12bd8bff6be77394fb7fff71abb0c8b4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4705085727415584, guid: 12bd8bff6be77394fb7fff71abb0c8b4, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4705085727415584, guid: 12bd8bff6be77394fb7fff71abb0c8b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -62942,6 +63051,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12bd8bff6be77394fb7fff71abb0c8b4, type: 3}
+--- !u!4 &1945970552 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4705085727415584, guid: 12bd8bff6be77394fb7fff71abb0c8b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1945970551}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1949384717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68286,15 +68401,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 85141066}
     m_Modifications:
     - target: {fileID: 1958254872529288, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Hell_Fence_05 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1958254872529288, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -68341,6 +68460,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1e510b39614cf1469aa59aeedc2072a, type: 3}
+--- !u!4 &2129682254 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4956155917376188, guid: d1e510b39614cf1469aa59aeedc2072a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2129682253}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2135289510
 GameObject:
   m_ObjectHideFlags: 0
