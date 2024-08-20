@@ -37,6 +37,7 @@ namespace HSM.Game
             public Vector3 Direction;
             public Transform Target;
             public GameObject EndPorisionEffect;
+            public bool SetBomb;
         }
         public NMagicBallSetting MagicBallSetting = new NMagicBallSetting();
         #endregion
@@ -75,6 +76,7 @@ namespace HSM.Game
             if (MagicBallSetting.EndPorisionEffect != null)
                 MagicBallSetting.EndPorisionEffect.gameObject.SetActive(false);
             StopMoving = false;
+            MagicBallSetting.SetBomb = false;
         }
         #endregion
 
@@ -118,6 +120,15 @@ namespace HSM.Game
             TargetCurveSetting();
         }
         #endregion
+
+        #region [Type Setting] 
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void SetBomb(bool b)
+        {
+            MagicBallSetting.SetBomb = b;
+        }
+        #endregion
+
 
         #region [CurveSetting]
         //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -197,7 +208,8 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void MagicBallEnd()
         {
-            MagicBallSetting.EndPorisionEffect.gameObject.SetActive(true);
+            if (MagicBallSetting.SetBomb == true)
+                MagicBallSetting.EndPorisionEffect.gameObject.SetActive(true);
         }
         #endregion
 
@@ -210,7 +222,7 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.layer == 7)
+            if (other.gameObject.layer == 7)
             {
                 other.gameObject.GetComponent<DCL_MonsterBase>().Hit(5);
                 Destroy(gameObject);

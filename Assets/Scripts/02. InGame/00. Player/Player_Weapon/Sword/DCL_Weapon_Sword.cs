@@ -34,6 +34,8 @@ namespace HSM.Game
         public class NSwordSetting
         {
             public GameObject[] SwordLevelRoot;
+            public float AttackCoolTime;
+            public float IngTime;
         }
         public NSwordSetting SwordSetting = new NSwordSetting();
         #endregion
@@ -138,14 +140,7 @@ namespace HSM.Game
             InitRotation = transform.localRotation;
 
             // 무기 레벨 1로 초기화
-            Setting.NowWeaponLevel = WeaponLevel.LEVEL_1;
-            StartCoroutine(Sword_Level_1());
-            //StartCoroutine(Sword_Level_2());
-            //StartCoroutine(Sword_Level_3());
-            //StartCoroutine(Sword_Level_4());
-            //StartCoroutine(Sword_Level_5());
-
-
+            //Setting.NowWeaponLevel = WeaponLevel.LEVEL_1;
         }
         #endregion
 
@@ -153,11 +148,11 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public new void Update()
         {
-            PlayerPos = GameObject.FindWithTag("Player").transform;
-
+            base.Update();
             transform.localRotation = InitRotation;
             transform.rotation = InitRotation;
-            //transform.position = PlayerPos.position;
+            ChangeWeapon_Sword_Setting();
+            ChangeWeapon_SwordForm();
         }
         #endregion
 
@@ -172,6 +167,7 @@ namespace HSM.Game
             switch (Setting.NowWeaponLevel)
             {
                 case WeaponLevel.LEVEL_1:
+                    Sword_Level_1();
                     break;
                 case WeaponLevel.LEVEL_2:
                     break;
@@ -193,31 +189,59 @@ namespace HSM.Game
                     break;
             }
         }
+        #endregion
 
+        #region [Attack] ChangeWeapon_Sword_Setting
+        public void ChangeWeapon_Sword_Setting()
+        {
+            switch (Setting.NowWeaponLevel)
+            {
+                case WeaponLevel.LEVEL_1:
+                    SwordSetting.AttackCoolTime = 1;
+                    break;
+                case WeaponLevel.LEVEL_2:
+                    break;
+                case WeaponLevel.LEVEL_3:
+                    break;
+                case WeaponLevel.LEVEL_4:
+                    break;
+                case WeaponLevel.LEVEL_5:
+                    break;
+                case WeaponLevel.LEVEL_6:
+                    break;
+                case WeaponLevel.LEVEL_7:
+                    break;
+                case WeaponLevel.LEVEL_8:
+                    break;
+                case WeaponLevel.LEVEL_9:
+                    break;
+                case WeaponLevel.LEVEL_10:
+                    break;
+            }
+        }
         #endregion
 
         #region [Attack] Sword_Level_1
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        IEnumerator Sword_Level_1(float duration = 1.0f)
+        public void  Sword_Level_1()
         {
-            float time = 0f;
             bool flip = false;
             Vector3 p2localpos = Sword_Lv1._p2.localPosition;
 
             while (true)
             {
-                if (time > 1)
+                if (SwordSetting.IngTime > SwordSetting.AttackCoolTime)
                 {
                     //ChangeAttackState(AttackState.COOLTIME);
-                    if (time > 1 + Setting.AttackCoolTime)
+                    if (SwordSetting.IngTime > SwordSetting.AttackCoolTime)
                     {
-                        time = 0f;
-                       // ChangeAttackState(AttackState.ATTACKING);
+                        SwordSetting.IngTime = 0f;
+                        // ChangeAttackState(AttackState.ATTACKING);
                         if (flip == false)
                         {
                             flip = true;
                             Sword_Lv1._p2.localPosition = new Vector3(p2localpos.x * -1, p2localpos.y, p2localpos.z);
-                        }   
+                        }
                         else
                         {
                             flip = false;
@@ -226,13 +250,11 @@ namespace HSM.Game
                     }
                 }
 
-                Vector3 p4 = Vector3.Lerp(Sword_Lv1._p1.position, Sword_Lv1._p2.position, time);
-                Vector3 p5 = Vector3.Lerp(Sword_Lv1._p2.position, Sword_Lv1._p3.position, time);
-                Sword_Lv1._target.position = Vector3.Lerp(p4, p5, time);
+                Vector3 p4 = Vector3.Lerp(Sword_Lv1._p1.position, Sword_Lv1._p2.position, SwordSetting.IngTime);
+                Vector3 p5 = Vector3.Lerp(Sword_Lv1._p2.position, Sword_Lv1._p3.position, SwordSetting.IngTime);
+                Sword_Lv1._target.position = Vector3.Lerp(p4, p5, SwordSetting.IngTime);
 
-                time += Time.deltaTime * Setting.AttackSpeed;
-
-                yield return null;
+                SwordSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
             }
         }
         #endregion

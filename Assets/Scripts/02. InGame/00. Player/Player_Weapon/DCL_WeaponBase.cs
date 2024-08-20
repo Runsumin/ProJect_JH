@@ -14,36 +14,47 @@ namespace HSM.Game
 {
     public class DCL_WeaponBase : ObjectBase
     {
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// Enum
-		//
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Enum
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-		public enum AttackType { MELEE, RANGE }
+        public enum AttackType { MELEE, RANGE }
         public enum AttackState { ATTACKING, COOLTIME }
         public enum WeaponLevel { LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_4, LEVEL_5, LEVEL_6, LEVEL_7, LEVEL_8, LEVEL_9, LEVEL_10 }
 
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// Nested Class
-		//
-		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Nested Class
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-		#region [NestedClass] Setting
+        #region [NestedClass] Setting
         [Serializable]
-		//------------------------------------------------------------------------------------------------------------------------------------------------------
-		public class NSetting
-		{
-			public GameObject HitBox;                   // 콜라이더 박스
-			public GameObject Effect;                   // 이펙트 -> 이펙트에 맞춰 조절 기능 추가
-			public float AttackSpeed;                   // 초당 공격속도
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public class NSetting
+        {
+            public GameObject HitBox;                   // 콜라이더 박스
+            public GameObject Effect;                   // 이펙트 -> 이펙트에 맞춰 조절 기능 추가
+            public float AttackSpeed;                   // 초당 공격속도
             public float AttackCoolTime;                // 공격 쿨타임
-			public float AttackRange;                   // 공격범위
-			public AttackType Weapon_AttackType;        // 공격타입
-			public AttackState Weapon_AttackState;      // 공격상태
+            public float AttackRange;                   // 공격범위
+            public AttackType Weapon_AttackType;        // 공격타입
+            public AttackState Weapon_AttackState;      // 공격상태
 
             public WeaponLevel NowWeaponLevel;                  // 무기 레벨
         }
         public NSetting Setting = new NSetting();
+        #endregion
+
+        #region [NestedClass] AttackPoint
+        [Serializable]
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public class AttackPointSetting
+        {
+            public Transform ATTransform;
+
+        }
+        public AttackPointSetting ATSetting = new AttackPointSetting();
         #endregion
 
 
@@ -53,7 +64,13 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Variable] Base
+        #region [Variable] AttackDirection
+        public Vector3 AttackPos;
+        public Vector3 AttackDirection;
+        #endregion
+
+
+        #region [Variable] PlayerData
         public Transform PlayerPos;
         public Vector3 PlayerAttackDirection;
         #endregion
@@ -92,6 +109,7 @@ namespace HSM.Game
         {
             PlayerPos = GameObject.FindWithTag("Player").transform;
             PlayerAttackDirection = GameObject.FindWithTag("Player").GetComponent<DCL_PlayerInput>().AttackDirection;
+            SetAttackPoint();
         }
         #endregion
 
@@ -124,6 +142,20 @@ namespace HSM.Game
             }
         }
         #endregion
+
+        #region [Attack] SetAttackPoint
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void SetAttackPoint()
+        {
+            ATSetting.ATTransform.position = transform.position + PlayerAttackDirection;
+        }
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 99. etc
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
     }
 
 }

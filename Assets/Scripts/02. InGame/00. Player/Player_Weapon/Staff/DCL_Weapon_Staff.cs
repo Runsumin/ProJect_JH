@@ -34,55 +34,13 @@ namespace HSM.Game
         {
             public GameObject[] StaffLevelRoot;
             public GameObject MagicBall;
+            public float AttcatCoolTime;
+            public float IngTime;
+            public int MagicBallCount;
+            public int GuidedMagicBallCount;
+            public int Level;
         }
         public NStaffSetting StaffSetting = new NStaffSetting();
-        #endregion
-
-        #region [Staff] Level_1
-        [Serializable]
-        public class NStaff_Level_1
-        {
-            public float AttcatCoolTime;
-            public float IngTime;
-            public Transform[] ShootingPoint;
-        }
-        public NStaff_Level_1 Staff_Lv_1 = new NStaff_Level_1();
-        #endregion
-
-        #region [Staff] Level_2
-        [Serializable]
-        public class NStaff_Level_2
-        {
-            public float AttcatCoolTime;
-            public float IngTime;
-            public int MagicBallCount;
-            public Transform[] ShootingPoint;
-        }
-        public NStaff_Level_2 Staff_Lv_2 = new NStaff_Level_2();
-        #endregion
-
-        #region [Staff] Level_3
-        [Serializable]
-        public class NStaff_Level_3
-        {
-            public float AttcatCoolTime;
-            public float IngTime;
-            public int MagicBallCount;
-            public Transform[] ShootingPoint;
-        }
-        public NStaff_Level_3 Staff_Lv_3 = new NStaff_Level_3();
-        #endregion
-
-        #region [Staff] Level_4
-        [Serializable]
-        public class NStaff_Level_4
-        {
-            public float AttcatCoolTime;
-            public float IngTime;
-            public int MagicBallCount;
-            public Transform[] ShootingPoint;
-        }
-        public NStaff_Level_4 Staff_Lv_4 = new NStaff_Level_4();
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -91,7 +49,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] Direction;
-        public Vector3[] Ball_Direction = { Vector3.forward, Vector3.forward, Vector3.right, Vector3.right, Vector3.left, Vector3.left, Vector3.back, Vector3.back };
+        public Vector3[] Ball_Direction;
         public Transform TempTarget;
         #endregion
 
@@ -117,19 +75,17 @@ namespace HSM.Game
             Setting.Weapon_AttackType = AttackType.RANGE;
             Setting.Weapon_AttackState = AttackState.COOLTIME;
 
-            // Staff_lv1 초기화
-            Staff_Lv_1.AttcatCoolTime = 1;
-
-            // Staff_lv2 초기화
-            Staff_Lv_2.AttcatCoolTime = 1;
-            Staff_Lv_2.MagicBallCount = 2;
-
-            // Staff_lv3 초기화
-            Staff_Lv_3.AttcatCoolTime = 1;
-            Staff_Lv_3.MagicBallCount = 8;
-            // Staff_lv4 초기화
-            Staff_Lv_4.AttcatCoolTime = 0.5f;
-            Staff_Lv_4.MagicBallCount = 8;
+            Ball_Direction = new Vector3[]
+            {
+                transform.right,
+                transform.right,
+                transform.forward,
+                transform.forward,
+                -transform.forward,
+                -transform.forward,
+                -transform.right,
+                -transform.right,
+            };
         }
         #endregion
 
@@ -138,7 +94,8 @@ namespace HSM.Game
         public new void Update()
         {
             base.Update();
-            Staff_Level_1();
+            SwitchStaffLevel_Status(Setting.NowWeaponLevel);
+            SwitchStaffLevel(Setting.NowWeaponLevel);
         }
         #endregion
 
@@ -147,20 +104,115 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Attack] Switch Level
+        public void SwitchStaffLevel(WeaponLevel lv)
+        {
+            switch (lv)
+            {
+                case WeaponLevel.LEVEL_1:
+                    Staff_Level_1();
+                    break;
+                case WeaponLevel.LEVEL_2:
+                    Staff_Level_1();
+                    break;
+                case WeaponLevel.LEVEL_3:
+                    Staff_Level_2();
+                    break;
+                case WeaponLevel.LEVEL_4:
+                    Staff_Level_2();
+                    break;
+                case WeaponLevel.LEVEL_5:
+                    Staff_Level_3();
+                    break;
+                case WeaponLevel.LEVEL_6:
+                    Staff_Level_3();
+                    break;
+                case WeaponLevel.LEVEL_7:
+                    Staff_Level_4();
+                    break;
+                case WeaponLevel.LEVEL_8:
+                    Staff_Level_4();
+                    break;
+                case WeaponLevel.LEVEL_9:
+                    Staff_Level_5();
+                    break;
+                case WeaponLevel.LEVEL_10:
+                    Staff_Level_5();
+                    break;
+            }
+        }
+        #endregion
+
+        #region [Attack] Switch Level
+        public void SwitchStaffLevel_Status(WeaponLevel lv)
+        {
+            switch (lv)
+            {
+                case WeaponLevel.LEVEL_1:
+                    // 바라보는 방향 구체 발사
+                    StaffSetting.AttcatCoolTime = 1;
+                    break;
+                case WeaponLevel.LEVEL_2:
+                    // 공격력 증가
+                    break;
+                case WeaponLevel.LEVEL_3:
+                    // 구체 개수 증가
+                    StaffSetting.AttcatCoolTime = 1;
+                    StaffSetting.MagicBallCount = 2;
+                    break;
+                case WeaponLevel.LEVEL_4:
+                    // 공격 속도 증가
+                    StaffSetting.AttcatCoolTime = 0.8f;
+                    StaffSetting.MagicBallCount = 2;
+                    break;
+                case WeaponLevel.LEVEL_5:
+                    // 유도탄 추가
+                    StaffSetting.AttcatCoolTime = 0.8f;
+                    StaffSetting.MagicBallCount = 2;
+                    StaffSetting.GuidedMagicBallCount = 1;
+                    break;
+                case WeaponLevel.LEVEL_6:
+                    // 유도탄 개수 증가
+                    StaffSetting.AttcatCoolTime = 0.8f;
+                    StaffSetting.MagicBallCount = 2;
+                    StaffSetting.GuidedMagicBallCount = 2;
+                    break;
+                case WeaponLevel.LEVEL_7:
+                    // 발사 방향, 크기 증가
+                    StaffSetting.AttcatCoolTime = 0.8f;
+                    StaffSetting.MagicBallCount = 4;
+                    StaffSetting.GuidedMagicBallCount = 2;
+                    break;
+                case WeaponLevel.LEVEL_8:
+                    // 발사 방향증가
+                    StaffSetting.AttcatCoolTime = 0.8f;
+                    StaffSetting.MagicBallCount = 8;
+                    StaffSetting.GuidedMagicBallCount = 2;
+                    break;
+                case WeaponLevel.LEVEL_9:
+                    // 유도탄 끝사거리 폭발
+                    break;
+                case WeaponLevel.LEVEL_10:
+                    // 폭발 반경 증가
+                    break;
+            }
+        }
+        #endregion
+
         #region [Attack] Staff_Level_1
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Staff_Level_1()
         {
-            if (Staff_Lv_1.IngTime > Staff_Lv_1.AttcatCoolTime)
+            if (StaffSetting.IngTime > StaffSetting.AttcatCoolTime)
             {
-                Staff_Lv_1.IngTime = 0f;
-                GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, Staff_Lv_1.ShootingPoint[0].position, PlayerPos.rotation);
+                StaffSetting.IngTime = 0f;
+                GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, ATSetting.ATTransform.position, PlayerPos.rotation);
                 // 매직볼 셋팅
                 InstantMagicball.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
                 InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
             }
 
-            Staff_Lv_1.IngTime += Time.deltaTime * Setting.AttackSpeed;
+            StaffSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
         }
         #endregion
 
@@ -168,19 +220,24 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Staff_Level_2()
         {
-            if (Staff_Lv_2.IngTime > Staff_Lv_2.AttcatCoolTime)
+            if (StaffSetting.IngTime > StaffSetting.AttcatCoolTime)
             {
-                Staff_Lv_2.IngTime = 0f;
-                for (int i = 0; i < Staff_Lv_2.MagicBallCount; i++)
+                float separationDistance = 0.5f; // 총알 간의 거리
+                Vector3[] offset = new Vector3[2];
+                offset[0] = transform.right * separationDistance / 2;
+                offset[1] = transform.right * -separationDistance / 2;
+
+                StaffSetting.IngTime = 0f;
+                for (int i = 0; i < StaffSetting.MagicBallCount; i++)
                 {
-                    GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, Staff_Lv_2.ShootingPoint[i].position, PlayerPos.rotation);
+                    GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, ATSetting.ATTransform.position + offset[i], PlayerPos.rotation);
                     // 매직볼 셋팅
                     InstantMagicball.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
                     InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
                 }
             }
 
-            Staff_Lv_2.IngTime += Time.deltaTime * Setting.AttackSpeed;
+            StaffSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
         }
         #endregion
 
@@ -188,18 +245,30 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Staff_Level_3()
         {
-            if (Staff_Lv_3.IngTime > Staff_Lv_3.AttcatCoolTime)
+            if (StaffSetting.IngTime > StaffSetting.AttcatCoolTime)
             {
-                Staff_Lv_3.IngTime = 0f;
-                for (int i = 0; i < Staff_Lv_3.MagicBallCount; i++)
+                float separationDistance = 0.5f; // 총알 간의 거리
+                Vector3[] offset = new Vector3[2];
+                offset[0] = transform.right * separationDistance / 2;
+                offset[1] = transform.right * -separationDistance / 2;
+
+                StaffSetting.IngTime = 0f;
+                for (int i = 0; i < StaffSetting.MagicBallCount; i++)
                 {
-                    GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, Staff_Lv_3.ShootingPoint[i].position, PlayerPos.rotation);
+                    GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, ATSetting.ATTransform.position + offset[i], PlayerPos.rotation);
                     // 매직볼 셋팅
-                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Ball_Direction[i]);
+                    InstantMagicball.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
+                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                }
+
+                for (int i = 0; i < StaffSetting.GuidedMagicBallCount; i++)
+                {
+                    // 타겟 발사
+                    GameObject InstantMagicball_target = Instantiate(StaffSetting.MagicBall, PlayerPos.position, PlayerPos.rotation);
+                    InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
                 }
             }
-
-            Staff_Lv_3.IngTime += Time.deltaTime * Setting.AttackSpeed;
+            StaffSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
         }
         #endregion
 
@@ -207,23 +276,45 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Staff_Level_4()
         {
-            if (Staff_Lv_4.IngTime > Staff_Lv_4.AttcatCoolTime)
+            if (StaffSetting.IngTime > StaffSetting.AttcatCoolTime)
             {
-                Staff_Lv_4.IngTime = 0f;
-                // 8방향 발사
-                for (int i = 0; i < Staff_Lv_4.MagicBallCount; i++)
+                Vector3[] offset = new Vector3[StaffSetting.MagicBallCount];
+                float separationDistance = 0.5f; // 총알 간의 거리
+                StaffSetting.IngTime = 0f;
+                Vector3[] dirction = new Vector3[]
                 {
-                    GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, Staff_Lv_4.ShootingPoint[i].position, PlayerPos.rotation);
+                    Quaternion.Euler(0, 0, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, 0, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, 180, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, 180, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, 90, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, 90, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, -90, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, -90, 0) * PlayerAttackDirection
+                };
+
+                for (int i = 0; i < StaffSetting.MagicBallCount; i++)
+                {
+                    if (i % 2 == 0)
+                        offset[i] = Ball_Direction[i] * separationDistance / 2;
+                    else
+                        offset[i] = Ball_Direction[i] * -separationDistance / 2;
+
+                    GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, ATSetting.ATTransform.position + offset[i], PlayerPos.rotation);
                     // 매직볼 셋팅
-                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Ball_Direction[i]);
+                    InstantMagicball.transform.rotation = Quaternion.LookRotation(dirction[i]);
+                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
                 }
-                // 타겟 발사
-                GameObject InstantMagicball_target = Instantiate(StaffSetting.MagicBall, PlayerPos.position, PlayerPos.rotation);
-                // 매직볼 셋팅
-                InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
+
+                for (int i = 0; i < StaffSetting.GuidedMagicBallCount; i++)
+                {
+                    // 타겟 발사
+                    GameObject InstantMagicball_target = Instantiate(StaffSetting.MagicBall, PlayerPos.position, PlayerPos.rotation);
+                    InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
+                }
             }
 
-            Staff_Lv_4.IngTime += Time.deltaTime * Setting.AttackSpeed;
+            StaffSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
         }
         #endregion
 
@@ -231,23 +322,47 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Staff_Level_5()
         {
-            if (Staff_Lv_4.IngTime > Staff_Lv_4.AttcatCoolTime)
+            if (StaffSetting.IngTime > StaffSetting.AttcatCoolTime)
             {
-                Staff_Lv_4.IngTime = 0f;
-                // 8방향 발사
-                for (int i = 0; i < Staff_Lv_4.MagicBallCount; i++)
+                Vector3[] offset = new Vector3[StaffSetting.MagicBallCount];
+                float separationDistance = 0.5f; // 총알 간의 거리
+                StaffSetting.IngTime = 0f;
+                Vector3[] dirction = new Vector3[]
                 {
-                    GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, Staff_Lv_4.ShootingPoint[i].position, PlayerPos.rotation);
+                    Quaternion.Euler(0, 0, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, 0, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, 180, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, 180, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, 90, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, 90, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, -90, 0) * PlayerAttackDirection,
+                    Quaternion.Euler(0, -90, 0) * PlayerAttackDirection
+                };
+
+                for (int i = 0; i < StaffSetting.MagicBallCount; i++)
+                {
+                    if (i % 2 == 0)
+                        offset[i] = Ball_Direction[i] * separationDistance / 2;
+                    else
+                        offset[i] = Ball_Direction[i] * -separationDistance / 2;
+
+                    GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, ATSetting.ATTransform.position + offset[i], PlayerPos.rotation);
                     // 매직볼 셋팅
-                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Ball_Direction[i]);
+                    InstantMagicball.transform.rotation = Quaternion.LookRotation(dirction[i]);
+                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
                 }
-                // 타겟 발사
-                GameObject InstantMagicball_target = Instantiate(StaffSetting.MagicBall, PlayerPos.position, PlayerPos.rotation);
-                // 매직볼 셋팅
-                InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
+
+                for (int i = 0; i < StaffSetting.GuidedMagicBallCount; i++)
+                {
+                    // 타겟 발사
+                    GameObject InstantMagicball_target = Instantiate(StaffSetting.MagicBall, PlayerPos.position, PlayerPos.rotation);
+                    InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
+                    InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().SetBomb(true);
+
+                }
             }
 
-            Staff_Lv_4.IngTime += Time.deltaTime * Setting.AttackSpeed;
+            StaffSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
         }
         #endregion
     }
