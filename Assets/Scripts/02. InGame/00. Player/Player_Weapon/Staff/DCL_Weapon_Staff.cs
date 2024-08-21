@@ -39,6 +39,7 @@ namespace HSM.Game
             public int MagicBallCount;
             public int GuidedMagicBallCount;
             public int Level;
+            public SphereCollider TargetCheckColl;
         }
         public NStaffSetting StaffSetting = new NStaffSetting();
         #endregion
@@ -265,7 +266,14 @@ namespace HSM.Game
                 {
                     // Å¸°Ù ¹ß»ç
                     GameObject InstantMagicball_target = Instantiate(StaffSetting.MagicBall, PlayerPos.position, PlayerPos.rotation);
-                    InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
+                    TempTarget = FindEnemy();
+                    if (TempTarget == null)
+                    {
+                        InstantMagicball_target.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                    }
+                    else
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
                 }
             }
             StaffSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
@@ -310,7 +318,14 @@ namespace HSM.Game
                 {
                     // Å¸°Ù ¹ß»ç
                     GameObject InstantMagicball_target = Instantiate(StaffSetting.MagicBall, PlayerPos.position, PlayerPos.rotation);
-                    InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
+                    TempTarget = FindEnemy();
+                    if (TempTarget == null)
+                    {
+                        InstantMagicball_target.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                    }
+                    else
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
                 }
             }
 
@@ -356,15 +371,67 @@ namespace HSM.Game
                 {
                     // Å¸°Ù ¹ß»ç
                     GameObject InstantMagicball_target = Instantiate(StaffSetting.MagicBall, PlayerPos.position, PlayerPos.rotation);
-                    InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
-                    InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().SetBomb(true);
-
+                    TempTarget = FindEnemy();
+                    if (TempTarget == null)
+                    {
+                        InstantMagicball_target.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                    }
+                    else
+                    {
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().SetBomb(true);
+                    }
                 }
             }
 
             StaffSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
         }
         #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 2. Find Enemy
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Find]
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public Transform FindEnemy()
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(StaffSetting.TargetCheckColl.bounds.center, StaffSetting.TargetCheckColl.radius);
+
+            List<Transform> targetdata = new List<Transform>();
+            foreach (Collider data in hitColliders)
+            {
+                if (data.transform.GetComponent<DCL_MonsterBase>() != null)
+                {
+                    targetdata.Add(data.transform);
+                }
+            }
+
+            if (targetdata.Capacity == 0)
+                return null;
+            else
+            {
+                Transform closestTransform = null;
+                float closestDistance = Mathf.Infinity;
+
+                foreach (Transform target in targetdata)
+                {
+                    float distance = Vector3.Distance(transform.position, target.position);
+
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestTransform = target;
+                    }
+                }
+
+                return closestTransform;
+            }
+        }
+        #endregion
+
     }
 
 }
