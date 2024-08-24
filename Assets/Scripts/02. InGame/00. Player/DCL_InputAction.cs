@@ -44,6 +44,15 @@ public partial class @DCL_InputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Idle"",
+                    ""type"": ""Button"",
+                    ""id"": ""051a3dc2-fe1e-4abe-af6a-0026ee849f9c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,17 @@ public partial class @DCL_InputAction: IInputActionCollection2, IDisposable
                     ""action"": ""AttDIr"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2db241d2-4ae6-44fc-a1c6-c07f044b2b3e"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Idle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -155,6 +175,7 @@ public partial class @DCL_InputAction: IInputActionCollection2, IDisposable
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Move = m_PlayerActions.FindAction("Move", throwIfNotFound: true);
         m_PlayerActions_AttDIr = m_PlayerActions.FindAction("AttDIr", throwIfNotFound: true);
+        m_PlayerActions_Idle = m_PlayerActions.FindAction("Idle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,12 +239,14 @@ public partial class @DCL_InputAction: IInputActionCollection2, IDisposable
     private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
     private readonly InputAction m_PlayerActions_Move;
     private readonly InputAction m_PlayerActions_AttDIr;
+    private readonly InputAction m_PlayerActions_Idle;
     public struct PlayerActionsActions
     {
         private @DCL_InputAction m_Wrapper;
         public PlayerActionsActions(@DCL_InputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerActions_Move;
         public InputAction @AttDIr => m_Wrapper.m_PlayerActions_AttDIr;
+        public InputAction @Idle => m_Wrapper.m_PlayerActions_Idle;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -239,6 +262,9 @@ public partial class @DCL_InputAction: IInputActionCollection2, IDisposable
             @AttDIr.started += instance.OnAttDIr;
             @AttDIr.performed += instance.OnAttDIr;
             @AttDIr.canceled += instance.OnAttDIr;
+            @Idle.started += instance.OnIdle;
+            @Idle.performed += instance.OnIdle;
+            @Idle.canceled += instance.OnIdle;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -249,6 +275,9 @@ public partial class @DCL_InputAction: IInputActionCollection2, IDisposable
             @AttDIr.started -= instance.OnAttDIr;
             @AttDIr.performed -= instance.OnAttDIr;
             @AttDIr.canceled -= instance.OnAttDIr;
+            @Idle.started -= instance.OnIdle;
+            @Idle.performed -= instance.OnIdle;
+            @Idle.canceled -= instance.OnIdle;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -288,5 +317,6 @@ public partial class @DCL_InputAction: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAttDIr(InputAction.CallbackContext context);
+        void OnIdle(InputAction.CallbackContext context);
     }
 }

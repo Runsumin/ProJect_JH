@@ -14,6 +14,17 @@ namespace HSM.Game
 
     public class DCL_PlayerInput : ObjectBase
     {
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Enum
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        public enum ePlayerActionState
+        {
+            IDLE,
+            RUN,
+            DEATH
+        };
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
@@ -25,6 +36,7 @@ namespace HSM.Game
 
         [Header("Action")]
         public InputActionReference MoveAction;
+        public InputActionReference IdleAction;
         public InputActionReference AttackDirectionAction;
 
         #region[Variable] Move
@@ -39,6 +51,12 @@ namespace HSM.Game
 
         #region[Variable] Player Data
         private DCL_Status Player_Status;
+        #endregion
+
+        #region [Variable] Animation
+        protected Animator PlayerAnimation;
+        protected ePlayerActionState BeForePlayerActionState = ePlayerActionState.IDLE;   // 이전 플레이어 행동
+        protected ePlayerActionState PlayerActionState = ePlayerActionState.IDLE;         // 현재 플레이어 행동
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -57,6 +75,8 @@ namespace HSM.Game
 
             camforward = Vector3.Normalize(camforward);
             camright = Quaternion.Euler(new Vector3(0, 90, 0)) * camforward;
+
+            PlayerAnimation = GetComponent<Animator>();
         }
         #endregion
 
@@ -102,6 +122,7 @@ namespace HSM.Game
             actionAsset.Enable();
 
             MoveAction.action.performed += OnMove;
+            IdleAction.action.performed += OnIdle;
             AttackDirectionAction.action.performed += OnAttDIr;
             //MoveAction.action.canceled += OnMove;
         }
@@ -114,6 +135,7 @@ namespace HSM.Game
             actionAsset.Disable();
 
             MoveAction.action.performed -= OnMove;
+            IdleAction.action.performed -= OnIdle;
             AttackDirectionAction.action.performed -= OnAttDIr;
             //MoveAction.action.canceled -= OnMove;
         }
@@ -124,17 +146,30 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Actions] Idle
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnIdle(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                SetStateNAnimation(ePlayerActionState.IDLE);
+            }
+        }
+        #endregion
+
         #region [Input Control] Move - InputAction
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnMove(InputAction.CallbackContext context)   // Unity Event로 받을 경우
         {
             Vector2 input = context.ReadValue<Vector2>();
+
             if (input != null)
             {
                 Vector3 rightmov = camright * input.x;
                 Vector3 forwardmov = camforward * input.y;
                 moveDirection = rightmov + forwardmov;
             }
+            SetStateNAnimation(ePlayerActionState.RUN);
         }
         #endregion
 
@@ -180,6 +215,28 @@ namespace HSM.Game
             dir = rightmov + forwardmov;
 
             return dir;
+        }
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 99. Animation
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Animation] SetTrigger By Animation State
+        public void ChangeAnimationByTrigger(ePlayerActionState playerstate, ePlayerActionState beforeplayerstate)
+        {
+            PlayerAnimation.ResetTrigger(beforeplayerstate.ToString());
+            PlayerAnimation.SetTrigger(playerstate.ToString());
+        }
+        #endregion
+
+        #region [Animation] SetStateAnimation
+        public void SetStateNAnimation(ePlayerActionState state)
+        {
+            BeForePlayerActionState = PlayerActionState;
+            PlayerActionState = state;
+            ChangeAnimationByTrigger(PlayerActionState, BeForePlayerActionState);
         }
         #endregion
 
