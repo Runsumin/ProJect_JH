@@ -36,18 +36,12 @@ namespace HSM.Game
             public GameObject[] SwordLevelRoot;
             public float AttackCoolTime;
             public float IngTime;
+            // Test
+            public Transform CollTarget;
+            public Transform _p1, _p2, _p3;
+            //
         }
         public NSwordSetting SwordSetting = new NSwordSetting();
-        #endregion
-
-        #region [Sword] Level_1
-        [Serializable]
-        public class NSword_Level_1
-        {
-            public Transform _target;
-            public Transform _p1, _p2, _p3;
-        }
-        public NSword_Level_1 Sword_Lv1 = new NSword_Level_1();
         #endregion
 
         #region [Sword] Level_2
@@ -105,7 +99,8 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Variable] PlayerTransform
+        #region [Variable] Coroutine Check
+        private bool SwordCorCheck;
         #endregion
 
         #region [Variable] Rotation
@@ -197,7 +192,7 @@ namespace HSM.Game
             switch (Setting.NowWeaponLevel)
             {
                 case WeaponLevel.LEVEL_1:
-                    SwordSetting.AttackCoolTime = 1;
+                    //SwordSetting.AttackCoolTime = 2;
                     break;
                 case WeaponLevel.LEVEL_2:
                     break;
@@ -223,71 +218,52 @@ namespace HSM.Game
 
         #region [Attack] Sword_Level_1
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void  Sword_Level_1()
+        public void Sword_Level_1()
         {
-            bool flip = false;
-            Vector3 p2localpos = Sword_Lv1._p2.localPosition;
-
-            while (true)
+            if (SwordSetting.IngTime > SwordSetting.AttackCoolTime)
             {
-                if (SwordSetting.IngTime > SwordSetting.AttackCoolTime)
-                {
-                    //ChangeAttackState(AttackState.COOLTIME);
-                    if (SwordSetting.IngTime > SwordSetting.AttackCoolTime)
-                    {
-                        SwordSetting.IngTime = 0f;
-                        // ChangeAttackState(AttackState.ATTACKING);
-                        if (flip == false)
-                        {
-                            flip = true;
-                            Sword_Lv1._p2.localPosition = new Vector3(p2localpos.x * -1, p2localpos.y, p2localpos.z);
-                        }
-                        else
-                        {
-                            flip = false;
-                            Sword_Lv1._p2.localPosition = new Vector3(p2localpos.x, p2localpos.y, p2localpos.z);
-                        }
-                    }
-                }
-
-                Vector3 p4 = Vector3.Lerp(Sword_Lv1._p1.position, Sword_Lv1._p2.position, SwordSetting.IngTime);
-                Vector3 p5 = Vector3.Lerp(Sword_Lv1._p2.position, Sword_Lv1._p3.position, SwordSetting.IngTime);
-                Sword_Lv1._target.position = Vector3.Lerp(p4, p5, SwordSetting.IngTime);
-
-                SwordSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
+                SwordSetting.IngTime = 0f;
+                if (SwordCorCheck)
+                    StopCoroutine(Sword_Swing());
+                StartCoroutine(Sword_Swing());
             }
+
+            SwordSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
         }
         #endregion
 
         #region [Attack] Sword_Level_2
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        IEnumerator Sword_Level_2(float duration = 1.0f)
+        IEnumerator Sword_Swing(float duration = 1.0f)
         {
+            SwordCorCheck = true;
             float time = 0f;
+            Vector3 lpos = ATSetting.ATTransform.right * 3;
+            Vector3 rpos = -ATSetting.ATTransform.right * 3;
+            Vector3 tpos = ATSetting.ATTransform.forward * 5;
+
+            // test
+            SwordSetting._p1.position = lpos;
+            SwordSetting._p2.position = tpos;
+            SwordSetting._p3.position = rpos;
+            //
 
             while (true)
             {
-                if (time > 1)
+                if (time > SwordSetting.AttackCoolTime)
                 {
-                    ChangeAttackState(AttackState.COOLTIME);
-                    if (time > 1 + Setting.AttackCoolTime)
-                    {
-                        time = 0f;
-                        ChangeAttackState(AttackState.ATTACKING);
-                    }
+                    SwordCorCheck = false;
+                    break;
                 }
 
-                Vector3 p4 = Vector3.Lerp(Sword_Lv2._p1.position, Sword_Lv2._p2_1.position, time);
-                Vector3 p5 = Vector3.Lerp(Sword_Lv2._p2_1.position, Sword_Lv2._p3.position, time);
-                Vector3 p6 = Vector3.Lerp(Sword_Lv2._p3.position, Sword_Lv2._p2_2.position, time);
-                Vector3 p7 = Vector3.Lerp(Sword_Lv2._p2_2.position, Sword_Lv2._p1.position, time);
-                Sword_Lv2._target_1.position = Vector3.Lerp(p4, p5, time);
-                Sword_Lv2._target_2.position = Vector3.Lerp(p6, p7, time);
-
-                time += Time.deltaTime * Setting.AttackSpeed;
+                Vector3 p4 = Vector3.Lerp(lpos, tpos, time);
+                Vector3 p5 = Vector3.Lerp(tpos, rpos, time);
+                SwordSetting.CollTarget.position = transform.position + Vector3.Lerp(p4, p5, time);
+                time += Time.deltaTime * Setting.AttackSpeed / SwordSetting.AttackCoolTime;
 
                 yield return null;
             }
+
         }
         #endregion
 
