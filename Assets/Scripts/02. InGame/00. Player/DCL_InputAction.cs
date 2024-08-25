@@ -126,7 +126,7 @@ public partial class @DCL_InputAction: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""2db241d2-4ae6-44fc-a1c6-c07f044b2b3e"",
                     ""path"": ""<Keyboard>/anyKey"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": ""PC"",
                     ""action"": ""Idle"",

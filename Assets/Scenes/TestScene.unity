@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.46436012, g: 0.4663651, b: 0.5852887, a: 1}
+  m_IndirectSpecularColor: {r: 0.4643605, g: 0.46636528, b: 0.58528876, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -68639,6 +68639,8 @@ MonoBehaviour:
     type: 3}
   MoveAction: {fileID: 8930077309943863785, guid: dfa3fc92d0b539541be83da4b1890d29,
     type: 3}
+  IdleAction: {fileID: -1445003556842988464, guid: dfa3fc92d0b539541be83da4b1890d29,
+    type: 3}
   AttackDirectionAction: {fileID: 2328830121998067547, guid: dfa3fc92d0b539541be83da4b1890d29,
     type: 3}
   moveDirection: {x: 0, y: 0, z: 0}
@@ -68689,6 +68691,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4bcaff4f-9fbc-4bfc-a375-5c1c071e645e
     m_ActionName: PlayerActions/AttDIr[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 051a3dc2-fe1e-4abe-af6a-0026ee849f9c
+    m_ActionName: PlayerActions/Idle[/Keyboard/anyKey]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerActions
