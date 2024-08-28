@@ -15397,6 +15397,7 @@ MonoBehaviour:
     Monster_OverLapColl: {fileID: 0}
     Monster_State: 0
     Monster_Level: 0
+    EXP: {fileID: 7182592017989851762, guid: ef2824ef7b984004192c22c563d8a6fd, type: 3}
   PlayerPos: {fileID: 0}
   Destination: {fileID: 0}
 --- !u!65 &2231616529829812194

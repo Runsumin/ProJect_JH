@@ -41,7 +41,15 @@ namespace HSM.Game
         }
         #endregion
 
-
+        #region [const] Coll Layer
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public const int PLAYERCOLLIDER = 6;
+        public const int MONSTERCOLLIDER = 7;
+        public const int MONSTERWEAPONCOLLIDER = 8;
+        public const int PLAYERWEAPONCOLLIDER = 9;
+        public const int PLAYERINTERACTIONCOLLIDER = 10;
+        public const int ITEM = 11;
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
@@ -50,8 +58,6 @@ namespace HSM.Game
 
         #region [Variable] TransForm
         #endregion
-
-
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Property

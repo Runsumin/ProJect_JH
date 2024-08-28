@@ -32,8 +32,9 @@ namespace HSM.Game
         [Serializable]
         public class NSetting
         {
-            //public DCL_Status Player_Status = new DCL_Status();                         // 플레이어 스텟
-            public List<NPlayerLevle> Player_Status_Level = new List<NPlayerLevle>();   // 
+            //public DCL_Status Player_Status = new DCL_Status();                         
+            public List<NPlayerLevle> Player_Status_Level = new List<NPlayerLevle>();   // 플레이어 스텟 
+            public float NowEXP;
         }
         public NSetting Setting = new NSetting();
         #endregion
@@ -55,6 +56,7 @@ namespace HSM.Game
         {
             public DCL_Status Pl_Status;
             public int Level;
+            public float MaxEXP;
 
             public NPlayerLevle(DCL_Status status, int lv)
             {
@@ -178,6 +180,7 @@ namespace HSM.Game
         #endregion
 
         #region [Status_Change] HitCoolTime
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         IEnumerator HitCoolTimeChange()
         {
             float cooltime = 0;
@@ -193,6 +196,32 @@ namespace HSM.Game
             yield return null;
         }
         #endregion
+
+        //#region [Status_Change] Level_Up
+        ////------------------------------------------------------------------------------------------------------------------------------------------------------
+        //public void LevelUp()
+        //{
+        //    if(Setting.NowEXP >= Setting.Player_Status_Level[NowPlayerLevel].MaxEXP)
+        //    {
+        //        NowPlayerLevel++;
+        //        Setting.NowEXP = 0;
+        //    }
+        //}
+        //#endregion
+
+        #region [Status_Change] Add_EXP
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Add_EXP(int amount)
+        {
+            Setting.NowEXP += amount;
+            if (Setting.NowEXP >= Setting.Player_Status_Level[NowPlayerLevel].MaxEXP)
+            {
+                NowPlayerLevel++;
+                Setting.NowEXP = 0;
+            }
+        }
+        #endregion
+
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 2. Move
@@ -215,7 +244,7 @@ namespace HSM.Game
         public void OnTriggerEnter(Collider coll)
         {
             // Layer = 7 : monstercoll, 8 = MonsterWeaponcoll
-            if(HitAble && coll.gameObject.layer == 7)
+            if(HitAble && coll.gameObject.layer == MONSTERCOLLIDER)
             {
                 HitAble = false;
                 float att = coll.gameObject.GetComponent<DCL_MonsterBase>().Mon_Status.Attack_Power;
@@ -223,6 +252,9 @@ namespace HSM.Game
             }
 
         }
+        #endregion
+
+        #region [InterAction] - Collision - EXP
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

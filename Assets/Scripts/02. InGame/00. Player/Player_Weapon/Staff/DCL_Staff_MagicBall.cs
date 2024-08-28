@@ -76,7 +76,7 @@ namespace HSM.Game
             if (MagicBallSetting.EndPorisionEffect != null)
                 MagicBallSetting.EndPorisionEffect.gameObject.SetActive(false);
             StopMoving = false;
-            MagicBallSetting.SetBomb = false;
+            //MagicBallSetting.SetBomb = false;
         }
         #endregion
 

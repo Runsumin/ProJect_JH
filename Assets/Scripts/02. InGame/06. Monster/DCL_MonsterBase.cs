@@ -36,6 +36,7 @@ namespace HSM.Game
             public Collider Monster_OverLapColl;                     // 충돌 방지 
             public MonsterState Monster_State;                       // 몬스터 상태
             public int Monster_Level;                                // 몬스터 레벨	
+            public GameObject EXP;                                   // 경험치 프리펩
         }
         public NSetting Setting = new NSetting();
         #endregion
@@ -169,7 +170,8 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public virtual void Death()
         {
-
+            GameObject exp = Instantiate(Setting.EXP, transform.position, Quaternion.identity);
+            exp.GetComponent<DCL_Item_EXP>().SetEXP(3, 1);
         }
         #endregion
 

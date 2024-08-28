@@ -148,7 +148,7 @@ namespace HSM.Game
         public void SetAttackPoint()
         {
             ATSetting.ATTransform.position = transform.position + PlayerAttackDirection;
-            ATSetting.ATTransform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
+            //ATSetting.ATTransform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
         }
         #endregion
 

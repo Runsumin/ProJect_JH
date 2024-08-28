@@ -14318,6 +14318,7 @@ MonoBehaviour:
     Direction: {x: 0, y: 0, z: 0}
     Target: {fileID: 0}
     EndPorisionEffect: {fileID: 1370948438719252343}
+    SetBomb: 0
   LimitTime: 0
   ingtm: 0
   MagicBallSpeed: 0

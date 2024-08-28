@@ -13,7 +13,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 0
+            "Level": 0,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -28,7 +29,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 1
+            "Level": 1,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -43,7 +45,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 2
+            "Level": 2,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -58,7 +61,9 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 3
+            "Level": 3,
+            "MaxEXP": 100
+
         },
         {
             "Pl_Status": {
@@ -73,7 +78,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 4
+            "Level": 4,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -88,7 +94,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 5
+            "Level": 5,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -103,7 +110,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 6
+            "Level": 6,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -118,7 +126,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 7
+            "Level": 7,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -133,7 +142,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 8
+            "Level": 8,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -148,7 +158,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 9
+            "Level": 9,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -163,7 +174,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 10
+            "Level": 10,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -178,7 +190,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 11
+            "Level": 11,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -193,7 +206,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 12
+            "Level": 12,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -208,7 +222,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 13
+            "Level": 13,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -223,7 +238,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 14
+            "Level": 14,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -238,7 +254,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 15
+            "Level": 15,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -253,7 +270,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 16
+            "Level": 16,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -268,7 +286,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 17
+            "Level": 17,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -283,7 +302,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 18
+            "Level": 18,
+            "MaxEXP": 100
         },
         {
             "Pl_Status": {
@@ -298,7 +318,8 @@
                 "Cleaning_Speed": 1.0,
                 "Gain_Range": 5.0
             },
-            "Level": 19
+            "Level": 19,
+            "MaxEXP": 100
         }
     ]
 }

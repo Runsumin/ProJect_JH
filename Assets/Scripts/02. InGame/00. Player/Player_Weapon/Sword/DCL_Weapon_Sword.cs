@@ -34,8 +34,14 @@ namespace HSM.Game
         public class NSwordSetting
         {
             public GameObject[] SwordLevelRoot;
-            public float AttackCoolTime;
-            public float IngTime;
+            public float AttackCoolTime;        // 공격 쿨타임
+            public float CoolDownTime;        // 공격 쿨타임
+            public float AttackRange;           // 공격범위
+            public float AttackSpeed;           // 공격속도
+            public float IngTime;               // 공격 진행 시간
+            public float AttackIngTime;         // 공격 시간
+
+            public BoxCollider AttackCollider;
             // Test
             public Transform CollTarget;
             public Transform _p1, _p2, _p3;
@@ -99,8 +105,8 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Variable] Coroutine Check
-        private bool SwordCorCheck;
+        #region [Variable] Attack Check
+        private bool SwordAttCheck;
         #endregion
 
         #region [Variable] Rotation
@@ -116,7 +122,6 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void ChangeNowWeaponLevel(WeaponLevel level) => Setting.NowWeaponLevel = level;
         #endregion
-
 
 
 
@@ -136,6 +141,13 @@ namespace HSM.Game
 
             // 무기 레벨 1로 초기화
             //Setting.NowWeaponLevel = WeaponLevel.LEVEL_1;
+            SwordSetting.AttackCoolTime = 3;
+            SwordSetting.AttackRange = 3;
+            SwordSetting.AttackSpeed = 1;
+            SwordSetting.IngTime = 0;
+            SwordSetting.CoolDownTime = 0;
+            SwordSetting.AttackIngTime = 1;
+            SwordAttCheck = false;
         }
         #endregion
 
@@ -220,50 +232,40 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Sword_Level_1()
         {
-            if (SwordSetting.IngTime > SwordSetting.AttackCoolTime)
+            if (SwordSetting.CoolDownTime > SwordSetting.AttackCoolTime)
             {
-                SwordSetting.IngTime = 0f;
-                if (SwordCorCheck)
-                    StopCoroutine(Sword_Swing());
-                StartCoroutine(Sword_Swing());
+                SwordSetting.CoolDownTime = 0;
             }
+            else
+            {
+                if (SwordSetting.CoolDownTime == 0 && SwordAttCheck == false)
+                {
+                    SwordAttCheck = true;
+                    Sword_Swing(SwordAttCheck);
+                }
+                else if (SwordSetting.CoolDownTime > SwordSetting.AttackIngTime && SwordAttCheck == true)
+                {
+                    SwordAttCheck = false;
+                    Sword_Swing(SwordAttCheck);
+                }
 
-            SwordSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
+                SwordSetting.CoolDownTime += Time.deltaTime * Setting.AttackSpeed;
+            }
         }
         #endregion
 
-        #region [Attack] Sword_Level_2
+        #region [Attack] Sword_Swing
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        IEnumerator Sword_Swing(float duration = 1.0f)
+        public void Sword_Swing(bool b)
         {
-            SwordCorCheck = true;
-            float time = 0f;
-            Vector3 lpos = ATSetting.ATTransform.right * 3;
-            Vector3 rpos = -ATSetting.ATTransform.right * 3;
-            Vector3 tpos = ATSetting.ATTransform.forward * 5;
-
-            // test
-            SwordSetting._p1.position = lpos;
-            SwordSetting._p2.position = tpos;
-            SwordSetting._p3.position = rpos;
-            //
-
-            while (true)
+            if(b)
             {
-                if (time > SwordSetting.AttackCoolTime)
-                {
-                    SwordCorCheck = false;
-                    break;
-                }
-
-                Vector3 p4 = Vector3.Lerp(lpos, tpos, time);
-                Vector3 p5 = Vector3.Lerp(tpos, rpos, time);
-                SwordSetting.CollTarget.position = transform.position + Vector3.Lerp(p4, p5, time);
-                time += Time.deltaTime * Setting.AttackSpeed / SwordSetting.AttackCoolTime;
-
-                yield return null;
+                SwordSetting.AttackCollider.gameObject.SetActive(b);
+                SwordSetting.AttackCollider.transform.position = transform.position + PlayerAttackDirection * SwordSetting.AttackRange;
+                SwordSetting.AttackCollider.size = new Vector3(SwordSetting.AttackRange, 1, SwordSetting.AttackRange);
             }
-
+            else
+                SwordSetting.AttackCollider.gameObject.SetActive(b);
         }
         #endregion
 
@@ -392,6 +394,41 @@ namespace HSM.Game
         }
         #endregion
 
+        #region [BackUp]
+        /*
+ IEnumerator Sword_Swing(float duration = 1.0f)
+        {
+            SwordCorCheck = true;
+            float time = 0f;
+            Vector3 TargetPos = ATSetting.ATTransform.position;
+            Vector3 lpos = ATSetting.ATTransform.right * 3;
+            Vector3 rpos = -ATSetting.ATTransform.right * 3;
+            Vector3 tpos = ATSetting.ATTransform.forward * 5;
+
+            // test
+            SwordSetting._p1.position = lpos;
+            SwordSetting._p2.position = tpos;
+            SwordSetting._p3.position = rpos;
+            //
+
+            while (true)
+            {
+                if (time > SwordSetting.AttackIngTime)
+                {
+                    SwordCorCheck = false;
+                    break;
+                }
+
+                Vector3 p4 = Vector3.Lerp(lpos, tpos, time);
+                Vector3 p5 = Vector3.Lerp(tpos, rpos, time);
+                SwordSetting.CollTarget.position = transform.position + Vector3.Lerp(p4, p5, time);
+                time += Time.deltaTime * Setting.AttackSpeed / SwordSetting.AttackIngTime;
+
+                yield return null;
+            }
+
+        }         */
+        #endregion
     }
 
 }
