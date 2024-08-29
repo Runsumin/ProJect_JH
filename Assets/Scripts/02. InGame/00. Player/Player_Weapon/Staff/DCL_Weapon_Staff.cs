@@ -210,7 +210,7 @@ namespace HSM.Game
                 GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, ATSetting.ATTransform.position, PlayerPos.rotation);
                 // 古送瑳 実特
                 InstantMagicball.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
-                InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward, PlayerStatus.Attack_Power);
             }
 
             StaffSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
@@ -234,7 +234,7 @@ namespace HSM.Game
                     GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, ATSetting.ATTransform.position + offset[i], PlayerPos.rotation);
                     // 古送瑳 実特
                     InstantMagicball.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
-                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward, PlayerStatus.Attack_Power);
                 }
             }
 
@@ -259,7 +259,7 @@ namespace HSM.Game
                     GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, ATSetting.ATTransform.position + offset[i], PlayerPos.rotation);
                     // 古送瑳 実特
                     InstantMagicball.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
-                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward, PlayerStatus.Attack_Power);
                 }
 
                 for (int i = 0; i < StaffSetting.GuidedMagicBallCount; i++)
@@ -270,10 +270,10 @@ namespace HSM.Game
                     if (TempTarget == null)
                     {
                         InstantMagicball_target.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
-                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward, PlayerStatus.Attack_Power);
                     }
                     else
-                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget, PlayerStatus.Attack_Power);
                 }
             }
             StaffSetting.IngTime += Time.deltaTime * Setting.AttackSpeed;
@@ -311,7 +311,7 @@ namespace HSM.Game
                     GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, ATSetting.ATTransform.position + offset[i], PlayerPos.rotation);
                     // 古送瑳 実特
                     InstantMagicball.transform.rotation = Quaternion.LookRotation(dirction[i]);
-                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward, PlayerStatus.Attack_Power);
                 }
 
                 for (int i = 0; i < StaffSetting.GuidedMagicBallCount; i++)
@@ -322,10 +322,10 @@ namespace HSM.Game
                     if (TempTarget == null)
                     {
                         InstantMagicball_target.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
-                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward, PlayerStatus.Attack_Power);
                     }
                     else
-                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget, PlayerStatus.Attack_Power);
                 }
             }
 
@@ -364,7 +364,7 @@ namespace HSM.Game
                     GameObject InstantMagicball = Instantiate(StaffSetting.MagicBall, ATSetting.ATTransform.position + offset[i], PlayerPos.rotation);
                     // 古送瑳 実特
                     InstantMagicball.transform.rotation = Quaternion.LookRotation(dirction[i]);
-                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                    InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward, PlayerStatus.Attack_Power);
                 }
 
                 for (int i = 0; i < StaffSetting.GuidedMagicBallCount; i++)
@@ -375,11 +375,11 @@ namespace HSM.Game
                     if (TempTarget == null)
                     {
                         InstantMagicball_target.transform.rotation = Quaternion.LookRotation(PlayerAttackDirection);
-                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward, PlayerStatus.Attack_Power);
                     }
                     else
                     {
-                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget);
+                        InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().Set_Target(TempTarget, PlayerStatus.Attack_Power);
                         InstantMagicball_target.GetComponent<DCL_Staff_MagicBall>().SetBomb(true);
                     }
                 }

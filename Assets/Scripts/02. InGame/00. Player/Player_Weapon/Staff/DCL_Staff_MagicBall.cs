@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace HSM.Game
 {
-    public class DCL_Staff_MagicBall : MonoBehaviour
+    public class DCL_Staff_MagicBall : ObjectBase
     {
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Enum Class
@@ -38,6 +38,7 @@ namespace HSM.Game
             public Transform Target;
             public GameObject EndPorisionEffect;
             public bool SetBomb;
+            public float Damage;
         }
         public NMagicBallSetting MagicBallSetting = new NMagicBallSetting();
         #endregion
@@ -68,8 +69,9 @@ namespace HSM.Game
 
         #region [Init] Start
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        void Start()
+        public new void Start()
         {
+            base.Start();
             ingtm = 0;
             LimitTime = 2;
             MagicBallSpeed = 20;
@@ -104,19 +106,21 @@ namespace HSM.Game
 
         #region [Type Setting] 
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void Set_Direction(Vector3 direction)
+        public void Set_Direction(Vector3 direction, float damage)
         {
             MagicBallSetting.MagicBall_Level = MagicBallType.DIRECTION;
             MagicBallSetting.Direction = direction;
+            MagicBallSetting.Damage = damage;
         }
         #endregion
 
         #region [Type Setting] 
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void Set_Target(Transform target)
+        public void Set_Target(Transform target, float damage)
         {
             MagicBallSetting.MagicBall_Level = MagicBallType.TARGET;
             MagicBallSetting.Target = target;
+            MagicBallSetting.Damage = damage;
             TargetCurveSetting();
         }
         #endregion
@@ -222,9 +226,9 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == 7)
+            if (other.gameObject.layer == MONSTERCOLLIDER)
             {
-                other.gameObject.GetComponent<DCL_MonsterBase>().Hit(5);
+                other.gameObject.GetComponent<DCL_MonsterBase>().Hit(MagicBallSetting.Damage);
                 Destroy(gameObject);
             }
         }

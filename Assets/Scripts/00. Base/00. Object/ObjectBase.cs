@@ -38,6 +38,34 @@ namespace HSM.Game
             public float HP_Recovery;       // 체력재생량
             public float Cleaning_Speed;    // 청소속도
             public float Gain_Range;        // 획득범위
+
+            public DCL_Status(float att_pwr, float att_spd, int cri_per, float cri_dmg, float mov_spd, float def, float hp, float hp_re, float clean_spd, float gain_rng)
+            {
+                this.Attack_Power = att_pwr;
+                this.Attack_Speed = att_spd;
+                this.Cri_Percent = cri_per;
+                this.Critical_Damage = cri_dmg;
+                this.Move_Speed = mov_spd;
+                this.Defense = def;
+                this.HP = hp;
+                this.HP_Recovery = hp_re;
+                this.Cleaning_Speed = clean_spd;
+                this.Gain_Range = gain_rng;
+            }
+
+            public static DCL_Status operator +(DCL_Status p1, DCL_Status p2)
+            {
+                return new DCL_Status(p1.Attack_Power + p2.Attack_Power, 
+                    p1.Attack_Speed + p2.Attack_Speed , 
+                    p1.Cri_Percent + p2.Cri_Percent,
+                    p1.Critical_Damage + p2.Critical_Damage,
+                    p1.Move_Speed + p2.Move_Speed,
+                    p1.Defense + p2.Defense,
+                    p1.HP + p2.HP,
+                    p1.HP_Recovery + p2.HP_Recovery,
+                    p1.Cleaning_Speed + p2.Cleaning_Speed,
+                    p1.Gain_Range + p2.Gain_Range);
+            }
         }
         #endregion
 

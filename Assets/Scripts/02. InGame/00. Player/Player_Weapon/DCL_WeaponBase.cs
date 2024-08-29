@@ -73,6 +73,7 @@ namespace HSM.Game
         #region [Variable] PlayerData
         public Transform PlayerPos;
         public Vector3 PlayerAttackDirection;
+        public DCL_Status PlayerStatus;
         #endregion
 
 
@@ -97,9 +98,7 @@ namespace HSM.Game
         public override void Start()
         {
             base.Start();
-            PlayerPos = GameObject.FindWithTag("Player").transform;
-            PlayerAttackDirection = GameObject.FindWithTag("Player").GetComponent<DCL_PlayerInput>().AttackDirection;
-
+            SetPlayerData();
         }
         #endregion
 
@@ -107,8 +106,21 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public virtual void Update()
         {
-            PlayerPos = GameObject.FindWithTag("Player").transform;
-            PlayerAttackDirection = GameObject.FindWithTag("Player").GetComponent<DCL_PlayerInput>().AttackDirection;
+            // 현재는 매 프레임 업데이트, 추후 콜백형태로 변환 예정
+            SetPlayerData();
+            SetAttackPoint();
+        }
+        #endregion
+
+
+        #region [Init] SetPlayerData
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void SetPlayerData()
+        {
+            GameObject pl = GameObject.FindWithTag("Player");
+            PlayerPos = pl.transform;
+            PlayerAttackDirection = pl.GetComponent<DCL_PlayerInput>().AttackDirection;
+            PlayerStatus = pl.GetComponent<DCL_PlayerBase>().PL_Status;
             SetAttackPoint();
         }
         #endregion

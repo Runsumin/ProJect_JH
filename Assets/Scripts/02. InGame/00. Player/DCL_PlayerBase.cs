@@ -33,8 +33,11 @@ namespace HSM.Game
         public class NSetting
         {
             //public DCL_Status Player_Status = new DCL_Status();                         
-            public List<NPlayerLevle> Player_Status_Level = new List<NPlayerLevle>();   // 플레이어 스텟 
+            public List<NPlayerLevle> Player_Level = new List<NPlayerLevle>();   // 플레이어 레벨당 필요 경험치
+            public DCL_Status Pl_Status_InGame;                   // 플레이어 스텟 - 인게임
+            public DCL_Status Pl_Status_Permanent;                // 플레이어 스텟 - 영구
             public float NowEXP;
+            public float MaxLevel;
         }
         public NSetting Setting = new NSetting();
         #endregion
@@ -54,14 +57,13 @@ namespace HSM.Game
         [Serializable]
         public class NPlayerLevle
         {
-            public DCL_Status Pl_Status;
             public int Level;
             public float MaxEXP;
 
-            public NPlayerLevle(DCL_Status status, int lv)
+            public NPlayerLevle(int lv, float exp)
             {
-                this.Pl_Status = status;
                 this.Level = lv;
+                this.MaxEXP = exp;
             }
         }
         #endregion
@@ -99,6 +101,7 @@ namespace HSM.Game
 
         #region [Variable] Level
         public int NowPlayerLevel;
+        private int MaxLevel;
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -108,7 +111,7 @@ namespace HSM.Game
 
         #region [Property] Setting
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public DCL_Status PL_Status => Setting.Player_Status_Level[NowPlayerLevel].Pl_Status;       // 플레이어 스텟
+        public DCL_Status PL_Status => Setting.Pl_Status_InGame + Setting.Pl_Status_Permanent;       // 플레이어 스텟
         #endregion
 
 
@@ -124,8 +127,10 @@ namespace HSM.Game
         public override void Awake()
         {
             base.Awake();
-            //Json_Utility_Extend.FileSaveList(Setting.Player_Status_Level, "Data/Json_Data/Player/Player_Status.Json");
-            Setting.Player_Status_Level = Json_Utility_Extend.FileLoadList<NPlayerLevle>("Data/Json_Data/Player/Player_Status.Json");
+
+            Setting.Player_Level = Json_Utility_Extend.FileLoadList<NPlayerLevle>("Data/Json_Data/Player/Player_Level.Json");
+            Setting.Pl_Status_InGame = Json_Utility_Extend.FileLoad<DCL_Status>("Data/Json_Data/Player/Player_Status_Stage.Json");
+            Setting.Pl_Status_Permanent = Json_Utility_Extend.FileLoad<DCL_Status>("Data/Json_Data/Player/Player_Status_Permanent.Json");
         }
         #endregion
 
@@ -214,7 +219,7 @@ namespace HSM.Game
         public void Add_EXP(int amount)
         {
             Setting.NowEXP += amount;
-            if (Setting.NowEXP >= Setting.Player_Status_Level[NowPlayerLevel].MaxEXP)
+            if (Setting.NowEXP >= Setting.Player_Level[NowPlayerLevel].MaxEXP)
             {
                 NowPlayerLevel++;
                 Setting.NowEXP = 0;

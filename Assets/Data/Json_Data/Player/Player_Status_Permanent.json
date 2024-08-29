@@ -1,0 +1,16 @@
+{
+    "datas": [
+        {
+            "Attack_Power": 0,
+            "Attack_Speed": 0,
+            "Cri_Percent": 0,
+            "Critical_Damage": 0,
+            "Move_Speed": 0,
+            "Defense": 0,
+            "HP": 0,
+            "HP_Recovery": 0,
+            "Cleaning_Speed": 0,
+            "Gain_Range": 0
+        }
+    ]
+}

@@ -184,7 +184,7 @@ namespace HSM.Game
 
             GameObject InstantMagicball = Instantiate(FireEffect, AttackPoint.position, AttackPoint.rotation);
             // 古送瑳 実特
-            InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward);
+            InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward, Mon_Status.Attack_Power);
             Setting.Monster_State = MonsterState.MOVING;
         }
         #endregion
