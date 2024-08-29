@@ -59,14 +59,14 @@ namespace HSM.Game
         public NPopupPause Popup_Pause = new NPopupPause();
         #endregion
 
-        #region [Nested] InGame_Trash
+        #region [Nested] InGame_Timer
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        //[Serializable]
-        public class NInGame_Trash : NPopUpBase
+        [Serializable]
+        public class NInGame_Timer : NPopUpBase
         {
-            public GameObject TrashIcon;
+            public TextMeshProUGUI MainTimer;
         }
-        public NInGame_Trash InGame_Trash = new NInGame_Trash();
+        public NInGame_Timer InGame_Timer = new NInGame_Timer();
         #endregion
 
         #region [Nested] InGame_Choice
@@ -81,19 +81,35 @@ namespace HSM.Game
         public NInGame_Choice InGame_Choice = new NInGame_Choice();
         #endregion
 
+        #region [Nested] InGame_Choice
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class NDebug : NPopUpBase
+        {
+            public TextMeshProUGUI HP;
+            public TextMeshProUGUI EXP;
+            public TextMeshProUGUI LEVEL;
+        }
+        public NDebug InGame_Debug = new NDebug();
+        #endregion
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Item_Trash] Icon
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public List<NInGame_Trash> InGame_TrashList = new List<NInGame_Trash>();
-        #endregion
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Property
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Property] 스테이지 데이터
+        private DCL_StageBase StageData;
+        #endregion
+
+        #region [Property] 플레이어 정보
+        private DCL_PlayerBase PlayerData;
+        #endregion
+
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 0. Base Methods
@@ -108,9 +124,28 @@ namespace HSM.Game
             Instance = this;
         }
 
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Start()
         {
             base.Start();
+            StageData = GameObject.Find("DCL_InGame").GetComponent<DCL_StageBase>();
+            SetPlayerData();
+        }
+        #endregion
+
+        #region [Update]
+        public void Update()
+        {
+            Update_MainTimer();
+            Update_PlayerData();
+        }
+        #endregion
+
+        #region [Init] SetPlayerData
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void SetPlayerData()
+        {
+            PlayerData = GameObject.FindWithTag("Player").GetComponent<DCL_PlayerBase>();
         }
         #endregion
 
@@ -196,15 +231,25 @@ namespace HSM.Game
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 2. Item_Trash
+        // 2. Timer
         //  
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Item_Trash] Generate Icon
+        #region [Timer] Update Maintimer
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void GenerateIcon()
+        public void Update_MainTimer()
         {
+            InGame_Timer.MainTimer.text = ((int)StageData.Setting.StageTime.StageStreamNowTime).ToString();
+        }
+        #endregion
 
+        #region [Debug] Update PlayerData
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Update_PlayerData()
+        {
+            InGame_Debug.HP.text = $" HP : {PlayerData.PL_Status.HP} / {PlayerData.Setting.NowHP}";
+            InGame_Debug.EXP.text = $" EXP : {PlayerData.ToTalEXP} / {PlayerData.Setting.NowEXP}";
+            InGame_Debug.LEVEL.text = $" LEVEL : {PlayerData.NowPlayerLevel + 1}";
         }
         #endregion
 

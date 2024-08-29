@@ -38,6 +38,7 @@ namespace HSM.Game
             public DCL_Status Pl_Status_Permanent;                // 플레이어 스텟 - 영구
             public float NowEXP;
             public float MaxLevel;
+            public float NowHP;
         }
         public NSetting Setting = new NSetting();
         #endregion
@@ -88,7 +89,6 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] HP
-        public float NowHP;
         private float HPRecoveryTime;
         private float HPRecoveryCoolTime;
         #endregion
@@ -112,6 +112,7 @@ namespace HSM.Game
         #region [Property] Setting
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public DCL_Status PL_Status => Setting.Pl_Status_InGame + Setting.Pl_Status_Permanent;       // 플레이어 스텟
+        public float ToTalEXP => Setting.Player_Level[NowPlayerLevel].MaxEXP;
         #endregion
 
 
@@ -139,7 +140,7 @@ namespace HSM.Game
         public override void Start()
         {
             base.Start();
-            NowHP = PL_Status.HP;
+            Setting.NowHP = PL_Status.HP;
             HitCoolTime = 2;
             HitAble = true;
         }
@@ -150,7 +151,7 @@ namespace HSM.Game
         public void Update()
         {
             Auto_HP_Recovery();
-            Debug.Log(NowHP);
+            //Debug.Log(NowHP);
         }
         #endregion
 
@@ -166,9 +167,9 @@ namespace HSM.Game
             HPRecoveryTime += Time.deltaTime;
             if (HPRecoveryTime > 3)
             {
-                if (NowHP < PL_Status.HP)
+                if (Setting.NowHP < PL_Status.HP)
                 {
-                    NowHP += PL_Status.HP_Recovery;
+                    Setting.NowHP += PL_Status.HP_Recovery;
                     HPRecoveryTime = 0;
                 }
             }
@@ -179,7 +180,7 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Hit_HP_Reduce(float monatt)
         {
-            NowHP -= monatt;
+            Setting.NowHP -= monatt;
             StartCoroutine(HitCoolTimeChange());
         }
         #endregion
@@ -219,6 +220,7 @@ namespace HSM.Game
         public void Add_EXP(int amount)
         {
             Setting.NowEXP += amount;
+            // 레벨업
             if (Setting.NowEXP >= Setting.Player_Level[NowPlayerLevel].MaxEXP)
             {
                 NowPlayerLevel++;

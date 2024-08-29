@@ -98,7 +98,7 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public virtual void Update()
         {
-            PlayerPos = GameObject.FindWithTag("Player").transform;
+            //PlayerPos = GameObject.FindWithTag("Player").transform;
         }
         #endregion
 

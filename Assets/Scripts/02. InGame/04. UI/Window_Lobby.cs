@@ -151,7 +151,7 @@ namespace HSM.Game
                 // 스테이지, 레벨 정보에 따라서 난이도 밸런스 조절.
                 Setting.MainTitleRoot.SetActive(true);
                 Setting.StageSelectRoot.SetActive(false);
-                SceneManager.Instance.LoadScene("TestScene");
+                SceneManager.Instance.LoadScene("DCL_InGame");
                 SceneManager.Instance.NowLevelIndex = Level;
                 CloseWindow(true);
             }
