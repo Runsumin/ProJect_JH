@@ -47,10 +47,10 @@ namespace HSM.Game
         {
             public float DelayMinTime;         // 몬스터 생성 딜레이 지정타임
             public float DelayMaxTime;         // 몬스터 생성 딜레이 지정타임
-            public float DelayTime;         // 몬스터 생성 딜레이 지정타임
-            public float LoopTime;          // 몬스터 생성 딜레이 루프타임
-            public int GenerateCount;       // 한번에 생성할 몬스터 개수
-            public int DoubleSpeed;         // 배속
+            public float DelayTime;            // 몬스터 생성 딜레이 지정타임
+            public float LoopTime;             // 몬스터 생성 딜레이 루프타임
+            public int GenerateCount;          // 한번에 생성할 몬스터 개수
+            public int DoubleSpeed;            // 배속
             /////////////////////////////////////////////////
             public int MonsterMaxCount;
             public int MonsterMinCount;

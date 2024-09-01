@@ -18,7 +18,7 @@ TagManager:
   - PlayerWeaponCollider
   - PlayerInterActionCollider
   - Item
-  - 
+  - PlayerLight
   - 
   - 
   - 

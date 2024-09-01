@@ -81,7 +81,7 @@ namespace HSM.Game
         public NInGame_Choice InGame_Choice = new NInGame_Choice();
         #endregion
 
-        #region [Nested] InGame_Choice
+        #region [Nested] NDebug
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         [Serializable]
         public class NDebug : NPopUpBase

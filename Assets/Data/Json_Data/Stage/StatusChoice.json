@@ -1,0 +1,74 @@
+{
+  "datas": [
+    {
+      "Explain": "공격력이 증가합니다",
+      "AddStatSort": "Attack_Power",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Attack_Damege.png"
+    },
+    {
+      "Explain": "공격속도가 증가합니다",
+      "AddStatSort": "Attack_Speed",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Attack_Speed.png"
+    },
+    {
+      "Explain": "치명타 확률이 증가합니다",
+      "AddStatSort": "Cri_Percent",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Cri_Percent.png"
+    },
+    {
+      "Explain": "치명타 대미지가 증가합니다",
+      "AddStatSort": "Critical_Damage",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Cri_Damege.png"
+    },
+    {
+      "Explain": "이동속도가 증가합니다",
+      "AddStatSort": "Move_Speed",  
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Move_Speed.png"
+    },
+    {
+      "Explain": "방어력이 증가합니다",
+      "AddStatSort": "Defense",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Defense.png"
+    },
+    {
+      "Explain": "최대 체력이 증가합니다",
+      "AddStatSort": "HP",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/HP.png"
+    },
+    {
+      "Explain": "체력 회복력이 증가합니다",
+      "AddStatSort": "HP_Recovery",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/HP_regain.png"
+    },
+    {
+      "Explain": "청소 속도가 증가합니다",
+      "AddStatSort": "Cleaning_Speed",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/CleaningSpeed.png"
+    },
+    {
+      "Explain": "아이템 획득 범위가 증가합니다",
+      "AddStatSort": "Gain_Range",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Gain_Rainge.png"
+    }
+  ]
+}

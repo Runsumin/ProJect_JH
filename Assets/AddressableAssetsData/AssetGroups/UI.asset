@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  m_GroupName: UI
+  m_Data:
+    m_SerializedData: []
+  m_GUID: a2d8f0a90f6baec4b888f560004f8713
+  m_SerializeEntries:
+  - m_GUID: 906c7eaad8123f2459271dafcb474c47
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/Attack_Damege.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b986c02673206a14b9d3617692ebbbe9
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/Attack_Speed.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e032261aa751e940b2eddd95d304531
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/Cri_Percent.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3ae82950315cd34d9796e02c44d3699
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/Cri_Damege.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3e2a0199195fdf498a8eddae6d8f2a6
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/Move_Speed.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec136fd5b32a5344db2cfb54fd3f44d9
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/Defense.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8bf661392305117428482044cecd3179
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/HP.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12ff0fbc8ba88444e8eb701cf4f063b7
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/HP_regain.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6499a4670533e54bbf65abd71dd7cd3
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/CleaningSpeed.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd94510f378a855429931ecabd633262
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/Gain_Rainge.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 03df06b385c2f10489707a88095d85ba, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7a32869494e026f45b4b2c557db2d05a, type: 2}
+    - {fileID: 11400000, guid: 7a24150d6188eb042baf36e8ff5df464, type: 2}

@@ -114,6 +114,7 @@ namespace HSM.Game
         #region [CallBack]
         public delegate void WaveChangeCallBack();
         private WaveChangeCallBack WC_CallBack = null;
+        private DCL_Status_Choice choice = new DCL_Status_Choice();
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -146,7 +147,8 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Awake()
         {
-            SetWaveData(); 
+            SetWaveData();
+            choice.MakeChoiceData();
         }
         #endregion
 
