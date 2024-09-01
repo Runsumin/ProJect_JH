@@ -97,6 +97,10 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Choice]
+        private DCL_Status_Choice choice = new DCL_Status_Choice();
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Property
         //
@@ -130,6 +134,7 @@ namespace HSM.Game
             base.Start();
             StageData = GameObject.Find("DCL_InGame").GetComponent<DCL_StageBase>();
             SetPlayerData();
+            choice.MakeChoiceData();
         }
         #endregion
 
@@ -146,6 +151,7 @@ namespace HSM.Game
         public void SetPlayerData()
         {
             PlayerData = GameObject.FindWithTag("Player").GetComponent<DCL_PlayerBase>();
+            PlayerData.LevelUpSetCallback(Show_ChoiceList);
         }
         #endregion
 
@@ -273,6 +279,16 @@ namespace HSM.Game
         {
             Time.timeScale = 0f;
             InGame_Choice.Root.SetActive(true);
+            choice.SetChoiceData();
+            InGame_Choice.ExPlanationTextArr[0].text = choice.ChoiceData_val1.Explain;
+            InGame_Choice.ChoiceIconArr[0].sprite = choice.ImageArr[0];
+
+            InGame_Choice.ExPlanationTextArr[1].text = choice.ChoiceData_val2.Explain;
+            InGame_Choice.ChoiceIconArr[1].sprite = choice.ImageArr[1];
+
+            InGame_Choice.ExPlanationTextArr[2].text = choice.ChoiceData_val3.Explain;
+            InGame_Choice.ChoiceIconArr[2].sprite = choice.ImageArr[2];
+
         }
         #endregion
 

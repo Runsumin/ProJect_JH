@@ -115,6 +115,15 @@ namespace HSM.Game
         public float ToTalEXP => Setting.Player_Level[NowPlayerLevel].MaxEXP;
         #endregion
 
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // CallBack
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [CallBack]
+        public delegate void LevelUpCallBack();
+        private LevelUpCallBack LU_CallBack = null;
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 0. Base Methods
@@ -223,10 +232,17 @@ namespace HSM.Game
             {
                 NowPlayerLevel++;
                 Setting.NowEXP = 0;
+                LU_CallBack();
             }
         }
         #endregion
 
+        #region [Status_Change] LevelUpCallBack
+        public void LevelUpSetCallback(LevelUpCallBack cal)
+        {
+            LU_CallBack = cal;
+        }
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 2. Move

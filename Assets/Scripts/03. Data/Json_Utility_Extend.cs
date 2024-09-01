@@ -29,7 +29,7 @@ namespace HSM.Game
             json = PrettyPrintJson(json);
             if (!path.StartsWith('/')) path = "/" + path;
             File.WriteAllText(Application.dataPath + path, json);
-            AssetDatabase.Refresh();
+            //AssetDatabase.Refresh();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace HSM.Game
             json = PrettyPrintJson(json);
             if (!path.StartsWith('/')) path = "/" + path;
             File.WriteAllText(Application.dataPath + path, json);
-            AssetDatabase.Refresh();
+            //AssetDatabase.Refresh();
         }
 
         /// <summary>
