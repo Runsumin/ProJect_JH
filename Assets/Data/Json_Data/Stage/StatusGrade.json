@@ -1,0 +1,47 @@
+{
+    "datas": [
+        {
+            "ChoiceGradePercent": [
+                60.0,
+                30.0,
+                10.0
+            ],
+            "Bronze_Status": {
+                "Attack_Power": 1.0,
+                "Attack_Speed": 1.0,
+                "Cri_Percent": 3,
+                "Critical_Damage": 5.0,
+                "Move_Speed": 1.0,
+                "Defense": 2.0,
+                "HP": 10.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 1.0
+            },
+            "Silver_Status": {
+                "Attack_Power": 2.0,
+                "Attack_Speed": 2.0,
+                "Cri_Percent": 6,
+                "Critical_Damage": 10.0,
+                "Move_Speed": 3.0,
+                "Defense": 4.0,
+                "HP": 20.0,
+                "HP_Recovery": 2.0,
+                "Cleaning_Speed": 2.0,
+                "Gain_Range": 2.0
+            },
+            "Gold_Status": {
+                "Attack_Power": 3.0,
+                "Attack_Speed": 3.0,
+                "Cri_Percent": 10,
+                "Critical_Damage": 15.0,
+                "Move_Speed": 4.0,
+                "Defense": 6.0,
+                "HP": 30.0,
+                "HP_Recovery": 3.0,
+                "Cleaning_Speed": 3.0,
+                "Gain_Range": 3.0
+            }
+        }
+    ]
+}

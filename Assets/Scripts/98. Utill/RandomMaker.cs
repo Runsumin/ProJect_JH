@@ -14,7 +14,14 @@ namespace HSM.Game
 
     public static class RandomMaker
     {
-        #region[RandomMaker]
+        #region [RandomMaker] 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="minValue"></param> 최소값
+        /// <param name="maxValue"></param> 최대값
+        /// <param name="randomSeed"></param> 랜덤시드
+        /// <returns></returns>
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public static int[] MakeRandomNumbers(int minValue, int maxValue, int randomSeed = 0)
         {
@@ -43,6 +50,35 @@ namespace HSM.Game
             }
 
             return result;
+        }
+        #endregion
+
+        #region [RandomMaker] 
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public static float Choose(float[] probs)
+        {
+            float total = 0;
+
+            foreach (float elem in probs)
+            {
+                total += elem;
+            }
+
+            float randomPoint = UnityEngine.Random.value * total;
+
+            for (int i = 0; i < probs.Length; i++)
+            {
+                if (randomPoint < probs[i])
+                {
+                    return i;
+                }
+                else
+                {
+                    randomPoint -= probs[i];
+                }
+            }
+
+            return probs.Length - 1;
         }
         #endregion
 

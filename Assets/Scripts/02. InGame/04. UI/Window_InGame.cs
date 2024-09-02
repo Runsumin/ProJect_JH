@@ -267,10 +267,47 @@ namespace HSM.Game
 
         #region [Button] Select
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void OnClick_ChoiceStatus_Item()
+        public void OnClick_ChoiceStatus_Item(int select)
         {
             Time.timeScale = 1f;
+            string value = choice.ChoiceData_val[select].AddStatSort;
+
+            switch (value)
+            {
+                case "Attack_Power":
+                    PlayerData.Setting.Pl_Status_InGame.Attack_Power += choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
+                case "Attack_Speed":
+                    PlayerData.Setting.Pl_Status_InGame.Attack_Speed += choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
+                case "Cri_Percent":
+                    PlayerData.Setting.Pl_Status_InGame.Cri_Percent += (int)choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
+                case "Critical_Damage":
+                    PlayerData.Setting.Pl_Status_InGame.Critical_Damage += choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
+                case "Move_Speed":
+                    PlayerData.Setting.Pl_Status_InGame.Move_Speed += choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
+                case "Defense":
+                    PlayerData.Setting.Pl_Status_InGame.Defense += choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
+                case "HP":
+                    PlayerData.Setting.Pl_Status_InGame.HP += choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
+                case "HP_Recovery":
+                    PlayerData.Setting.Pl_Status_InGame.HP_Recovery += choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
+                case "Cleaning_Speed":
+                    PlayerData.Setting.Pl_Status_InGame.Cleaning_Speed += choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
+                case "Gain_Range":
+                    PlayerData.Setting.Pl_Status_InGame.Gain_Range += choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
+            }
+
             InGame_Choice.Root.SetActive(false);
+
         }
         #endregion
 
@@ -281,7 +318,7 @@ namespace HSM.Game
             Time.timeScale = 0f;
             InGame_Choice.Root.SetActive(true);
             int[] data = choice.SetChoiceData();
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 InGame_Choice.ExPlanationTextArr[i].text = choice.ChoiceData_val[i].Explain;
                 InGame_Choice.ChoiceIconArr[i].sprite = choice.ImageArr[data[i]];

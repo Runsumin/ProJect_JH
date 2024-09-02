@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace HSM.Game
 {
@@ -16,7 +17,7 @@ namespace HSM.Game
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    public class DCL_Status_Choice
+    public class DCL_Status_Choice : ObjectBase
     {
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Enum
@@ -38,6 +39,19 @@ namespace HSM.Game
 
         }
         public DataSettingArr DataSettingArray = new DataSettingArr();
+        #endregion
+
+        #region [NestedClass] ChoicePercent&data - 등급 확률 & 등급당 데이터
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class ChoicePercentNdata
+        {
+            public float[] ChoiceGradePercent;
+            public DCL_Status Bronze_Status;
+            public DCL_Status Silver_Status;
+            public DCL_Status Gold_Status;
+        }
+        public ChoicePercentNdata ChoicePercentNdataSet = new ChoicePercentNdata();
         #endregion
 
 
@@ -113,7 +127,10 @@ namespace HSM.Game
             //    ChoiceDataArr.Add(data);
             //}
 
-            //Json_Utility_Extend.FileSaveList(ChoiceDataArr, "Data/Json_Data/Stage/StatusChoice.Json");
+            //ChoicePercentNdataSet.ChoiceGradePercent = ChoiceGradePercent;
+            //Json_Utility_Extend.FileSave(ChoicePercentNdataSet, "Data/Json_Data/Stage/StatusGrade.Json");
+
+            ChoicePercentNdataSet = Json_Utility_Extend.FileLoad<ChoicePercentNdata>("Data/Json_Data/Stage/StatusGrade.Json");
             ChoiceDataArr = Json_Utility_Extend.FileLoadList<ChoiceDataSet>("Data/Json_Data/Stage/StatusChoice.Json");
             ImageArr = new Sprite[ChoiceDataArr.Count];
             ChoiceData_val = new ChoiceDataSet[3];
@@ -128,9 +145,24 @@ namespace HSM.Game
             // 초이스 데이터 랜덤 섞기
             int[] data = RandomMaker.MakeRandomNumbers(0, ChoiceDataArr.Count);
             int[] result = new int[3];
-            for (int i =0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 ChoiceData_val[i] = ChoiceDataArr[data[i]];
+                float grade = RandomMaker.Choose(ChoicePercentNdataSet.ChoiceGradePercent);
+                ChoiceGrade egrd = ChoiceGrade.BRONZE;
+                switch (grade)
+                {
+                    case 1:
+                        egrd = ChoiceGrade.BRONZE;
+                        break;
+                    case 2:
+                        egrd = ChoiceGrade.SILVER;
+                        break;
+                    case 3:
+                        egrd = ChoiceGrade.GOLD;
+                        break;
+                }
+                ChoiceData_val[i].Grade = egrd;
                 result[i] = data[i];
             }
 
@@ -160,7 +192,7 @@ namespace HSM.Game
             foreach (ChoiceDataSet key in ChoiceDataArr)
             {
                 // 에셋 로드 및 결과 처리
-                await LoadAssetAsync(key.ImagePath);                
+                await LoadAssetAsync(key.ImagePath);
             }
         }
         #endregion
@@ -221,6 +253,175 @@ namespace HSM.Game
             }
         }
         #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 2. Value Control
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Value Control] PrintField
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public object PrintField(string name)
+        {
+            var result = this.GetType().GetField(name).GetValue(this); // public변수가 아니면 GetField에서 null이 리턴된다
+            return result;
+        }
+        #endregion
+
+        #region [Value Control] SetPlayerAddData
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public float SetPlayerAddData(string value, ChoiceGrade grade)
+        {
+            float result = 0;
+            switch (value)
+            {
+                case "Attack_Power":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = ChoicePercentNdataSet.Bronze_Status.Attack_Power;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = ChoicePercentNdataSet.Silver_Status.Attack_Power;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = ChoicePercentNdataSet.Gold_Status.Attack_Power;
+                            break;
+                    }
+                    break;
+                case "Attack_Speed":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = ChoicePercentNdataSet.Bronze_Status.Attack_Speed;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = ChoicePercentNdataSet.Silver_Status.Attack_Speed;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = ChoicePercentNdataSet.Gold_Status.Attack_Speed;
+                            break;
+                    }
+                    break;
+                case "Cri_Percent":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = ChoicePercentNdataSet.Bronze_Status.Cri_Percent;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = ChoicePercentNdataSet.Silver_Status.Cri_Percent;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = ChoicePercentNdataSet.Gold_Status.Cri_Percent;
+                            break;
+                    }
+                    break;
+                case "Critical_Damage":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = ChoicePercentNdataSet.Bronze_Status.Critical_Damage;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = ChoicePercentNdataSet.Silver_Status.Critical_Damage;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = ChoicePercentNdataSet.Gold_Status.Critical_Damage;
+                            break;
+                    }
+                    break;
+                case "Move_Speed":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = ChoicePercentNdataSet.Bronze_Status.Move_Speed;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = ChoicePercentNdataSet.Silver_Status.Move_Speed;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = ChoicePercentNdataSet.Gold_Status.Move_Speed;
+                            break;
+                    }
+                    break;
+                case "Defense":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = ChoicePercentNdataSet.Bronze_Status.Defense;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = ChoicePercentNdataSet.Silver_Status.Defense;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = ChoicePercentNdataSet.Gold_Status.Defense;
+                            break;
+                    }
+                    break;
+                case "HP":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = ChoicePercentNdataSet.Bronze_Status.HP;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = ChoicePercentNdataSet.Silver_Status.HP;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = ChoicePercentNdataSet.Gold_Status.HP;
+                            break;
+                    }
+                    break;
+                case "HP_Recovery":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = ChoicePercentNdataSet.Bronze_Status.HP_Recovery;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = ChoicePercentNdataSet.Silver_Status.HP_Recovery;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = ChoicePercentNdataSet.Gold_Status.HP_Recovery;
+                            break;
+                    }
+                    break;
+                case "Cleaning_Speed":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = ChoicePercentNdataSet.Bronze_Status.Cleaning_Speed;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = ChoicePercentNdataSet.Silver_Status.Cleaning_Speed;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = ChoicePercentNdataSet.Gold_Status.Cleaning_Speed;
+                            break;
+                    }
+                    break;
+                case "Gain_Range":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = ChoicePercentNdataSet.Bronze_Status.Gain_Range;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = ChoicePercentNdataSet.Silver_Status.Gain_Range;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = ChoicePercentNdataSet.Gold_Status.Gain_Range;
+                            break;
+                    }
+                    break;
+            }
+            return result;
+        }
+        #endregion
+
+
+
     }
 
 }
