@@ -280,16 +280,12 @@ namespace HSM.Game
         {
             Time.timeScale = 0f;
             InGame_Choice.Root.SetActive(true);
-            choice.SetChoiceData();
-            InGame_Choice.ExPlanationTextArr[0].text = choice.ChoiceData_val1.Explain;
-            InGame_Choice.ChoiceIconArr[0].sprite = choice.ImageArr[0];
-
-            InGame_Choice.ExPlanationTextArr[1].text = choice.ChoiceData_val2.Explain;
-            InGame_Choice.ChoiceIconArr[1].sprite = choice.ImageArr[1];
-
-            InGame_Choice.ExPlanationTextArr[2].text = choice.ChoiceData_val3.Explain;
-            InGame_Choice.ChoiceIconArr[2].sprite = choice.ImageArr[2];
-
+            int[] data = choice.SetChoiceData();
+            for(int i = 0; i < 3; i++)
+            {
+                InGame_Choice.ExPlanationTextArr[i].text = choice.ChoiceData_val[i].Explain;
+                InGame_Choice.ChoiceIconArr[i].sprite = choice.ImageArr[data[i]];
+            }
         }
         #endregion
 

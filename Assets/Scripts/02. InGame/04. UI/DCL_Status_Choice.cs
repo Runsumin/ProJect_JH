@@ -71,9 +71,7 @@ namespace HSM.Game
         #region [Variable] ChoiceData
         private List<ChoiceDataSet> ChoiceDataArr = new List<ChoiceDataSet>(); // 선택지 리스트
         public Sprite[] ImageArr;
-        public ChoiceDataSet ChoiceData_val1;   // 1번 선택지
-        public ChoiceDataSet ChoiceData_val2;   // 2번 선택지
-        public ChoiceDataSet ChoiceData_val3;   // 3번 선택지
+        public ChoiceDataSet[] ChoiceData_val;   // 1번 선택지
         #endregion
 
         #region [Variable] 
@@ -118,18 +116,26 @@ namespace HSM.Game
             //Json_Utility_Extend.FileSaveList(ChoiceDataArr, "Data/Json_Data/Stage/StatusChoice.Json");
             ChoiceDataArr = Json_Utility_Extend.FileLoadList<ChoiceDataSet>("Data/Json_Data/Stage/StatusChoice.Json");
             ImageArr = new Sprite[ChoiceDataArr.Count];
+            ChoiceData_val = new ChoiceDataSet[3];
             LoadAsset();
         }
         #endregion
 
         #region [Init] SetChoiceData
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void SetChoiceData()
+        public int[] SetChoiceData()
         {
             // 초이스 데이터 랜덤 섞기
-            ChoiceData_val1 = ChoiceDataArr[0];
-            ChoiceData_val2 = ChoiceDataArr[1];
-            ChoiceData_val3 = ChoiceDataArr[2];
+            int[] data = RandomMaker.MakeRandomNumbers(0, ChoiceDataArr.Count);
+            int[] result = new int[3];
+            for (int i =0; i < 3; i++)
+            {
+                ChoiceData_val[i] = ChoiceDataArr[data[i]];
+                result[i] = data[i];
+            }
+
+            return result;
+
         }
         #endregion
 
