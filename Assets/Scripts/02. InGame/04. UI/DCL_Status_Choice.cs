@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using System.Threading.Tasks;
 
 namespace HSM.Game
 {
@@ -116,7 +117,8 @@ namespace HSM.Game
 
             //Json_Utility_Extend.FileSaveList(ChoiceDataArr, "Data/Json_Data/Stage/StatusChoice.Json");
             ChoiceDataArr = Json_Utility_Extend.FileLoadList<ChoiceDataSet>("Data/Json_Data/Stage/StatusChoice.Json");
-
+            ImageArr = new Sprite[ChoiceDataArr.Count];
+            LoadAsset();
         }
         #endregion
 
@@ -128,28 +130,74 @@ namespace HSM.Game
             ChoiceData_val1 = ChoiceDataArr[0];
             ChoiceData_val2 = ChoiceDataArr[1];
             ChoiceData_val3 = ChoiceDataArr[2];
-
-            ImageArr = new Sprite[3];
-            AddLoadStart(ChoiceData_val1.ImagePath);
-            AddLoadStart(ChoiceData_val2.ImagePath);
-            AddLoadStart(ChoiceData_val3.ImagePath);
-
         }
         #endregion
 
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 0. Base Methods
+        // 1. Load Addressable Assets
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Load Addressable Assets] LoadAsset
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        async void LoadAsset()
+        {
+            await LoadAssetsInList();
+        }
+        #endregion
+
+        #region [Load Addressable Assets] LoadAssetsInList
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public async Task LoadAssetsInList()
+        {
+            foreach (ChoiceDataSet key in ChoiceDataArr)
+            {
+                // 에셋 로드 및 결과 처리
+                await LoadAssetAsync(key.ImagePath);                
+            }
+        }
+        #endregion
+
+        #region [Load Addressable Assets] LoadAssetAsync
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        private async Task LoadAssetAsync(string key)
+        {
+            // 어드레서블 에셋을 비동기적으로 로드하고 완료될 때까지 대기
+            AsyncOperationHandle<Sprite> handle = Addressables.LoadAssetAsync<Sprite>(key);
+            await handle.Task;
+
+            // 로드 완료 후 에셋 사용
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                Sprite loadedObject = handle.Result;
+                ImageArr[imageloadindex] = loadedObject;
+                imageloadindex++;
+                Debug.Log($"{key} 에셋이 로드되었습니다.");
+            }
+            else
+            {
+                Debug.LogError($"{key} 에셋을 로드하는 데 실패했습니다.");
+            }
+
+            // 사용이 끝난 에셋 해제
+            Addressables.Release(handle);
+        }
+        #endregion
+
+
+
+        #region [Load Addressable Assets] AddLoadStart
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         private void AddLoadStart(string key)
         {
             // 어드레서블 에셋 로드 시작
             Addressables.LoadAssetAsync<Sprite>(key).Completed += OnAssetLoaded;
         }
+        #endregion
 
-        // 에셋 로드가 완료되면 호출되는 콜백 함수
+        #region [Load Addressable Assets] AddLoadStart
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         private void OnAssetLoaded(AsyncOperationHandle<Sprite> obj)
         {
             if (obj.Status == AsyncOperationStatus.Succeeded)
@@ -166,6 +214,7 @@ namespace HSM.Game
                 Debug.LogError("Addressable asset failed to load.");
             }
         }
+        #endregion
     }
 
 }
