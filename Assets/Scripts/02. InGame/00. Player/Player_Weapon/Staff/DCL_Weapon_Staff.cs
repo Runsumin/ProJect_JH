@@ -95,11 +95,19 @@ namespace HSM.Game
         public new void Update()
         {
             base.Update();
+            GetNowPlayerWeaponLevel();
             SwitchStaffLevel_Status(Setting.NowWeaponLevel);
             SwitchStaffLevel(Setting.NowWeaponLevel);
         }
         #endregion
 
+        #region [WeaponLevel]
+        public void GetNowPlayerWeaponLevel()
+        {
+            Setting.NowWeaponLevel = (WeaponLevel)PlayerWeaponLevel;
+            //return (WeaponLevel)PlayerWeaponLevel;
+        }
+        #endregion
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 1. Attack
         //

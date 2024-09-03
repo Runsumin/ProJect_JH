@@ -39,6 +39,8 @@ namespace HSM.Game
             public float Cleaning_Speed;    // Ã»¼Ò¼Óµµ
             public float Gain_Range;        // È¹µæ¹üÀ§
 
+            public DCL_Status() { }
+
             public DCL_Status(float att_pwr, float att_spd, int cri_per, float cri_dmg, float mov_spd, float def, float hp, float hp_re, float clean_spd, float gain_rng)
             {
                 this.Attack_Power = att_pwr;

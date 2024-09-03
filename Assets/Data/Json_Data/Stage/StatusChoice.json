@@ -69,6 +69,41 @@
       "AddStatValue": 1.0,
       "Grade": 0,
       "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Gain_Rainge.png"
+    },
+    {
+      "Explain": "현재 무기 레벨이 증가합니다",
+      "AddStatSort": "Weapon_LevelUp",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Blue_Highlight.png"
+    },
+    {
+      "Explain": "현재 무기 레벨이 증가합니다",
+      "AddStatSort": "Weapon_LevelUp",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Blue_Highlight.png"
+    },
+    {
+      "Explain": "현재 무기 레벨이 증가합니다",
+      "AddStatSort": "Weapon_LevelUp",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Blue_Highlight.png"
+    },
+    {
+      "Explain": "현재 무기 레벨이 증가합니다",
+      "AddStatSort": "Weapon_LevelUp",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Blue_Highlight.png"
+    },
+    {
+      "Explain": "현재 무기 레벨이 증가합니다",
+      "AddStatSort": "Weapon_LevelUp",
+      "AddStatValue": 1.0,
+      "Grade": 0,
+      "ImagePath": "Assets/Data/Prototype_Test/Image/StatusThumbnail/Blue_Highlight.png"
     }
   ]
 }

@@ -102,6 +102,7 @@ namespace HSM.Game
         #region [Variable] Level
         public int NowPlayerLevel;
         private int MaxLevel;
+        public int NowPlayerWeaponLevel;
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -150,6 +151,7 @@ namespace HSM.Game
             Setting.NowHP = PL_Status.HP;
             HitCoolTime = 2;
             HitAble = true;
+            NowPlayerWeaponLevel = 0;
         }
         #endregion
 

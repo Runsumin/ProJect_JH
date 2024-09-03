@@ -415,6 +415,21 @@ namespace HSM.Game
                             break;
                     }
                     break;
+                case "Weapon_LevelUp":
+                    switch (grade)
+                    {
+                        case ChoiceGrade.BRONZE:
+                            result = 1;
+                            break;
+                        case ChoiceGrade.SILVER:
+                            result = 1;
+                            break;
+                        case ChoiceGrade.GOLD:
+                            result = 1;
+                            break;
+                    }
+                    break;
+
             }
             return result;
         }

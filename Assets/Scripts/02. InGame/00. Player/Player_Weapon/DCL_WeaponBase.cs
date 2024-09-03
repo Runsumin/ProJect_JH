@@ -19,9 +19,11 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Enum] 
         public enum AttackType { MELEE, RANGE }
         public enum AttackState { ATTACKING, COOLTIME }
         public enum WeaponLevel { LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_4, LEVEL_5, LEVEL_6, LEVEL_7, LEVEL_8, LEVEL_9, LEVEL_10 }
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Nested Class
@@ -74,6 +76,7 @@ namespace HSM.Game
         public Transform PlayerPos;
         public Vector3 PlayerAttackDirection;
         public DCL_Status PlayerStatus;
+        public int PlayerWeaponLevel;
         #endregion
 
 
@@ -120,6 +123,7 @@ namespace HSM.Game
             PlayerPos = pl.transform;
             PlayerAttackDirection = pl.GetComponent<DCL_PlayerInput>().AttackDirection;
             PlayerStatus = pl.GetComponent<DCL_PlayerBase>().PL_Status;
+            PlayerWeaponLevel = pl.GetComponent<DCL_PlayerBase>().NowPlayerWeaponLevel;
             SetAttackPoint();
         }
         #endregion

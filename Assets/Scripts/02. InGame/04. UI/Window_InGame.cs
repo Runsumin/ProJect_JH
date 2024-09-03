@@ -129,7 +129,6 @@ namespace HSM.Game
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-
         public override void Start()
         {
             base.Start();
@@ -140,6 +139,7 @@ namespace HSM.Game
         #endregion
 
         #region [Update]
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Update()
         {
             Update_MainTimer();
@@ -220,7 +220,7 @@ namespace HSM.Game
         //  
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Button] ShowResult
+        #region [Result] ShowResult
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void ShowResult(bool result)
         {
@@ -265,7 +265,7 @@ namespace HSM.Game
         //  
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Button] Select
+        #region [Choice Item & Status] Select
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnClick_ChoiceStatus_Item(int select)
         {
@@ -304,6 +304,9 @@ namespace HSM.Game
                 case "Gain_Range":
                     PlayerData.Setting.Pl_Status_InGame.Gain_Range += choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
                     break;
+                case "Weapon_LevelUp":
+                    PlayerData.NowPlayerWeaponLevel += (int)choice.SetPlayerAddData(value, choice.ChoiceData_val[select].Grade);
+                    break;
             }
 
             InGame_Choice.Root.SetActive(false);
@@ -311,7 +314,7 @@ namespace HSM.Game
         }
         #endregion
 
-        #region [Choice] ShowChoiceList
+        #region [Choice Item & Status] ShowChoiceList
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Show_ChoiceList()
         {
