@@ -67,6 +67,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7edbbcd8aa2cbd4fb5cfb2720b36ea5
+    m_Address: Assets/Data/Prototype_Test/Image/StatusThumbnail/Blue_Highlight.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 03df06b385c2f10489707a88095d85ba, type: 2}
   m_SchemaSet:
