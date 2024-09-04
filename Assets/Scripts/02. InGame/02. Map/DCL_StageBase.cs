@@ -97,6 +97,14 @@ namespace HSM.Game
         }
         #endregion
 
+        #region [Nestedclass] MonsterWave-Setting
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public class NMonWaveSetting
+        {
+            public int MonsterWaveCount;
+        }
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
@@ -218,7 +226,21 @@ namespace HSM.Game
             //}
 
             //Json_Utility_Extend.FileSaveList(Setting.WaveArr, "Data/Json_Data/Monster/MonsterWave/MonsterWave.Json");
-            Setting.WaveArr = Json_Utility_Extend.FileLoadList<NMonsterWave>("Data/Json_Data/Monster/MonsterWave/MonsterWave.Json");
+            switch (Setting.NowStageDifficulty)
+            {
+                case eStageDifficulty.EASY:
+                    Setting.WaveArr = Json_Utility_Extend.FileLoadList<NMonsterWave>("Data/Json_Data/Monster/MonsterWave/MonsterWave_Easy.Json");
+                    break;
+                case eStageDifficulty.NORMAL:
+                    Setting.WaveArr = Json_Utility_Extend.FileLoadList<NMonsterWave>("Data/Json_Data/Monster/MonsterWave/MonsterWave_Normal.Json");
+                    break;
+                case eStageDifficulty.HARD:
+                    Setting.WaveArr = Json_Utility_Extend.FileLoadList<NMonsterWave>("Data/Json_Data/Monster/MonsterWave/MonsterWave_Hard.Json");
+                    break;
+                case eStageDifficulty.HELL:
+                    Setting.WaveArr = Json_Utility_Extend.FileLoadList<NMonsterWave>("Data/Json_Data/Monster/MonsterWave/MonsterWave_Hell.Json");
+                    break;
+            }
         }
         #endregion
 

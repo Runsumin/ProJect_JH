@@ -50,56 +50,6 @@
       "GenDelayMaxCount": 6,
       "GenDelayMinCount": 4,
       "MonsterTypeCnt": 2
-    },
-    {
-      "WaveType": 2,
-      "NextWaveTime": 150,
-      "MonsterLevel": 2,
-      "MonsterMinCount": 2,
-      "MonsterMaxCount": 4,
-      "GenDelayMaxCount": 6,
-      "GenDelayMinCount": 4,
-      "MonsterTypeCnt": 2
-    },
-    {
-      "WaveType": 0,
-      "NextWaveTime": 204,
-      "MonsterLevel": 3,
-      "MonsterMinCount": 2,
-      "MonsterMaxCount": 4,
-      "GenDelayMaxCount": 6,
-      "GenDelayMinCount": 4,
-      "MonsterTypeCnt": 3
-    },
-    {
-      "WaveType": 1,
-      "NextWaveTime": 237,
-      "MonsterLevel": 3,
-      "MonsterMinCount": 3,
-      "MonsterMaxCount": 5,
-      "GenDelayMaxCount": 6,
-      "GenDelayMinCount": 4,
-      "MonsterTypeCnt": 3
-    },
-    {
-      "WaveType": 2,
-      "NextWaveTime": 254,
-      "MonsterLevel": 4,
-      "MonsterMinCount": 3,
-      "MonsterMaxCount": 5,
-      "GenDelayMaxCount": 6,
-      "GenDelayMinCount": 4,
-      "MonsterTypeCnt": 3
-    },
-    {
-      "WaveType": 0,
-      "NextWaveTime": 279,
-      "MonsterLevel": 4,
-      "MonsterMinCount": 3,
-      "MonsterMaxCount": 5,
-      "GenDelayMaxCount": 6,
-      "GenDelayMinCount": 4,
-      "MonsterTypeCnt": 3
     }
   ]
 }
