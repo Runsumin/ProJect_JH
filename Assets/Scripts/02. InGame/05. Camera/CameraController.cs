@@ -93,6 +93,19 @@ namespace HSM.Game
         #region [Update]
         void Update()
         {
+            //ScreenSize = new Vector2(Screen.width, Screen.height);
+            //_mousePosition = SetMousePositionCenter(Input.mousePosition, ScreenSize);
+
+            //// 카메라 Follow
+            //OrthoTargetLookAtCamera(CamSetting.Follow.position, _mousePosition);
+            //// Ortho 사이즈 조절
+            //OrthoSizeControll();
+        }
+        #endregion
+
+        #region [Fixed Update]
+        private void FixedUpdate()
+        {
             ScreenSize = new Vector2(Screen.width, Screen.height);
             _mousePosition = SetMousePositionCenter(Input.mousePosition, ScreenSize);
 

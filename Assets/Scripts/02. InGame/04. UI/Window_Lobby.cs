@@ -34,13 +34,22 @@ namespace HSM.Game
         public NSetting Setting = new NSetting();
         #endregion
 
+
+        #region [Nested] Status_Upgrade
+        public class Stat_Upgrade
+        {
+            public int Maxlv;
+            public int Nowlv;
+            //public int 
+        }
+        #endregion
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] Base
-
+        private DCL_Status_Permanent Player_PermanentStatus;
         #endregion
 
 
@@ -72,6 +81,8 @@ namespace HSM.Game
         public override void Start()
         {
             base.Start();
+            Player_PermanentStatus = new DCL_Status_Permanent();
+            Player_PermanentStatus.Initialize_Status_Permanent();
         }
 
         #endregion
@@ -171,7 +182,19 @@ namespace HSM.Game
         }
         #endregion
 
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 3. Permanent Stat Up
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [Status Up]
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnClick_AddStatus(int index)
+        {
+
+        }
+
+
+        #endregion
     }
-
 }

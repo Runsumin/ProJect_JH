@@ -98,7 +98,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Choice]
-        private DCL_Status_Choice choice = new DCL_Status_Choice();
+        private DCL_Status_Choice choice;
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -134,6 +134,7 @@ namespace HSM.Game
             base.Start();
             StageData = GameObject.Find("DCL_InGame").GetComponent<DCL_StageBase>();
             SetPlayerData();
+            choice = new DCL_Status_Choice();
             choice.MakeChoiceData();
         }
         #endregion

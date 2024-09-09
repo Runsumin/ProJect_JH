@@ -85,7 +85,7 @@ namespace HSM.Game
         #region [Variable] ChoiceData
         private List<ChoiceDataSet> ChoiceDataArr = new List<ChoiceDataSet>(); // 선택지 리스트
         public Sprite[] ImageArr;
-        public ChoiceDataSet[] ChoiceData_val;   // 1번 선택지
+        public ChoiceDataSet[] ChoiceData_val;   // 선택지
         #endregion
 
         #region [Variable] 
