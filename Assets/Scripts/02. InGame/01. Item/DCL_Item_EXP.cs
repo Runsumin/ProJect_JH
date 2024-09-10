@@ -26,7 +26,7 @@ namespace HSM.Game
 		{
 			public GameObject[] ExpModelRoot;
 			public int EXP_Amount;            // 플레이어에게 부여할 경험치 총량
-			public int EXP_Level;               // 경험치 레벨 : 1,2,3 존재
+			public int EXP_Level;             // 경험치 레벨 : 1,2,3 존재
 
 		}
 		public NEXPSetting Setting = new NEXPSetting();

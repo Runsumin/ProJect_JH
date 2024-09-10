@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6065199088293263573}
   m_Layer: 5
-  m_Name: Panel_1
+  m_Name: Panel_1_Att_Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 625938773484323973}
   m_Layer: 5
-  m_Name: Panel_9
+  m_Name: Panel_9_Clean_Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1099,7 +1099,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1714686464638486109}
   m_Layer: 5
-  m_Name: Panel_10
+  m_Name: Panel_10_Gain_Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2673,7 +2673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3943713968415251022}
   m_Layer: 5
-  m_Name: Panel_6
+  m_Name: Panel_6_Defense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3661,7 +3661,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3511732499699393993}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_AddStatus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2602755374258668183
 GameObject:
   m_ObjectHideFlags: 0
@@ -4700,7 +4712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766368577986296857}
   m_Layer: 5
-  m_Name: Panel_8
+  m_Name: Panel_8_HP_Recovery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6216,6 +6228,7 @@ RectTransform:
   - {fileID: 625938773484323973}
   - {fileID: 1714686464638486109}
   - {fileID: 8694062374179423949}
+  - {fileID: 8415775468130067953}
   m_Father: {fileID: 7850490914170666241}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6345,7 +6358,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3796118411744132539}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_AddStatus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4783866470606143493
 GameObject:
   m_ObjectHideFlags: 0
@@ -7148,7 +7173,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 596753619954243967}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_AddStatus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5184457553757104843
 GameObject:
   m_ObjectHideFlags: 0
@@ -7235,7 +7272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7203559594999705352}
   m_Layer: 5
-  m_Name: Panel_5
+  m_Name: Panel_5_Move_Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7856,8 +7893,8 @@ RectTransform:
   - {fileID: 920677533329548643}
   - {fileID: 4230836568274100081}
   - {fileID: 5025283230339868457}
-  - {fileID: 1316749170451700486}
   - {fileID: 6705382546056852361}
+  - {fileID: 1316749170451700486}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7884,6 +7921,28 @@ MonoBehaviour:
     LevelSelectRoot: {fileID: 504196758685269252}
     Notification_Window: {fileID: 7281167242418167241}
     UpgradeWindow: {fileID: 4581659607776692604}
+    UpgradeDataShow:
+    - Level: {fileID: 1638484880423654912}
+      Payment: {fileID: 8745975237961536671}
+    - Level: {fileID: 5341841428267655208}
+      Payment: {fileID: 6934507438221750644}
+    - Level: {fileID: 8529710340054086337}
+      Payment: {fileID: 2567602785297221019}
+    - Level: {fileID: 1150096585737927851}
+      Payment: {fileID: 1519373967409668875}
+    - Level: {fileID: 5349504646341282680}
+      Payment: {fileID: 1229913026899485220}
+    - Level: {fileID: 2816221205210123669}
+      Payment: {fileID: 296720817075363648}
+    - Level: {fileID: 3216811617467154003}
+      Payment: {fileID: 8810842508554779151}
+    - Level: {fileID: 5807835295267221080}
+      Payment: {fileID: 4246810291055279380}
+    - Level: {fileID: 8323278862869567395}
+      Payment: {fileID: 245103015513376730}
+    - Level: {fileID: 3055107682811883674}
+      Payment: {fileID: 1065555226694681321}
+    NowDevilCoinCount: {fileID: 8534477181159049109}
 --- !u!1 &5696092290148924477
 GameObject:
   m_ObjectHideFlags: 0
@@ -7971,7 +8030,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3361501129428044719}
   m_Layer: 5
-  m_Name: Panel_3
+  m_Name: Panel_3_Cri_Percent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8002,6 +8061,142 @@ RectTransform:
   m_AnchoredPosition: {x: -250, y: 350}
   m_SizeDelta: {x: 100, y: 73}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &5825613552322923578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8415775468130067953}
+  - component: {fileID: 215660713901927231}
+  - component: {fileID: 8534477181159049109}
+  m_Layer: 5
+  m_Name: NowDevilCoin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8415775468130067953
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825613552322923578}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6705382546056852361}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 697.6632, y: 149.81604}
+  m_SizeDelta: {x: 317.1335, y: 80.3679}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &215660713901927231
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825613552322923578}
+  m_CullTransparentMesh: 1
+--- !u!114 &8534477181159049109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825613552322923578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 0
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 27e4037878f211a4f94fea3412efe03b, type: 2}
+  m_sharedMaterial: {fileID: 1728770047766015406, guid: 27e4037878f211a4f94fea3412efe03b,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 45
+  m_fontSizeBase: 45
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &5877592000149632980
 GameObject:
   m_ObjectHideFlags: 0
@@ -8681,7 +8876,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5772248203066547819}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_AddStatus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6119609774297148768
 GameObject:
   m_ObjectHideFlags: 0
@@ -8692,7 +8899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8460535780936026694}
   m_Layer: 5
-  m_Name: Panel_7
+  m_Name: Panel_7_HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9132,7 +9339,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1821999291906515783}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_AddStatus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6512580723885998779
 GameObject:
   m_ObjectHideFlags: 0
@@ -11190,7 +11409,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7695362510876447029}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_AddStatus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7281167242418167241
 GameObject:
   m_ObjectHideFlags: 0
@@ -11350,7 +11581,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5891891277130485959}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_AddStatus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7333244661981354847
 GameObject:
   m_ObjectHideFlags: 0
@@ -11745,7 +11988,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4043265510448497891}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_AddStatus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 9
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7657966620999104738
 GameObject:
   m_ObjectHideFlags: 0
@@ -12622,7 +12877,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2400716186880032469}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_AddStatus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8271627374848372094
 GameObject:
   m_ObjectHideFlags: 0
@@ -13117,7 +13384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2814991273963166243}
   m_Layer: 5
-  m_Name: Panel_2
+  m_Name: Panel_2_Att_Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13421,7 +13688,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4380204872789659621}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_MainTitle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8969680455585183807
 GameObject:
   m_ObjectHideFlags: 0
@@ -13695,7 +13974,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9681437128893860}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7514039518685979930}
+        m_TargetAssemblyTypeName: HSM.Game.Window_Lobby, Assembly-CSharp
+        m_MethodName: OnClick_AddStatus
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9019320275257271291
 GameObject:
   m_ObjectHideFlags: 0
@@ -14327,7 +14618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6318843983379832943}
   m_Layer: 5
-  m_Name: Panel_4
+  m_Name: Panel_4_Cri_Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

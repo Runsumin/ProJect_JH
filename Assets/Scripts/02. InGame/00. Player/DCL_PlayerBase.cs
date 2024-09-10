@@ -35,7 +35,7 @@ namespace HSM.Game
             //public DCL_Status Player_Status = new DCL_Status();                         
             public List<NPlayerLevle> Player_Level = new List<NPlayerLevle>();   // 플레이어 레벨당 필요 경험치
             public DCL_Status Pl_Status_InGame;                   // 플레이어 스텟 - 인게임
-            public DCL_Status Pl_Status_Permanent;                // 플레이어 스텟 - 영구
+            public Player_PermanentData Pl_Status_Permanent;                // 플레이어 스텟 - 영구
             public float NowEXP;
             public float MaxLevel;
             public float NowHP;
@@ -83,6 +83,16 @@ namespace HSM.Game
         }
         #endregion
 
+        #region [Parsing] PlayerStatus_Level
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class Player_PermanentData
+        {
+            public DCL_Status Status_Permanent;                   // 플레이어 스텟 - 영구
+            public int DevilCoinCount;
+        }
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
@@ -112,7 +122,7 @@ namespace HSM.Game
 
         #region [Property] Setting
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public DCL_Status PL_Status => Setting.Pl_Status_InGame + Setting.Pl_Status_Permanent;       // 플레이어 스텟
+        public DCL_Status PL_Status => Setting.Pl_Status_InGame + Setting.Pl_Status_Permanent.Status_Permanent;       // 플레이어 스텟
         public float ToTalEXP => Setting.Player_Level[NowPlayerLevel].MaxEXP;
         #endregion
 
@@ -139,7 +149,8 @@ namespace HSM.Game
 
             Setting.Player_Level = Json_Utility_Extend.FileLoadList<NPlayerLevle>("Data/Json_Data/Player/Player_Level.Json");
             Setting.Pl_Status_InGame = Json_Utility_Extend.FileLoad<DCL_Status>("Data/Json_Data/Player/Player_Status_Stage.Json");
-            Setting.Pl_Status_Permanent = Json_Utility_Extend.FileLoad<DCL_Status>("Data/Json_Data/Player/Player_Status_Permanent.Json");
+            Setting.Pl_Status_Permanent = Json_Utility_Extend.FileLoad<Player_PermanentData>("Data/Json_Data/Player/Player_Status_Permanent.Json");
+            //*Setting.Pl_Status_Permanent = */Json_Utility_Extend.FileSave(Setting.Pl_Status_Permanent, "Data/Json_Data/Player/Player_Status_Permanent.Json");
         }
         #endregion
 
@@ -199,7 +210,7 @@ namespace HSM.Game
         IEnumerator HitCoolTimeChange()
         {
             float cooltime = 0;
-            while(true)
+            while (true)
             {
                 cooltime += Time.deltaTime;
                 if (cooltime > HitCoolTime)
@@ -267,7 +278,7 @@ namespace HSM.Game
         public void OnTriggerEnter(Collider coll)
         {
             // Layer = 7 : monstercoll, 8 = MonsterWeaponcoll
-            if(HitAble && coll.gameObject.layer == MONSTERCOLLIDER)
+            if (HitAble && coll.gameObject.layer == MONSTERCOLLIDER)
             {
                 HitAble = false;
                 float att = coll.gameObject.GetComponent<DCL_MonsterBase>().Mon_Status.Attack_Power;
