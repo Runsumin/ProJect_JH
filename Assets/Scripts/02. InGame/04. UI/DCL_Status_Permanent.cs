@@ -68,6 +68,8 @@ namespace HSM.Game
 
         #region [Variable] Base
         public DCL_PlayerBase.Player_PermanentData Player_PermanentData;
+        public List<List<Status_Per_Base>> Status_listSet;
+        public List<int> Status_NowLevel;
         #endregion
 
 
@@ -127,36 +129,40 @@ namespace HSM.Game
             //Json_Utility_Extend.FileSave(Stat_Per_List, "Data/Json_Data/Stage/PermanentStatus.Json");
             Stat_Per_List = Json_Utility_Extend.FileLoad<Status_Per_List>("Data/Json_Data/Stage/PermanentStatus.Json");
             Player_PermanentData = Json_Utility_Extend.FileLoad<DCL_PlayerBase.Player_PermanentData>("Data/Json_Data/Player/Player_Status_Permanent.Json");
+
+            Status_listSet = new List<List<Status_Per_Base>>();
+            Status_listSet.Add(Stat_Per_List.Att_Power_List);
+            Status_listSet.Add(Stat_Per_List.Att_Speed_List);
+            Status_listSet.Add(Stat_Per_List.Cri_Percent_List);
+            Status_listSet.Add(Stat_Per_List.Cri_Damage_List);
+            Status_listSet.Add(Stat_Per_List.Move_Speed_List);
+            Status_listSet.Add(Stat_Per_List.Defense_List);
+            Status_listSet.Add(Stat_Per_List.HP_List);
+            Status_listSet.Add(Stat_Per_List.HP_Recovery_List);
+            Status_listSet.Add(Stat_Per_List.Cln_Speed_List);
+            Status_listSet.Add(Stat_Per_List.Gain_Range_List);
+
+            Status_NowLevel = new List<int>();
+            Status_NowLevel.Add(Stat_Per_List.Att_Power_Now_Level);
+            Status_NowLevel.Add(Stat_Per_List.Att_Speed_Now_Level);
+            Status_NowLevel.Add(Stat_Per_List.Cri_Percent_Now_Level);
+            Status_NowLevel.Add(Stat_Per_List.Cri_Damage_Now_Level);
+            Status_NowLevel.Add(Stat_Per_List.Move_Speed_Now_Level);
+            Status_NowLevel.Add(Stat_Per_List.Defense_Now_Level);
+            Status_NowLevel.Add(Stat_Per_List.HP_Now_Level);
+            Status_NowLevel.Add(Stat_Per_List.HP_Recovery_Now_Level);
+            Status_NowLevel.Add(Stat_Per_List.Cln_Speed_Now_Level);
+            Status_NowLevel.Add(Stat_Per_List.Gain_Range_Now_Level);
         }
         #endregion
 
-        #region [Init] 
+        #region [Init] Show_Status_PermanentData
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public string Show_Status_PermanentData(int data, int type/* 1 = level, 2 = */)
+        public void Save_PermanentData()
         {
-            //for (int i = 1; i < 8; i++)
-            //{
-            //    Status_Per_Base data = new Status_Per_Base();
-            //    data.AddStatus = 1;
-            //    data.Expense = 1000 * i;
-            //    data.Level = i;
+            Json_Utility_Extend.FileSave(Stat_Per_List, "Data/Json_Data/Stage/PermanentStatus.Json");
+            Json_Utility_Extend.FileSave(Player_PermanentData, "Data/Json_Data/Player/Player_Status_Permanent.Json");
 
-            //    Stat_Per_List.Att_Power_List.Add(data);
-            //    Stat_Per_List.Att_Speed_List.Add(data);
-            //    Stat_Per_List.Cri_Percent_List.Add(data);
-            //    Stat_Per_List.Cri_Damage_List.Add(data);
-            //    Stat_Per_List.Move_Speed_List.Add(data);
-            //    Stat_Per_List.Defense_List.Add(data);
-            //    Stat_Per_List.HP_List.Add(data);
-            //    Stat_Per_List.HP_Recovery_List.Add(data);
-            //    Stat_Per_List.Cln_Speed_List.Add(data);
-            //    Stat_Per_List.Gain_Range_List.Add(data);
-            //}
-
-            //Json_Utility_Extend.FileSave(Stat_Per_List, "Data/Json_Data/Stage/PermanentStatus.Json");
-            //Stat_Per_List = Json_Utility_Extend.FileLoad<Status_Per_List>("Data/Json_Data/Stage/PermanentStatus.Json");
-            //Player_PermanentData = Json_Utility_Extend.FileLoad<DCL_PlayerBase.Player_PermanentData>("Data/Json_Data/Player/Player_Status_Permanent.Json");
-            return "";
         }
         #endregion
     }

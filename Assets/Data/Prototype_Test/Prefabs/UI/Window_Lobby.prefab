@@ -7943,6 +7943,7 @@ MonoBehaviour:
     - Level: {fileID: 3055107682811883674}
       Payment: {fileID: 1065555226694681321}
     NowDevilCoinCount: {fileID: 8534477181159049109}
+    NowNotifyMessage: {fileID: 2933189011586721524}
 --- !u!1 &5696092290148924477
 GameObject:
   m_ObjectHideFlags: 0
