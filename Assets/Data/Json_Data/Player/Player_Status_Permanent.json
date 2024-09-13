@@ -2,18 +2,18 @@
     "datas": [
         {
             "Status_Permanent": {
-                "Attack_Power": 0.0,
-                "Attack_Speed": 0.0,
-                "Cri_Percent": 0,
-                "Critical_Damage": 0.0,
-                "Move_Speed": 0.0,
-                "Defense": 0.0,
-                "HP": 0.0,
-                "HP_Recovery": 0.0,
-                "Cleaning_Speed": 0.0,
-                "Gain_Range": 0.0
+                "Attack_Power": 2.0,
+                "Attack_Speed": 0.20000000298023225,
+                "Cri_Percent": 2,
+                "Critical_Damage": 5.0,
+                "Move_Speed": 0.4000000059604645,
+                "Defense": 1.0,
+                "HP": 10.0,
+                "HP_Recovery": 1.0,
+                "Cleaning_Speed": 1.0,
+                "Gain_Range": 1.0
             },
-            "DevilCoinCount": -400
+            "DevilCoinCount": -1000
         }
     ]
 }

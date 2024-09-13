@@ -1,16 +1,16 @@
 {
     "datas": [
         {
-            "Att_Power_Now_Level": 0,
+            "Att_Power_Now_Level": 1,
             "Att_Speed_Now_Level": 0,
             "Cri_Percent_Now_Level": 0,
-            "Cri_Damage_Now_Level": 1,
-            "Move_Speed_Now_Level": 5,
-            "Defense_Now_Level": 3,
-            "HP_Now_Level": 3,
-            "HP_Recovery_Now_Level": 6,
-            "Cln_Speed_Now_Level": 6,
-            "Gain_Range_Now_Level": 2,
+            "Cri_Damage_Now_Level": 0,
+            "Move_Speed_Now_Level": 0,
+            "Defense_Now_Level": 0,
+            "HP_Now_Level": 0,
+            "HP_Recovery_Now_Level": 0,
+            "Cln_Speed_Now_Level": 0,
+            "Gain_Range_Now_Level": 0,
             "Att_Power_List": [
                 {
                     "Expense": 1000,

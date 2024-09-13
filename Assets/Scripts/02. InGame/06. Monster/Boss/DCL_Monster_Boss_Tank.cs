@@ -6,15 +6,28 @@ namespace HSM.Game
 {
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //
-    // DCL_Monster_Hero
-    // 몬스터 - 용사 클래스
+    // DCL_Monster_Boss_Tank
+    // 보스몬스터 - 탱크
     //
-    // Step.1 : 단순히 플레이어 목표로 따라가기만 한다               - 완료
-    // Step.2 : 네비메쉬 위에 태워서 장애물 피하면서 목표 따라가기.   - 완료
-    //
+    //  패턴 3종 구현
+    //  - 돌진
+    //  - 낙하
+    //  - 지진
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public class DCL_Monster_Hero : DCL_MonsterBase
+
+    public class DCL_Monster_Boss_Tank : DCL_MonsterBase
     {
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Enum Class
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Enum] 
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public enum eTankState { IDLE, RUN }
+        #endregion
+
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Nested Class
         //
@@ -31,7 +44,19 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Variable] Base
+        #region [Variable] Animation State
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public eTankState Tank_State;
+        #region [Variable] Animation
+        protected Animator TankAnimation;
+        protected eTankState BeForeTankState = eTankState.IDLE;   // 이전 플레이어 행동
+        protected eTankState TankState = eTankState.IDLE;         // 현재 플레이어 행동
+        #endregion
+        #endregion
+
+        #region [Variable] Attack
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public float Attack_Range;
         #endregion
 
 
@@ -59,7 +84,7 @@ namespace HSM.Game
             base.Awake();
 
             //Json_Utility_Extend.FileSave(Mon_Status, "Data/Json_Data/Monster/Monster_Hero.Json");
-            Setting.Monster_Status = Json_Utility_Extend.FileLoadList<DCL_Status>("Data/Json_Data/Monster/Monster_Hero.Json");
+            Setting.Monster_Status = Json_Utility_Extend.FileLoadList<DCL_Status>("Data/Json_Data/Monster/Boss_Monster_Tank.Json");
         }
         #endregion
 
@@ -68,6 +93,10 @@ namespace HSM.Game
         public override void Start()
         {
             base.Start();
+            Attack_Range = 10f;
+            Tank_State = eTankState.IDLE;
+            TankAnimation = GetComponent<Animator>();
+
         }
         #endregion
 
@@ -76,7 +105,7 @@ namespace HSM.Game
         public override void Update()
         {
             base.Update();
-            Move();
+            Tank_FSM();
         }
         #endregion
 
@@ -89,27 +118,78 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Move()
         {
-
-            //Ver_1 Default
-            // Y값 보정 - 테스트 위해
-            //Vector3 Pos = new Vector3(PlayerPos.position.x, 0, PlayerPos.position.z);
-
-            //Vector3 dir = SetDirection(transform.position, PlayerPos.position);
-
-            //transform.position += -dir * Mon_Status.Move_Speed * Time.deltaTime;
-
             // Ver_2 NavMesh
+            Nav_Agent.isStopped = false;
             Nav_Agent.speed = Mon_Status.Move_Speed;
             Nav_Agent.SetDestination(PlayerPos.position);
             transform.LookAt(PlayerPos);
+        }
+        #endregion
 
+        #region [Move] Idle
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Idle()
+        {
+            // Ver_2 NavMesh
+            Nav_Agent.isStopped = true;
+            transform.LookAt(PlayerPos);
+        }
+        #endregion
+
+
+        #region [Move] Check AttackRange
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public bool Check_AttackRange()
+        {
+            Vector3 dirvec = transform.position - PlayerPos.position;
+            float length = Mathf.Sqrt(Mathf.Pow(dirvec.x, 2) + Mathf.Pow(dirvec.y, 2) + Mathf.Pow(dirvec.z, 2));
+
+            if (Attack_Range < length)
+                return false;
+            else
+                return true;
         }
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 2. Attack
+        // 2. FSM
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [FSM] 몬스터 패턴
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Tank_FSM()
+        {
+            switch (Tank_State)
+            {
+                case eTankState.IDLE:
+                    if (Check_AttackRange())
+                    {
+                        Tank_State = eTankState.IDLE;
+                    }
+                    else
+                    {
+                        Tank_State = eTankState.RUN;
+                    }
+                    Idle();
+                    break;
+                case eTankState.RUN:
+                    if (Check_AttackRange())
+                    {
+                        Tank_State = eTankState.IDLE;
+                    }
+                    else
+                    {
+                        Tank_State = eTankState.RUN;
+                    }
+                    Move();
+                    break;
+            }
+
+            SetStateNAnimation(Tank_State);
+
+        }
+        #endregion
 
         #region [Attack] Monster_Attack
         //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -153,7 +233,30 @@ namespace HSM.Game
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 3. Death
+        // 98. Animation
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Animation] SetTrigger By Animation State
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void ChangeAnimationByTrigger(eTankState tankstate, eTankState beforetankstate)
+        {
+            TankAnimation.ResetTrigger(beforetankstate.ToString());
+            TankAnimation.SetTrigger(tankstate.ToString());
+        }
+        #endregion
+
+        #region [Animation] SetStateAnimation
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void SetStateNAnimation(eTankState state)
+        {
+            BeForeTankState = TankState;
+            TankState = state;
+            ChangeAnimationByTrigger(TankState, BeForeTankState);
+        }
+        #endregion
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 99. Death
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

@@ -160,6 +160,17 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Save_PermanentData()
         {
+            Player_PermanentData.Status_Permanent.Attack_Power = Now_Att_Power_Data.AddStatus;
+            Player_PermanentData.Status_Permanent.Attack_Speed = Now_Att_Speed_Data.AddStatus;
+            Player_PermanentData.Status_Permanent.Cleaning_Speed = Now_Cln_Speed_Data.AddStatus;
+            Player_PermanentData.Status_Permanent.Critical_Damage = Now_Cri_Damage_Data.AddStatus;
+            Player_PermanentData.Status_Permanent.Cri_Percent = (int)Now_Cri_Percent_Data.AddStatus;
+            Player_PermanentData.Status_Permanent.Defense = Now_Defense_Data.AddStatus;
+            Player_PermanentData.Status_Permanent.Gain_Range = Now_Gain_Range_Data.AddStatus;
+            Player_PermanentData.Status_Permanent.HP = Now_HP_Data.AddStatus;
+            Player_PermanentData.Status_Permanent.HP_Recovery = Now_HP_Recovery_Data.AddStatus;
+            Player_PermanentData.Status_Permanent.Move_Speed = Now_Move_Speed_Data.AddStatus;
+
             Json_Utility_Extend.FileSave(Stat_Per_List, "Data/Json_Data/Stage/PermanentStatus.Json");
             Json_Utility_Extend.FileSave(Player_PermanentData, "Data/Json_Data/Player/Player_Status_Permanent.Json");
 

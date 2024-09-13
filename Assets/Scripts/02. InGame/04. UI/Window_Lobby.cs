@@ -224,45 +224,6 @@ namespace HSM.Game
             }
 
             Setting.NowDevilCoinCount.text = Player_PermanentStatus.Player_PermanentData.DevilCoinCount.ToString();
-            //// Att_Power
-            //Setting.UpgradeDataShow[0].Level.text = Player_PermanentStatus.Now_Att_Power_Data.Level.ToString();
-            //Setting.UpgradeDataShow[0].Payment.text = Player_PermanentStatus.Now_Att_Power_Data.Expense.ToString();
-
-            //// Att_Speed
-            //Setting.UpgradeDataShow[1].Level.text = Player_PermanentStatus.Now_Att_Speed_Data.Level.ToString();
-            //Setting.UpgradeDataShow[1].Payment.text = Player_PermanentStatus.Now_Att_Speed_Data.Expense.ToString();
-
-            //// Cri_Percent
-            //Setting.UpgradeDataShow[2].Level.text = Player_PermanentStatus.Now_Cri_Percent_Data.Level.ToString();
-            //Setting.UpgradeDataShow[2].Payment.text = Player_PermanentStatus.Now_Cri_Percent_Data.Expense.ToString();
-
-            //// Cri_Damage
-            //Setting.UpgradeDataShow[3].Level.text = Player_PermanentStatus.Now_Cri_Damage_Data.Level.ToString();
-            //Setting.UpgradeDataShow[3].Payment.text = Player_PermanentStatus.Now_Cri_Damage_Data.Expense.ToString();
-
-            //// Move_Speed
-            //Setting.UpgradeDataShow[4].Level.text = Player_PermanentStatus.Now_Move_Speed_Data.Level.ToString();
-            //Setting.UpgradeDataShow[4].Payment.text = Player_PermanentStatus.Now_Move_Speed_Data.Expense.ToString();
-
-            //// Defense
-            //Setting.UpgradeDataShow[5].Level.text = Player_PermanentStatus.Now_Defense_Data.Level.ToString();
-            //Setting.UpgradeDataShow[5].Payment.text = Player_PermanentStatus.Now_Defense_Data.Expense.ToString();
-
-            //// HP
-            //Setting.UpgradeDataShow[6].Level.text = Player_PermanentStatus.Now_HP_Data.Level.ToString();
-            //Setting.UpgradeDataShow[6].Payment.text = Player_PermanentStatus.Now_HP_Data.Expense.ToString();
-
-            //// HP_Recovery
-            //Setting.UpgradeDataShow[7].Level.text = Player_PermanentStatus.Now_HP_Recovery_Data.Level.ToString();
-            //Setting.UpgradeDataShow[7].Payment.text = Player_PermanentStatus.Now_HP_Recovery_Data.Expense.ToString();
-
-            //// Cln_Speed
-            //Setting.UpgradeDataShow[8].Level.text = Player_PermanentStatus.Now_Cln_Speed_Data.Level.ToString();
-            //Setting.UpgradeDataShow[8].Payment.text = Player_PermanentStatus.Now_Cln_Speed_Data.Expense.ToString();
-
-            //// Gain_Range
-            //Setting.UpgradeDataShow[9].Level.text = Player_PermanentStatus.Now_Gain_Range_Data.Level.ToString();
-            //Setting.UpgradeDataShow[9].Payment.text = Player_PermanentStatus.Now_Gain_Range_Data.Expense.ToString();
         }
         #endregion
 
@@ -273,7 +234,7 @@ namespace HSM.Game
             eStatusType data = (eStatusType)type;
 
             if (Player_PermanentStatus.Status_listSet[type].Count > Player_PermanentStatus.Status_listSet[type][Player_PermanentStatus.Status_NowLevel[type]].Level &&
-                Player_PermanentStatus.Player_PermanentData.DevilCoinCount >
+                Player_PermanentStatus.Player_PermanentData.DevilCoinCount >=
                 Player_PermanentStatus.Status_listSet[type][Player_PermanentStatus.Status_NowLevel[type]].Expense)
             {
 
