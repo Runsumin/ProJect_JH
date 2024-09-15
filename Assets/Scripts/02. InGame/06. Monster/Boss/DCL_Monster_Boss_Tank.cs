@@ -22,9 +22,10 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Enum] 
+        #region [Enum] Animation State
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public enum eTankState { IDLE, RUN }
+        public enum eTankState { IDLE, RUN, ATTACK, DIE}
+        public enum eTankPattern { DASH, FALLDOWN, EARTHQUAKE }
         #endregion
 
 
@@ -49,8 +50,8 @@ namespace HSM.Game
         public eTankState Tank_State;
         #region [Variable] Animation
         protected Animator TankAnimation;
-        protected eTankState BeForeTankState = eTankState.IDLE;   // 이전 플레이어 행동
-        protected eTankState TankState = eTankState.IDLE;         // 현재 플레이어 행동
+        protected eTankState BeForeTankState = eTankState.IDLE;   // 이전 행동
+        protected eTankState TankState = eTankState.IDLE;         // 현재 행동
         #endregion
         #endregion
 
@@ -188,6 +189,14 @@ namespace HSM.Game
 
             SetStateNAnimation(Tank_State);
 
+        }
+        #endregion
+
+        #region [FSM] 패턴 정하기
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public eTankPattern SetTankPattern()
+        {
+            return eTankPattern.DASH;
         }
         #endregion
 
