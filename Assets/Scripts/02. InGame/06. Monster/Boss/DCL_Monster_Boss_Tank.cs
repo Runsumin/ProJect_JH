@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace HSM.Game
 {
@@ -36,6 +38,13 @@ namespace HSM.Game
 
         #region [NestedClass] Setting
         //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class Boss_Tank_Setting
+        {
+            public DecalProjector Box_Effect;
+            public DecalProjector Circle_Effect;
+        }
+        public Boss_Tank_Setting Tank_Setting = new Boss_Tank_Setting();
         #endregion
 
 
