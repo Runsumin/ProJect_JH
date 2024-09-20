@@ -84753,6 +84753,8 @@ MonoBehaviour:
     Circle_Effect: {fileID: 1229980946}
   Tank_State: 0
   Attack_Range: 0
+  TankPattern: 0
+  NowAttack: 0
 --- !u!195 &4388290449184603524
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -85241,11 +85243,11 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: 8b477e463ec34a142839aba56e799a90, type: 3}
-  - {fileID: -6478536213147159724, guid: 8b477e463ec34a142839aba56e799a90, type: 3}
-  - {fileID: -6922793697723135513, guid: 8b477e463ec34a142839aba56e799a90, type: 3}
-  - {fileID: 4874126678125670354, guid: 8b477e463ec34a142839aba56e799a90, type: 3}
-  - {fileID: -876546973899608171, guid: 8b477e463ec34a142839aba56e799a90, type: 3}
+  - {fileID: 2100000, guid: 8122017031c320643a0e6417df369f11, type: 2}
+  - {fileID: 2100000, guid: 8122017031c320643a0e6417df369f11, type: 2}
+  - {fileID: 2100000, guid: 8122017031c320643a0e6417df369f11, type: 2}
+  - {fileID: 2100000, guid: 8122017031c320643a0e6417df369f11, type: 2}
+  - {fileID: 2100000, guid: 8122017031c320643a0e6417df369f11, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85444,9 +85446,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8274133419916619345, guid: 8b477e463ec34a142839aba56e799a90, type: 3}
-  - {fileID: -6629797300637803691, guid: 8b477e463ec34a142839aba56e799a90, type: 3}
-  - {fileID: -2813467912831258332, guid: 8b477e463ec34a142839aba56e799a90, type: 3}
+  - {fileID: 2100000, guid: 98cd98e75735988478710c39386614aa, type: 2}
+  - {fileID: 2100000, guid: 98cd98e75735988478710c39386614aa, type: 2}
+  - {fileID: 2100000, guid: 98cd98e75735988478710c39386614aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
