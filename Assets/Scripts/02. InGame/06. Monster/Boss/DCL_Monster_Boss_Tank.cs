@@ -68,7 +68,13 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public float Attack_Range;
         public eTankPattern TankPattern;
+    
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public bool NowAttack;
+        public bool AttackEnd;
+        public float DashInTime;
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public float IdleTime;
         #endregion
 
         #region [Variable] BT
@@ -127,53 +133,6 @@ namespace HSM.Game
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 1. Move
-        //
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-        #region [Move] Monster_Move
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
-        INode.eNodeState TankMove()
-        {
-            SetStateNAnimation(eTankState.RUN);
-            // Ver_2 NavMesh
-            Nav_Agent.isStopped = false;
-            Nav_Agent.speed = Mon_Status.Move_Speed;
-            Nav_Agent.SetDestination(PlayerPos.position);
-            transform.LookAt(PlayerPos);
-
-            return INode.eNodeState.Running;
-        }
-        #endregion
-
-        #region [Move] Idle
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
-        INode.eNodeState Idle()
-        {
-            SetStateNAnimation(eTankState.IDLE);
-            // Ver_2 NavMesh
-            Nav_Agent.isStopped = true;
-            transform.LookAt(PlayerPos);
-            return INode.eNodeState.Running;
-        }
-        #endregion
-
-
-        #region [Move] Check AttackRange
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
-        INode.eNodeState Check_AttackRange()
-        {
-            Vector3 dirvec = transform.position - PlayerPos.position;
-            float length = Mathf.Sqrt(Mathf.Pow(dirvec.x, 2) + Mathf.Pow(dirvec.y, 2) + Mathf.Pow(dirvec.z, 2));
-
-            if (Attack_Range < length)
-                return INode.eNodeState.Failure;
-            else
-                return INode.eNodeState.Success;
-        }
-        #endregion        
-
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 2. BT
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -188,17 +147,153 @@ namespace HSM.Game
                     (
                         new List<INode>()
                         {
+                            new ActionNode(Check_Run),
                             new ActionNode(Check_AttackRange),
-                            new ActionNode(Idle),
+                            new ActionNode(TankMove),
                         }
                     ),
-                    new ActionNode(TankMove),
+                    new SequenceNode
+                    (
+                        new List<INode>()
+                        {
+                            new ActionNode(Check_Attack),
+                            new ActionNode(Dash),
+                        }
+                    ),
+                    new SequenceNode
+                    (
+                        new List<INode>()
+                        {
+                            new ActionNode(Check_Idle),
+                            new ActionNode(Idle),
+                        }
+                    )
+
                     }
                 );
         }
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 99. Collider
+        // 3. BT Node
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [BT_Node] Monster_Move
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState TankMove()
+        {
+            SetStateNAnimation(eTankState.RUN);
+            // Ver_2 NavMesh
+            Nav_Agent.isStopped = false;
+            Nav_Agent.speed = Mon_Status.Move_Speed;
+            Nav_Agent.SetDestination(PlayerPos.position);
+            transform.LookAt(PlayerPos);
+
+            return INode.eNodeState.Running;
+        }
+        #endregion
+
+        #region [BT_Node] Idle
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Idle()
+        {
+            SetStateNAnimation(eTankState.IDLE);
+            IdleTime += Time.deltaTime;
+            // Ver_2 NavMesh
+            Nav_Agent.isStopped = true;
+            if(IdleTime > 2)
+            {
+                IdleTime = 0;
+                AttackEnd = false;
+                return INode.eNodeState.Success;
+            }
+
+            return INode.eNodeState.Running;
+        }
+        #endregion
+
+        #region [BT_Node] Check_AttackState
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Check_Run()
+        {
+            if (NowAttack == false && AttackEnd == false)
+                return INode.eNodeState.Success;
+            else
+                return INode.eNodeState.Failure;
+        }
+        #endregion
+
+        #region [BT_Node] Check_AttackState
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Check_Attack()
+        {
+            if (NowAttack == true && AttackEnd == false)
+                return INode.eNodeState.Success;
+            else
+                return INode.eNodeState.Failure;
+        }
+        #endregion
+
+        #region [BT_Node] Check_AttackState
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Check_Idle()
+        {
+            if (NowAttack == false && AttackEnd == true)
+                return INode.eNodeState.Success;
+            else
+                return INode.eNodeState.Failure;
+        }
+        #endregion
+
+        #region [BT_Node] Check AttackRange
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Check_AttackRange()
+        {
+            Vector3 dirvec = transform.position - PlayerPos.position;
+            float length = Mathf.Sqrt(Mathf.Pow(dirvec.x, 2) + Mathf.Pow(dirvec.y, 2) + Mathf.Pow(dirvec.z, 2));
+
+            if (Attack_Range > length && NowAttack == false)
+            {
+                // 사거리 안에 들어오면 공격
+                NowAttack = true;
+                return INode.eNodeState.Success;
+            }
+            else
+            {
+                return INode.eNodeState.Success;
+            }
+        }
+        #endregion
+
+        #region [BT_Node] Dash
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Dash()
+        {
+            if (DashInTime == 0)
+                SetStateNAnimation(eTankState.DASH_CHARGE);
+
+            DashInTime += Time.deltaTime;
+
+            if (DashInTime > 4)
+            {
+                SetStateNAnimation(eTankState.DASH_END);
+                NowAttack = false;
+                AttackEnd = true;
+                DashInTime = 0;
+                return INode.eNodeState.Success;
+            }
+            else if (DashInTime > 2)
+            {
+                SetStateNAnimation(eTankState.DASH_START);
+            }
+
+            Nav_Agent.isStopped = true;
+            return INode.eNodeState.Running;
+        }
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 97. Collider
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
