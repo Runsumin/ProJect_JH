@@ -30506,8 +30506,8 @@ MonoBehaviour:
   m_UVBias: {x: 0, y: 0}
   m_DecalLayerMask: 0
   m_ScaleMode: 0
-  m_Offset: {x: 0, y: 0, z: 15}
-  m_Size: {x: 20, y: 1, z: 30}
+  m_Offset: {x: 0, y: 0, z: 0.25}
+  m_Size: {x: 15, y: 1, z: 0.5}
   m_FadeFactor: 1
 --- !u!1 &1076148349
 GameObject:
@@ -84755,7 +84755,9 @@ MonoBehaviour:
   Attack_Range: 0
   TankPattern: 0
   NowAttack: 0
+  AttackEnd: 0
   DashInTime: 0
+  IdleTime: 0
 --- !u!195 &4388290449184603524
 NavMeshAgent:
   m_ObjectHideFlags: 0

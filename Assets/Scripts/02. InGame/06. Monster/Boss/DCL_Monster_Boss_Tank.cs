@@ -43,11 +43,46 @@ namespace HSM.Game
         {
             public DecalProjector Box_Effect;
             public DecalProjector Circle_Effect;
+            public float AttactCoolTime;
         }
         public Boss_Tank_Setting Tank_Setting = new Boss_Tank_Setting();
         #endregion
 
+        #region [class] InGamePatternSet
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class DashPatternSetting
+        {
+            public float DashTimer;         // 패턴진행시간
+            public float DashChargeTime;    // 차지 시간
+            public float DashIngTime;       // 대쉬 진행 시간
+            public float AttackRange;       // 공격 범위
+            public float IdleTime;          // 공격 후 대기시간
+            public bool ChargeStart;
+            public bool DashStart;
+            public bool Dash_End;
+        }
+        public DashPatternSetting DashPTSetting = new DashPatternSetting();
 
+        [Serializable]
+        public class QuakePatternSetting
+        {
+            public float QuakeTimer;        // 패턴진행시간
+            public float QuakeChargeTime;   // 차지 시간
+            public float QuakeTime;       // 대쉬 진행 시간
+            public float AttackRange;       // 공격 범위
+            public float IdleTime;          // 공격 후 대기시간
+            public bool QuakeChargeStart;
+            public bool QuakeStart;
+            public bool Quake_End;
+        }
+        public QuakePatternSetting QuakePTSetting = new QuakePatternSetting();
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public class IdleSetting
+        {
+            public float IdleTimer;         // 패턴진행시간
+        }
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
@@ -68,13 +103,13 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public float Attack_Range;
         public eTankPattern TankPattern;
-    
+
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public bool NowAttack;
         public bool AttackEnd;
-        public float DashInTime;
+        public float AttackCoolTime;
+        public bool AttackAble;
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public float IdleTime;
         #endregion
 
         #region [Variable] BT
@@ -120,6 +155,12 @@ namespace HSM.Game
 
             _BTRunner = new BehaviorTreeRunner(SettingBT());
 
+            // Dash Setting
+            DashPTSetting.DashTimer = 0;
+            DashPTSetting.DashChargeTime = 2;
+            DashPTSetting.DashIngTime = 4;
+            DashPTSetting.IdleTime = 6;
+            DashPTSetting.AttackRange = 10;
         }
         #endregion
 
@@ -137,41 +178,34 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        #region [BT] Setting
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         INode SettingBT()
         {
             return new SelectorNode
                 (
                     new List<INode>()
                     {
+                    // 대시공격
                     new SequenceNode
                     (
                         new List<INode>()
                         {
-                            new ActionNode(Check_Run),
-                            new ActionNode(Check_AttackRange),
-                            new ActionNode(TankMove),
+                            // 대쉬 준비
+                            new ActionNode(Dash_Charge),
+                            // 대쉬
+                            new ActionNode(Dashing),
+                            // 대쉬 완료
+                            new ActionNode(Dash_End),
+
                         }
                     ),
-                    new SequenceNode
-                    (
-                        new List<INode>()
-                        {
-                            new ActionNode(Check_Attack),
-                            new ActionNode(Dash),
-                        }
-                    ),
-                    new SequenceNode
-                    (
-                        new List<INode>()
-                        {
-                            new ActionNode(Check_Idle),
-                            new ActionNode(Idle),
-                        }
-                    )
+                    new ActionNode(TankMove_Check_AttackRange)
 
                     }
                 );
         }
+        #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 3. BT Node
@@ -180,68 +214,31 @@ namespace HSM.Game
 
         #region [BT_Node] Monster_Move
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        INode.eNodeState TankMove()
+        INode.eNodeState TankMove_Check_AttackRange()
         {
-            SetStateNAnimation(eTankState.RUN);
-            // Ver_2 NavMesh
-            Nav_Agent.isStopped = false;
-            Nav_Agent.speed = Mon_Status.Move_Speed;
-            Nav_Agent.SetDestination(PlayerPos.position);
-            transform.LookAt(PlayerPos);
-
-            return INode.eNodeState.Running;
-        }
-        #endregion
-
-        #region [BT_Node] Idle
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
-        INode.eNodeState Idle()
-        {
-            SetStateNAnimation(eTankState.IDLE);
-            IdleTime += Time.deltaTime;
-            // Ver_2 NavMesh
-            Nav_Agent.isStopped = true;
-            if(IdleTime > 2)
+            if (NowAttack == true)
+                return INode.eNodeState.Failure;
+            else
             {
-                IdleTime = 0;
-                AttackEnd = false;
-                return INode.eNodeState.Success;
+                SetStateNAnimation(eTankState.RUN);
+                // Ver_2 NavMesh
+                Nav_Agent.isStopped = false;
+                Nav_Agent.speed = Mon_Status.Move_Speed;
+                Nav_Agent.SetDestination(PlayerPos.position);
+                transform.LookAt(PlayerPos);
+
+                Vector3 dirvec = transform.position - PlayerPos.position;
+                float length = Mathf.Sqrt(Mathf.Pow(dirvec.x, 2) + Mathf.Pow(dirvec.y, 2) + Mathf.Pow(dirvec.z, 2));
+
+                if (Attack_Range > length && NowAttack == false && AttackAble == false)
+                {
+                    // 사거리 안에 들어오면 공격
+                    NowAttack = true;
+                    return INode.eNodeState.Success;
+                }
+
+                return INode.eNodeState.Running;
             }
-
-            return INode.eNodeState.Running;
-        }
-        #endregion
-
-        #region [BT_Node] Check_AttackState
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
-        INode.eNodeState Check_Run()
-        {
-            if (NowAttack == false && AttackEnd == false)
-                return INode.eNodeState.Success;
-            else
-                return INode.eNodeState.Failure;
-        }
-        #endregion
-
-        #region [BT_Node] Check_AttackState
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
-        INode.eNodeState Check_Attack()
-        {
-            if (NowAttack == true && AttackEnd == false)
-                return INode.eNodeState.Success;
-            else
-                return INode.eNodeState.Failure;
-        }
-        #endregion
-
-        #region [BT_Node] Check_AttackState
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
-        INode.eNodeState Check_Idle()
-        {
-            if (NowAttack == false && AttackEnd == true)
-                return INode.eNodeState.Success;
-            else
-                return INode.eNodeState.Failure;
         }
         #endregion
 
@@ -260,38 +257,126 @@ namespace HSM.Game
             }
             else
             {
-                return INode.eNodeState.Success;
+                return INode.eNodeState.Failure;
             }
         }
         #endregion
 
-        #region [BT_Node] Dash
+        #region [BT_Node] Dash charge
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        INode.eNodeState Dash()
+        INode.eNodeState Dash_Charge()
         {
-            if (DashInTime == 0)
-                SetStateNAnimation(eTankState.DASH_CHARGE);
-
-            DashInTime += Time.deltaTime;
-
-            if (DashInTime > 4)
+            if (NowAttack == true)
             {
-                SetStateNAnimation(eTankState.DASH_END);
-                NowAttack = false;
-                AttackEnd = true;
-                DashInTime = 0;
-                return INode.eNodeState.Success;
+                // 대쉬 시작
+                if (DashPTSetting.ChargeStart == false)
+                {
+                    SetStateNAnimation(eTankState.DASH_CHARGE);
+                    Tank_Setting.Box_Effect.gameObject.SetActive(true);
+                    Nav_Agent.isStopped = true;
+                    DashPTSetting.ChargeStart = true;
+                }
+
+                if (DashPTSetting.DashTimer > DashPTSetting.DashChargeTime)
+                {
+                    return INode.eNodeState.Success;
+                }
+                else
+                {
+                    DashPTSetting.DashTimer += Time.deltaTime;
+                    Tank_Setting.Box_Effect.size = new Vector3(15, 1, DashPTSetting.DashTimer * DashPTSetting.AttackRange);
+                    Tank_Setting.Box_Effect.pivot = new Vector3(0, 0, DashPTSetting.DashTimer * DashPTSetting.AttackRange / 2);
+                    return INode.eNodeState.Running;
+                }
             }
-            else if (DashInTime > 2)
+            return INode.eNodeState.Failure;
+        }
+        #endregion
+
+        #region [BT_Node] Dashing
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Dashing()
+        {
+            // 대쉬 시작
+            if (DashPTSetting.DashStart == false)
             {
                 SetStateNAnimation(eTankState.DASH_START);
+                Tank_Setting.Box_Effect.gameObject.SetActive(false);
+                DashPTSetting.DashStart = true;
             }
 
-            Nav_Agent.isStopped = true;
-            return INode.eNodeState.Running;
+            if (DashPTSetting.DashTimer > DashPTSetting.DashIngTime)
+            {
+                return INode.eNodeState.Success;
+            }
+            else
+            {
+                DashPTSetting.DashTimer += Time.deltaTime;
+                transform.position += Time.deltaTime * transform.forward * DashPTSetting.AttackRange;
+                return INode.eNodeState.Running;
+            }
+
         }
         #endregion
 
+        #region [BT_Node] Dash_End
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Dash_End()
+        {
+            // 대쉬 시작
+            if (DashPTSetting.Dash_End == false)
+            {
+                SetStateNAnimation(eTankState.IDLE);
+                Nav_Agent.isStopped = true;
+                DashPTSetting.Dash_End = true;
+            }
+
+            if (DashPTSetting.DashTimer > DashPTSetting.IdleTime)
+            {
+                DashPTSetting.Dash_End = false;
+                DashPTSetting.ChargeStart = false;
+                DashPTSetting.DashStart = false;
+                NowAttack = false;
+                DashPTSetting.DashTimer = 0;
+
+                StartCoroutine(AttackAbleTimeCheck());
+                return INode.eNodeState.Failure;
+            }
+            else
+            {
+                DashPTSetting.DashTimer += Time.deltaTime;
+                return INode.eNodeState.Running;
+            }
+
+        }
+        #endregion
+
+        #region [BT_Node] Idle
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Idle()
+        {
+
+        }
+        #endregion
+
+        #region
+        IEnumerator AttackAbleTimeCheck()
+        {
+            AttackAble = true;
+            while (true)
+            {
+                AttackCoolTime += Time.deltaTime;
+
+                if(AttackCoolTime > 2)
+                {
+                    AttackCoolTime = 0;
+                    AttackAble = false;
+                    break;
+                }
+            }
+            yield return null;
+        }
+        #endregion
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 97. Collider
         //
