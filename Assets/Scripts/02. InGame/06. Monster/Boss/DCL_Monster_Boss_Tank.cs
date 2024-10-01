@@ -26,7 +26,7 @@ namespace HSM.Game
 
         #region [Enum] Animation State
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public enum eTankState { IDLE, RUN, ATTACK, DASH_CHARGE, DASH_START, DASH_END }
+        public enum eTankState { IDLE, RUN, ATTACK, DASH_CHARGE, DASH_START, DASH_END, QUAKE_CHARGE, QUAKE_START, QUAKE_END }
         public enum eTankPattern { DASH, FALLDOWN, EARTHQUAKE }
         #endregion
 
@@ -69,7 +69,7 @@ namespace HSM.Game
         {
             public float QuakeTimer;        // 패턴진행시간
             public float QuakeChargeTime;   // 차지 시간
-            public float QuakeTime;       // 대쉬 진행 시간
+            public float QuakeTime;         // 대쉬 진행 시간
             public float AttackRange;       // 공격 범위
             public float IdleTime;          // 공격 후 대기시간
             public bool QuakeChargeStart;
@@ -109,6 +109,7 @@ namespace HSM.Game
         public bool AttackEnd;
         public float AttackCoolTime;
         public bool AttackAble;
+        public int RandomPT;
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         #endregion
 
@@ -161,6 +162,12 @@ namespace HSM.Game
             DashPTSetting.DashIngTime = 4;
             DashPTSetting.IdleTime = 6;
             DashPTSetting.AttackRange = 10;
+
+            QuakePTSetting.QuakeTimer = 0;
+            QuakePTSetting.QuakeChargeTime = 3;
+            QuakePTSetting.QuakeTime = 4;
+            QuakePTSetting.IdleTime = 6;
+            QuakePTSetting.AttackRange = 13;
         }
         #endregion
 
@@ -191,12 +198,29 @@ namespace HSM.Game
                     (
                         new List<INode>()
                         {
+                            // 랜덤선택
+                            new ActionNode(RandomPattern_Dash),
                             // 대쉬 준비
                             new ActionNode(Dash_Charge),
                             // 대쉬
                             new ActionNode(Dashing),
                             // 대쉬 완료
                             new ActionNode(Dash_End),
+
+                        }
+                    ),
+                    new SequenceNode
+                    (
+                        new List<INode>()
+                        {
+                            // 랜덤선택
+                            new ActionNode(RandomPattern_Quake),
+                            // 지진패턴 준비
+                            new ActionNode(Quake_Charge),
+                            // 지진 공격
+                            new ActionNode(Quake),
+                            // 완료
+                            new ActionNode(Quake_End),
 
                         }
                     ),
@@ -234,6 +258,7 @@ namespace HSM.Game
                 {
                     // 사거리 안에 들어오면 공격
                     NowAttack = true;
+                    RandomPatternMaker();
                     return INode.eNodeState.Success;
                 }
 
@@ -351,13 +376,124 @@ namespace HSM.Game
         }
         #endregion
 
-        #region [BT_Node] Idle
+        #region [BT_Node] Dash charge
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        INode.eNodeState Idle()
+        INode.eNodeState Quake_Charge()
         {
-            return INode.eNodeState.Failure; 
+            if (NowAttack == true)
+            {
+                // 대쉬 시작
+                if (QuakePTSetting.QuakeChargeStart == false)
+                {
+                    SetStateNAnimation(eTankState.QUAKE_CHARGE);
+                    Tank_Setting.Circle_Effect.gameObject.SetActive(true);
+                    Nav_Agent.isStopped = true;
+                    QuakePTSetting.QuakeChargeStart = true;
+                }
+
+                if (QuakePTSetting.QuakeTimer > QuakePTSetting.QuakeChargeTime)
+                {
+                    return INode.eNodeState.Success;
+                }
+                else
+                {
+                    QuakePTSetting.QuakeTimer += Time.deltaTime;
+                    Tank_Setting.Circle_Effect.size = new Vector3(QuakePTSetting.QuakeTimer * QuakePTSetting.AttackRange, (float)((double)QuakePTSetting.QuakeTimer * QuakePTSetting.AttackRange * 0.8), 1);
+                    return INode.eNodeState.Running;
+                }
+            }
+            return INode.eNodeState.Failure;
         }
         #endregion
+
+        #region [BT_Node] Dashing
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Quake()
+        {
+            // 대쉬 시작
+            if (QuakePTSetting.QuakeStart == false)
+            {
+                SetStateNAnimation(eTankState.QUAKE_START);
+                Tank_Setting.Circle_Effect.gameObject.SetActive(false);
+                QuakePTSetting.QuakeStart = true;
+            }
+
+            if (QuakePTSetting.QuakeTimer > QuakePTSetting.QuakeTime)
+            {
+                return INode.eNodeState.Success;
+            }
+            else
+            {
+                QuakePTSetting.QuakeTimer += Time.deltaTime;
+                return INode.eNodeState.Running;
+            }
+
+        }
+        #endregion
+
+        #region [BT_Node] Dash_End
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Quake_End()
+        {
+            // 대쉬 시작
+            if (QuakePTSetting.Quake_End == false)
+            {
+                SetStateNAnimation(eTankState.IDLE);
+                Nav_Agent.isStopped = true;
+                QuakePTSetting.Quake_End = true;
+            }
+
+            if (QuakePTSetting.QuakeTimer > QuakePTSetting.IdleTime)
+            {
+                QuakePTSetting.QuakeChargeStart = false;
+                QuakePTSetting.QuakeStart = false;
+                QuakePTSetting.Quake_End = false;
+                NowAttack = false;
+                QuakePTSetting.QuakeTimer = 0;
+
+                StartCoroutine(AttackAbleTimeCheck());
+                return INode.eNodeState.Failure;
+            }
+            else
+            {
+                QuakePTSetting.QuakeTimer += Time.deltaTime;
+                return INode.eNodeState.Running;
+            }
+
+        }
+        #endregion
+
+        #region [BT_Node] Idle
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState RandomPattern_Dash()
+        {
+            if (RandomPT == 0)
+                return INode.eNodeState.Failure;
+            else
+                return INode.eNodeState.Success;
+        }
+        #endregion
+
+        #region [BT_Node] Idle
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState RandomPattern_Quake()
+        {
+            if (RandomPT == 1)
+                return INode.eNodeState.Failure;
+            else
+                return INode.eNodeState.Success;
+        }
+        #endregion
+
+        #region [BT_Node] Idle
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public int RandomPatternMaker()
+        {
+            RandomPT = UnityEngine.Random.Range(0, 2);
+            return RandomPT;
+        }
+        #endregion
+
 
         #region
         IEnumerator AttackAbleTimeCheck()
@@ -367,7 +503,7 @@ namespace HSM.Game
             {
                 AttackCoolTime += Time.deltaTime;
 
-                if(AttackCoolTime > 2)
+                if (AttackCoolTime > 2)
                 {
                     AttackCoolTime = 0;
                     AttackAble = false;
@@ -376,6 +512,9 @@ namespace HSM.Game
             }
             yield return null;
         }
+        #endregion
+
+        #region [Random Maker]
         #endregion
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 97. Collider

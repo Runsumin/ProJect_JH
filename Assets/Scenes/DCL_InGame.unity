@@ -84644,7 +84644,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4388290449184603521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.3, y: 0, z: -30.9}
+  m_LocalPosition: {x: -14.62, y: 0, z: -29.28}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -84751,13 +84751,32 @@ MonoBehaviour:
   Tank_Setting:
     Box_Effect: {fileID: 1075107313}
     Circle_Effect: {fileID: 1229980946}
+    AttactCoolTime: 0
+  DashPTSetting:
+    DashTimer: 0
+    DashChargeTime: 0
+    DashIngTime: 0
+    AttackRange: 0
+    IdleTime: 0
+    ChargeStart: 0
+    DashStart: 0
+    Dash_End: 0
+  QuakePTSetting:
+    QuakeTimer: 0
+    QuakeChargeTime: 0
+    QuakeTime: 0
+    AttackRange: 0
+    IdleTime: 0
+    QuakeChargeStart: 0
+    QuakeStart: 0
+    Quake_End: 0
   Tank_State: 0
   Attack_Range: 0
   TankPattern: 0
   NowAttack: 0
   AttackEnd: 0
-  DashInTime: 0
-  IdleTime: 0
+  AttackCoolTime: 0
+  AttackAble: 0
 --- !u!195 &4388290449184603524
 NavMeshAgent:
   m_ObjectHideFlags: 0
