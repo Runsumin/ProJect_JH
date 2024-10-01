@@ -26,7 +26,7 @@ namespace HSM.Game
 
         #region [Enum] Animation State
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public enum eTankState { IDLE, RUN, ATTACK, DASH_CHARGE, DASH_START, DASH_END, QUAKE_CHARGE, QUAKE_START, QUAKE_END }
+        public enum eTankState { IDLE, RUN, ATTACK, DASH_CHARGE, DASH_START, DASH_END, QUAKE_CHARGE, QUAKE_START, QUAKE_END, JUMP_START, JUMP_END }
         public enum eTankPattern { DASH, FALLDOWN, EARTHQUAKE }
         #endregion
 
@@ -43,6 +43,7 @@ namespace HSM.Game
         {
             public DecalProjector Box_Effect;
             public DecalProjector Circle_Effect;
+            public GameObject Model;
             public float AttactCoolTime;
         }
         public Boss_Tank_Setting Tank_Setting = new Boss_Tank_Setting();
@@ -63,7 +64,7 @@ namespace HSM.Game
             public bool Dash_End;
         }
         public DashPatternSetting DashPTSetting = new DashPatternSetting();
-
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         [Serializable]
         public class QuakePatternSetting
         {
@@ -78,10 +79,20 @@ namespace HSM.Game
         }
         public QuakePatternSetting QuakePTSetting = new QuakePatternSetting();
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public class IdleSetting
+        [Serializable]
+        public class JumpPatternSetting
         {
-            public float IdleTimer;         // 패턴진행시간
+            public float JumpTimer;         // 패턴진행시간
+            public float JumpStartTime;     // 점프 시간
+            public float JumpingTime;           // 패턴 진행 시간
+            public float JumpEndTime;       // 점프 진행 시간
+            public float AttackRange;       // 공격 범위
+            public float IdleTime;          // 공격 후 대기시간
+            public bool JumpStart;
+            public bool Jumping;
+            public bool Jump_End;
         }
+        public JumpPatternSetting JumpPTSetting = new JumpPatternSetting();
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -162,12 +173,19 @@ namespace HSM.Game
             DashPTSetting.DashIngTime = 4;
             DashPTSetting.IdleTime = 6;
             DashPTSetting.AttackRange = 10;
-
+            // Quake Setting
             QuakePTSetting.QuakeTimer = 0;
             QuakePTSetting.QuakeChargeTime = 3;
             QuakePTSetting.QuakeTime = 4;
             QuakePTSetting.IdleTime = 6;
-            QuakePTSetting.AttackRange = 13;
+            QuakePTSetting.AttackRange = 10;
+            // Jump Setting
+            JumpPTSetting.JumpTimer = 0;
+            JumpPTSetting.JumpStartTime = 1;
+            JumpPTSetting.JumpingTime = 3;
+            JumpPTSetting.JumpEndTime = 5;
+            JumpPTSetting.IdleTime = 6;
+            JumpPTSetting.AttackRange = 10;
         }
         #endregion
 
@@ -209,6 +227,7 @@ namespace HSM.Game
 
                         }
                     ),
+                    // 지진공격
                     new SequenceNode
                     (
                         new List<INode>()
@@ -221,6 +240,22 @@ namespace HSM.Game
                             new ActionNode(Quake),
                             // 완료
                             new ActionNode(Quake_End),
+
+                        }
+                    ),
+                    // 점프공격
+                    new SequenceNode
+                    (
+                        new List<INode>()
+                        {
+                            // 랜덤선택
+                            new ActionNode(RandomPattern_Jump),
+                            // 점프 시작
+                            new ActionNode(Jump_Start),
+                            // 점프 공격
+                            new ActionNode(Jumping),
+                            // 점프 완료
+                            new ActionNode(Jump_End),
 
                         }
                     ),
@@ -376,7 +411,7 @@ namespace HSM.Game
         }
         #endregion
 
-        #region [BT_Node] Dash charge
+        #region [BT_Node] Quake Charge
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         INode.eNodeState Quake_Charge()
         {
@@ -406,7 +441,7 @@ namespace HSM.Game
         }
         #endregion
 
-        #region [BT_Node] Dashing
+        #region [BT_Node] Quake
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         INode.eNodeState Quake()
         {
@@ -431,7 +466,7 @@ namespace HSM.Game
         }
         #endregion
 
-        #region [BT_Node] Dash_End
+        #region [BT_Node] Quake End
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         INode.eNodeState Quake_End()
         {
@@ -463,39 +498,142 @@ namespace HSM.Game
         }
         #endregion
 
-        #region [BT_Node] Idle
+        #region [BT_Node] Jump Start
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Jump_Start()
+        {
+            if (NowAttack == true)
+            {
+                // 대쉬 시작
+                if (JumpPTSetting.JumpStart == false)
+                {
+                    SetStateNAnimation(eTankState.JUMP_START);
+                    Nav_Agent.isStopped = true;
+                    JumpPTSetting.JumpStart = true;
+                }
+
+                if (JumpPTSetting.JumpTimer > JumpPTSetting.JumpStartTime)
+                {
+                    return INode.eNodeState.Success;
+                }
+                else
+                {
+                    JumpPTSetting.JumpTimer += Time.deltaTime;
+                    return INode.eNodeState.Running;
+                }
+            }
+            return INode.eNodeState.Failure;
+        }
+        #endregion
+
+        #region [BT_Node] Jumping
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Jumping()
+        {
+            // 대쉬 시작
+            if (JumpPTSetting.Jumping == false)
+            {
+                //SetStateNAnimation(eTankState.JUMP_START);
+                Tank_Setting.Circle_Effect.gameObject.SetActive(true);
+                Tank_Setting.Model.SetActive(false);
+                JumpPTSetting.Jumping = true;
+                transform.position = PlayerPos.position;
+            }
+
+            if (JumpPTSetting.JumpTimer > JumpPTSetting.JumpingTime)
+            {
+                return INode.eNodeState.Success;
+            }
+            else
+            {
+                JumpPTSetting.JumpTimer += Time.deltaTime;
+                Tank_Setting.Circle_Effect.size = new Vector3((JumpPTSetting.JumpTimer - JumpPTSetting.JumpStartTime) * JumpPTSetting.AttackRange, 
+                    (float)((double)(JumpPTSetting.JumpTimer - JumpPTSetting.JumpStartTime) * JumpPTSetting.AttackRange * 0.8), 1);
+                return INode.eNodeState.Running;
+            }
+        }
+        #endregion
+
+        #region [BT_Node] Jump End
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState Jump_End()
+        {
+            // 대쉬 시작
+            if (JumpPTSetting.Jump_End == false)
+            {
+                SetStateNAnimation(eTankState.JUMP_END);
+                Tank_Setting.Model.SetActive(true);
+                Tank_Setting.Circle_Effect.gameObject.SetActive(false);
+                Nav_Agent.isStopped = true;
+                JumpPTSetting.Jump_End = true;
+            }
+
+            if (JumpPTSetting.JumpTimer > JumpPTSetting.JumpEndTime)
+            {
+                JumpPTSetting.JumpStart = false;
+                JumpPTSetting.Jump_End = false;
+                JumpPTSetting.Jumping = false;
+                NowAttack = false;
+                JumpPTSetting.JumpTimer = 0;
+
+                SetStateNAnimation(eTankState.IDLE);
+                StartCoroutine(AttackAbleTimeCheck());
+                return INode.eNodeState.Failure;
+            }
+            else
+            {
+                JumpPTSetting.JumpTimer += Time.deltaTime;
+                return INode.eNodeState.Running;
+            }
+
+        }
+        #endregion
+
+        #region [BT_Node] RandomPattern_Maker
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         INode.eNodeState RandomPattern_Dash()
         {
             if (RandomPT == 0)
-                return INode.eNodeState.Failure;
-            else
                 return INode.eNodeState.Success;
+            else
+                return INode.eNodeState.Failure;
         }
         #endregion
 
-        #region [BT_Node] Idle
+        #region [BT_Node] RandomPattern_Maker
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         INode.eNodeState RandomPattern_Quake()
         {
             if (RandomPT == 1)
-                return INode.eNodeState.Failure;
-            else
                 return INode.eNodeState.Success;
+            else
+                return INode.eNodeState.Failure;
         }
         #endregion
 
-        #region [BT_Node] Idle
+        #region [BT_Node] RandomPattern_Maker
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        INode.eNodeState RandomPattern_Jump()
+        {
+            if (RandomPT == 2)
+                return INode.eNodeState.Success;
+            else
+                return INode.eNodeState.Failure;
+        }
+        #endregion
+
+        #region [BT_Node] RandomPattern_Maker
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public int RandomPatternMaker()
         {
-            RandomPT = UnityEngine.Random.Range(0, 2);
+            //RandomPT = UnityEngine.Random.Range(0, 3);
+            RandomPT = 2;
             return RandomPT;
         }
         #endregion
 
-
-        #region
+        #region [AttackAbleTimeCheck]
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         IEnumerator AttackAbleTimeCheck()
         {
             AttackAble = true;

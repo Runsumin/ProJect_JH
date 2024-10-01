@@ -13016,6 +13016,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404738472}
   m_Mesh: {fileID: 4300000, guid: 0c24df8b2eb6f7140a0cfe365a357279, type: 3}
+--- !u!1 &405155991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 405155992}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &405155992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405155991}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2908139959473775972}
+  - {fileID: 8575021902102975815}
+  - {fileID: 987849651831041199}
+  m_Father: {fileID: 4012010475181270843}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &405383738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84150,13 +84184,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622912638382235691}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7841783483657120153}
-  m_Father: {fileID: 4012010475181270843}
+  m_Father: {fileID: 405155992}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1022965501194081175
@@ -84500,12 +84534,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4940275150047394526}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4012010475181270843}
+  m_Father: {fileID: 405155992}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3034958699936361273
@@ -84648,9 +84682,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2908139959473775972}
-  - {fileID: 8575021902102975815}
-  - {fileID: 987849651831041199}
+  - {fileID: 405155992}
   - {fileID: 1075107312}
   - {fileID: 1229980945}
   m_Father: {fileID: 0}
@@ -84751,6 +84783,7 @@ MonoBehaviour:
   Tank_Setting:
     Box_Effect: {fileID: 1075107313}
     Circle_Effect: {fileID: 1229980946}
+    Model: {fileID: 405155991}
     AttactCoolTime: 0
   DashPTSetting:
     DashTimer: 0
@@ -84770,6 +84803,16 @@ MonoBehaviour:
     QuakeChargeStart: 0
     QuakeStart: 0
     Quake_End: 0
+  JumpPTSetting:
+    JumpTimer: 0
+    JumpStartTime: 0
+    JumpingTime: 0
+    JumpEndTime: 0
+    AttackRange: 0
+    IdleTime: 0
+    JumpStart: 0
+    Jumping: 0
+    Jump_End: 0
   Tank_State: 0
   Attack_Range: 0
   TankPattern: 0
@@ -84777,6 +84820,7 @@ MonoBehaviour:
   AttackEnd: 0
   AttackCoolTime: 0
   AttackAble: 0
+  RandomPT: 0
 --- !u!195 &4388290449184603524
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -85940,12 +85984,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955222997507590386}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4012010475181270843}
+  m_Father: {fileID: 405155992}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8578466212301856895
