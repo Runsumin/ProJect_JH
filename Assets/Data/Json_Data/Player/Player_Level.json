@@ -2,75 +2,75 @@
     "datas": [
         {
             "Level": 0,
-            "MaxEXP": 50.0
+            "MaxEXP": 30.0
         },
         {
             "Level": 1,
-            "MaxEXP": 100.0
+            "MaxEXP": 40.0
         },
         {
             "Level": 2,
-            "MaxEXP": 150.0
+            "MaxEXP": 50.0
         },
         {
             "Level": 3,
-            "MaxEXP": 20.0
+            "MaxEXP": 60.0
         },
         {
             "Level": 4,
-            "MaxEXP": 250.0
+            "MaxEXP": 70.0
         },
         {
             "Level": 5,
-            "MaxEXP": 300.0
+            "MaxEXP": 80.0
         },
         {
             "Level": 6,
-            "MaxEXP": 350.0
+            "MaxEXP": 90.0
         },
         {
             "Level": 7,
-            "MaxEXP": 400.0
+            "MaxEXP": 100.0
         },
         {
             "Level": 8,
-            "MaxEXP": 10.0
+            "MaxEXP": 110.0
         },
         {
             "Level": 9,
-            "MaxEXP": 1000.0
+            "MaxEXP": 120.0
         },
         {
             "Level": 10,
-            "MaxEXP": 1100.0
+            "MaxEXP": 130.0
         },
         {
             "Level": 11,
-            "MaxEXP": 1200.0
+            "MaxEXP": 140.0
         },
         {
             "Level": 12,
-            "MaxEXP": 1300.0
+            "MaxEXP": 150.0
         },
         {
             "Level": 13,
-            "MaxEXP": 1400.0
+            "MaxEXP": 160.0
         },
         {
             "Level": 14,
-            "MaxEXP": 1500.0
+            "MaxEXP": 170.0
         },
         {
             "Level": 15,
-            "MaxEXP": 1600.0
+            "MaxEXP": 180.0
         },
         {
             "Level": 16,
-            "MaxEXP": 1700.0
+            "MaxEXP": 190.0
         },
         {
             "Level": 17,
-            "MaxEXP": 1800.0
+            "MaxEXP": 200.0
         },
         {
             "Level": 18,

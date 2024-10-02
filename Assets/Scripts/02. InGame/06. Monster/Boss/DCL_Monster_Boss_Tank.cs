@@ -626,8 +626,8 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public int RandomPatternMaker()
         {
-            //RandomPT = UnityEngine.Random.Range(0, 3);
-            RandomPT = 2;
+            RandomPT = UnityEngine.Random.Range(0, 3);
+            //RandomPT = 2;
             return RandomPT;
         }
         #endregion
