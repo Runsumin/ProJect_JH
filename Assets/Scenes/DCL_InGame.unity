@@ -8023,6 +8023,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 237624838}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &239768224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239768225}
+  m_Layer: 0
+  m_Name: MiniGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &239768225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239768224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &241193696
 GameObject:
   m_ObjectHideFlags: 0
@@ -20690,7 +20721,6 @@ MonoBehaviour:
     MonsterCount: 0
     MonsterList:
     - {fileID: 63868574799903149, guid: 9ca1e78c3fcaac343a85787e016be5e4, type: 3}
-    - {fileID: 6580638884809741832, guid: df2664db4206b384296e91108494d321, type: 3}
     - {fileID: 2713309492032581148, guid: a4d622c76ddd1694ba003db6a85a2d09, type: 3}
     - {fileID: 8645197594169398750, guid: 9d9512b27e82389479a44ebb19ba30a6, type: 3}
     GeneratePointArr:
@@ -83360,7 +83390,7 @@ PrefabInstance:
     - target: {fileID: 1792911210406605805, guid: 2ddc922de494ee74493fa1aad3cb215a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4186064611814400124, guid: 2ddc922de494ee74493fa1aad3cb215a,
         type: 3}
