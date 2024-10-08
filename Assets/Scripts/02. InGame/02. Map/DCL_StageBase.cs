@@ -31,9 +31,9 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         #region [Enum]
         public enum eStageDifficulty { EASY, NORMAL, HARD, HELL }   // 스테이지 난이도
-        public enum eEventType { BIGWAVE, ELITE, MINIGAME, BOSS }   // 분기점(이벤트 종류)
-        public enum eSubQuestType { MARATHON, CLEANING }            // 서브퀘스트 종류
-        public enum eWaveType { CountUp, StatUp, TypeUp }           // 웨이브 종류
+        public enum eEventType { BIGWAVE, ELITE, MINIGAME, BOSS, NONE }   // 분기점(이벤트 종류)
+        public enum eSubQuestType { PRISION, MARATHON, CLEANING, NONE }            // 서브퀘스트 종류
+        public enum eWaveType { CountUp, StatUp, TypeUp, NONE }           // 웨이브 종류
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -87,6 +87,8 @@ namespace HSM.Game
         public class NMonsterWave
         {
             public eWaveType WaveType;
+            public eEventType EventType;
+            public eSubQuestType SubQuestType;
             public int NextWaveTime;
             public int MonsterLevel;
             public int MonsterMinCount;

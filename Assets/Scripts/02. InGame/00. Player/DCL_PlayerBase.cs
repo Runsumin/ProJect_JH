@@ -250,6 +250,16 @@ namespace HSM.Game
         }
         #endregion
 
+
+        #region [Status_Change] Add_Coin
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Add_Coin(int amount)
+        {
+            Setting.Pl_Status_Permanent.DevilCoinCount += amount;
+        }
+        #endregion
+
+
         #region [Status_Change] LevelUpCallBack
         public void LevelUpSetCallback(LevelUpCallBack cal)
         {
