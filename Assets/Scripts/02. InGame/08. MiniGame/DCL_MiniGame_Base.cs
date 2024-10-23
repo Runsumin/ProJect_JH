@@ -41,6 +41,7 @@ namespace HSM.Game
             public float GameIngTime;
             public float EventEndTime;          
             public string Explanation;
+            public Vector3 Position;
         }
         public NSetting Setting = new NSetting();
         #endregion

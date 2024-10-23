@@ -68,7 +68,8 @@ namespace HSM.Game
             Setting.EventStartTime = time;
             Setting.GameIngTime = GameTime;
             Setting.EventEndTime = Setting.EventStartTime + 30;
-            Setting.Explanation = "제한시간 동안 감옥 안에서 살아남으세요!";     
+            Setting.Explanation = "제한시간 동안 감옥 안에서 살아남으세요!";
+            Setting.Position = Vector3.zero;
         }
         #endregion
 
