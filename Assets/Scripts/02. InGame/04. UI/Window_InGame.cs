@@ -92,6 +92,19 @@ namespace HSM.Game
         }
         public NDebug InGame_Debug = new NDebug();
         #endregion
+
+        #region [Nested] MiniGame
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class NMiniGame : NPopUpBase
+        {
+            public TextMeshProUGUI ExplainText;
+            public TextMeshProUGUI Timer;
+            public TextMeshProUGUI LEVEL;
+        }
+        public NMiniGame InGame_MiniGAme = new NMiniGame();
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
