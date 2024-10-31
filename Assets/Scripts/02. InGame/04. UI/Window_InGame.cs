@@ -100,7 +100,8 @@ namespace HSM.Game
         {
             public TextMeshProUGUI ExplainText;
             public TextMeshProUGUI Timer;
-            public TextMeshProUGUI LEVEL;
+            public GameObject Result;
+
         }
         public NMiniGame InGame_MiniGAme = new NMiniGame();
         #endregion
@@ -340,6 +341,14 @@ namespace HSM.Game
                 InGame_Choice.ExPlanationTextArr[i].text = choice.ChoiceData_val[i].Explain;
                 InGame_Choice.ChoiceIconArr[i].sprite = choice.ImageArr[data[i]];
             }
+        }
+        #endregion
+
+        #region [MiniGame]
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Show_MiniGame()
+        {
+
         }
         #endregion
 

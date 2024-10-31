@@ -107,6 +107,17 @@ namespace HSM.Game
         }
         #endregion
 
+        #region [Nestedclass] MiniGame
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class NMiniGameSetting
+        {
+            public GameObject Root;
+            public GameObject PrisionPrefab;
+        }
+        public NMiniGameSetting MiniGameSet = new NMiniGameSetting();
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
@@ -121,11 +132,15 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [CallBack]
+        #region [CallBack_WaveChange]
         public delegate void WaveChangeCallBack();
         private WaveChangeCallBack WC_CallBack = null;
         #endregion
 
+        #region [CallBack_MiniGame]
+        public delegate void Create_MiniGame_CallBack();
+        private Create_MiniGame_CallBack CM_CallBack = null;
+        #endregion
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Property
         //
@@ -261,6 +276,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [GameTimer] WaveTimeSetting
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void WaveTimeSetting(float time)
         {
             if ((int)time == Setting.WaveArr[MonsterWaveIndex].NextWaveTime)
@@ -283,6 +299,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [RandomData] Random WaveType
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         public eWaveType Random_WaveType(int rof)
         {
             eWaveType data = eWaveType.CountUp;
@@ -304,6 +321,22 @@ namespace HSM.Game
             return data;
         }
         #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 3. MiniGame
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [MiniGame] MiniGame Setting
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Create_MiniGame()
+        {
+            GameObject minigame = Instantiate(MiniGameSet.PrisionPrefab, MiniGameSet.Root.transform);
+            minigame.GetComponent<DCL_MiniGame_Prison>().Initialize(Setting.StageTime.StageStreamNowTime, 30);
+
+        }
+        #endregion
+
     }
 
 }

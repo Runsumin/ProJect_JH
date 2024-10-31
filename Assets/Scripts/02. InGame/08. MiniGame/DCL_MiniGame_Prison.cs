@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace HSM.Game
 {
@@ -21,10 +23,10 @@ namespace HSM.Game
 
         #region [NestedClass] Setting
         //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
         public class NMiniGame_PrisionSetting
         {
-            public float Prision_Range;
-            public GameObject Range_Model;
+            public DecalProjector Decal_RangeEffect;
         }
         public NMiniGame_PrisionSetting NMiniGame_PrisionSet = new NMiniGame_PrisionSetting();
         #endregion
@@ -67,7 +69,7 @@ namespace HSM.Game
             Setting.GameType = MiniGameType.Prison;
             Setting.EventStartTime = time;
             Setting.GameIngTime = GameTime;
-            Setting.EventEndTime = Setting.EventStartTime + 30;
+            Setting.EventEndTime = Setting.EventStartTime + Setting.GameIngTime;
             Setting.Explanation = "제한시간 동안 감옥 안에서 살아남으세요!";
             Setting.Position = Vector3.zero;
         }
@@ -91,6 +93,19 @@ namespace HSM.Game
         public override void Update()
         {
 
+        }
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 2. Decal
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Decal] ChangeDecalSize
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void ChangeDecalSize(float w, float h)
+        {
+            NMiniGame_PrisionSet.Decal_RangeEffect.size = new Vector3(w, h, 1);
         }
         #endregion
 
