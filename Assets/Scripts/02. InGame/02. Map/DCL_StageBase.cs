@@ -187,9 +187,6 @@ namespace HSM.Game
                 Setting.NowLevelIndex = SceneManager.Instance.NowLevelIndex;
                 Setting.NowStageIndex = SceneManager.Instance.NowStageIndex;
             }
-
-            //Setting.NowMonsterWave.WaveTime = 0;
-            //Setting.NowMonsterWave.WaveType = eWaveType.CountUp;
             SetStageData();
         }
         #endregion
@@ -270,8 +267,6 @@ namespace HSM.Game
         {
             Setting.StageTime.StageStreamNowTime += Time.deltaTime;
             WaveTimeSetting(Setting.StageTime.StageStreamNowTime);
-
-           
         }
         #endregion
 
