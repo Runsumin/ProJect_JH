@@ -1569,11 +1569,12 @@ MonoBehaviour:
     HP: {fileID: 460346892644610851}
     EXP: {fileID: 4481144874067150139}
     LEVEL: {fileID: 4320994743426332783}
-  InGame_MiniGAme:
+  InGame_MiniGame:
     Root: {fileID: 8133451955400318814}
     ExplainText: {fileID: 5053148227934704041}
     Timer: {fileID: 4530836931755099222}
-    Result: {fileID: 6531566962315487764}
+    Result: {fileID: 6724025501712226401}
+    MiniGameStart: 0
 --- !u!1 &3087846117326168463
 GameObject:
   m_ObjectHideFlags: 0

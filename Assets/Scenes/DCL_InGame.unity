@@ -6308,7 +6308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &196544031
 Transform:
   m_ObjectHideFlags: 0
@@ -43052,6 +43052,7 @@ MonoBehaviour:
     Root: {fileID: 239768224}
     PrisionPrefab: {fileID: 4127730274998497230, guid: 072d3690f429d7d4185e033bc4b164b6,
       type: 3}
+    nowData: {fileID: 0}
 --- !u!1001 &1511951370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44346,79 +44347,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1553517165}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1561251429
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4127730274998497230, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_Name
-      value: Prision
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5504695528755309663, guid: 072d3690f429d7d4185e033bc4b164b6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 072d3690f429d7d4185e033bc4b164b6, type: 3}
 --- !u!1001 &1561700354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47151,7 +47079,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632211607}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25, y: 0, z: 25}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47193,7 +47121,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 8414e5dbbd0a2d4428d4133dbfc611c2, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 244e6d182db26be448a21de58bc57ed6, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1633967693
 GameObject:
@@ -83304,6 +83232,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1507208062}
     m_Modifications:
+    - target: {fileID: 4158784309942781783, guid: 2fdc94f627c43544683c5dfb934c6978,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158784309942781783, guid: 2fdc94f627c43544683c5dfb934c6978,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5710774697962156763, guid: 2fdc94f627c43544683c5dfb934c6978,
         type: 3}
       propertyPath: m_RootOrder

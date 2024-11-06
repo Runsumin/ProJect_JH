@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3426118387778711811}
   - component: {fileID: 6401642997674608763}
   - component: {fileID: 8926205908400889508}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4779,7 +4779,7 @@ GameObject:
   - component: {fileID: 7303014596993059951}
   - component: {fileID: 3404346889939094988}
   - component: {fileID: 2932915937332250920}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SparkTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9550,7 +9550,7 @@ GameObject:
   - component: {fileID: 2006701162368518149}
   - component: {fileID: 2104865964239257999}
   - component: {fileID: -1853380818550833076}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: MagicBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14319,6 +14319,7 @@ MonoBehaviour:
     Target: {fileID: 0}
     EndPorisionEffect: {fileID: 1370948438719252343}
     SetBomb: 0
+    Damage: 0
   LimitTime: 0
   ingtm: 0
   MagicBallSpeed: 0
@@ -14443,8 +14444,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1543862427057237436, guid: c0ccea73cb86c544682071a9e40404dd,
         type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543862427057237436, guid: c0ccea73cb86c544682071a9e40404dd,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293017997600438453, guid: c0ccea73cb86c544682071a9e40404dd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319543978318410473, guid: c0ccea73cb86c544682071a9e40404dd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737056035219783618, guid: c0ccea73cb86c544682071a9e40404dd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

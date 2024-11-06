@@ -100,10 +100,11 @@ namespace HSM.Game
         {
             public TextMeshProUGUI ExplainText;
             public TextMeshProUGUI Timer;
-            public GameObject Result;
+            public TextMeshProUGUI Result;
+            public bool MiniGameStart;
 
         }
-        public NMiniGame InGame_MiniGAme = new NMiniGame();
+        public NMiniGame InGame_MiniGame = new NMiniGame();
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -147,6 +148,7 @@ namespace HSM.Game
         {
             base.Start();
             StageData = GameObject.Find("DCL_InGame").GetComponent<DCL_StageBase>();
+            StageData.SetMiniGameCallback(Show_MiniGame);
             SetPlayerData();
             choice = new DCL_Status_Choice();
             choice.MakeChoiceData();
@@ -159,6 +161,10 @@ namespace HSM.Game
         {
             Update_MainTimer();
             Update_PlayerData();
+            if (InGame_MiniGame.MiniGameStart)
+            {
+                MiniGame_TimeCheck();
+            }
         }
         #endregion
 
@@ -344,11 +350,82 @@ namespace HSM.Game
         }
         #endregion
 
-        #region [MiniGame]
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 4. MiniGame
+        //  
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [MiniGame] Show_MiniGame
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Show_MiniGame()
         {
+            InGame_MiniGame.Root.SetActive(true);
+            InGame_MiniGame.ExplainText.text = StageData.MiniGameSet.nowData.Setting.Explanation;
+            InGame_MiniGame.Timer.text = StageData.MiniGameSet.nowData.Setting.GameIngTime.ToString();
+            InGame_MiniGame.MiniGameStart = true;
+        }
+        #endregion
 
+        #region [MiniGame] Result_MiniGame
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Result_MiniGame(bool result)
+        {
+            InGame_MiniGame.ExplainText.gameObject.SetActive(false);
+            InGame_MiniGame.Timer.gameObject.SetActive(false);
+            InGame_MiniGame.Result.gameObject.SetActive(true);
+            if(result)
+                InGame_MiniGame.Result.text = "성공";
+            else
+                InGame_MiniGame.Result.text = "실패";
+
+            StartCoroutine(Hide_MiniGame());
+        }
+        #endregion
+
+
+        #region [MiniGame] Hide_MiniGame
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        IEnumerator Hide_MiniGame()
+        {
+            float time = 0;
+            while(true)
+            {
+                time += Time.deltaTime;
+
+                if(time > 8f)
+                {
+                    InGame_MiniGame.Root.SetActive(false);  
+                    InGame_MiniGame.ExplainText.gameObject.SetActive(true);
+                    InGame_MiniGame.Timer.gameObject.SetActive(true);
+                    StageData.MiniGameSet.nowData.Destroy();
+                    break;
+                }
+            }
+
+            yield return null;
+        }
+        #endregion
+
+        #region [MiniGame] MiniGame_TimeCheck
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void MiniGame_TimeCheck()
+        {
+            InGame_MiniGame.Timer.text = StageData.MiniGameSet.nowData.Setting.GameIngTime.ToString();
+            // GameEndCheck
+            if (StageData.MiniGameSet.nowData.Setting.MiniGameEnd == true &&
+                StageData.MiniGameSet.nowData.Setting.MiniGameClear == false)
+            {
+                // 미니게임 실패
+                Result_MiniGame(false);
+                InGame_MiniGame.MiniGameStart = false;
+            }
+            else if (StageData.MiniGameSet.nowData.Setting.MiniGameEnd == true &&
+                   StageData.MiniGameSet.nowData.Setting.MiniGameClear == true)
+            {
+                // 미니게임 성공
+                Result_MiniGame(true);
+                InGame_MiniGame.MiniGameStart = false;
+            }
         }
         #endregion
 

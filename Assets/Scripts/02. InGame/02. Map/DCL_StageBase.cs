@@ -19,7 +19,7 @@ namespace HSM.Game
     //  - 서브 퀘스트 종류
     //  - 서브 퀘스트 발생 시간
     //
-    //  이벤트 - 게임 내 큰 분기점
+    //  이벤트 - 게임 내 큰 분기점x`c``~~~`zzzzzzzzzzzzzzzzzzz
     //  웨이브 - 게임 내 몬스터 생성 패턴
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -114,6 +114,9 @@ namespace HSM.Game
         {
             public GameObject Root;
             public GameObject PrisionPrefab;
+            public DCL_MiniGame_Base nowData;
+            ///
+            public GameObject MiniGame_Item;
         }
         public NMiniGameSetting MiniGameSet = new NMiniGameSetting();
         #endregion
@@ -267,6 +270,8 @@ namespace HSM.Game
         {
             Setting.StageTime.StageStreamNowTime += Time.deltaTime;
             WaveTimeSetting(Setting.StageTime.StageStreamNowTime);
+
+           
         }
         #endregion
 
@@ -288,11 +293,16 @@ namespace HSM.Game
         }
         #endregion
 
+
         public void SetCallback(WaveChangeCallBack cal)
         {
             WC_CallBack = cal;
         }
 
+        public void SetMiniGameCallback(Create_MiniGame_CallBack cal)
+        {
+            CM_CallBack = cal;
+        }
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 2. Random Data
         //
@@ -323,19 +333,32 @@ namespace HSM.Game
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // 3. MiniGame
+        // 3. Generate
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [MiniGame] MiniGame Setting
+        #region [Generate] MiniGame Setting
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public void Create_MiniGame()
+        public void Create_MiniGame(Vector3 pos)
         {
             GameObject minigame = Instantiate(MiniGameSet.PrisionPrefab, MiniGameSet.Root.transform);
-            minigame.GetComponent<DCL_MiniGame_Prison>().Initialize(Setting.StageTime.StageStreamNowTime, 30);
+            minigame.GetComponent<DCL_MiniGame_Prison>().Initialize(Setting.StageTime.StageStreamNowTime, 30, pos);
+            MiniGameSet.nowData = minigame.GetComponent<DCL_MiniGame_Prison>();
+
+            CM_CallBack();
+        }
+        #endregion
+
+        #region [Generate] MiniGame Setting
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Create_Boss(Vector3 pos)
+        {
+            //GameObject boss = Instantiate(MiniGameSet.PrisionPrefab, MiniGameSet.Root.transform);            
+            //boss.GetComponent<DCL_MiniGame_Prison>().Initialize(Setting.StageTime.StageStreamNowTime, 30, pos);            
 
         }
         #endregion
+
 
     }
 

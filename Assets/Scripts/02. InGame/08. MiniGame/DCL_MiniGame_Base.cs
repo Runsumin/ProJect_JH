@@ -13,7 +13,7 @@ namespace HSM.Game
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-    public class DCL_MiniGame_Base : MonoBehaviour
+    public class DCL_MiniGame_Base : ObjectBase
     {
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Nested Class
@@ -37,11 +37,15 @@ namespace HSM.Game
         {
             public MiniGameType GameType;
             public MiniGameStatus GameStatus;
-            public float EventStartTime;
-            public float GameIngTime;
-            public float EventEndTime;          
+            public float EventStartTime;    // 미니게임 시작 시간
+            public float GameIngTime;       // 미니게임 진행 시간
+            public float EventEndTime;      // 미니게임 성공시 종료 시간
             public string Explanation;
             public Vector3 Position;
+            ///
+            public bool MiniGameEnd;    // 미니게임 종료
+            public bool MiniGameClear;  // 미니게임 성공 여부
+
         }
         public NSetting Setting = new NSetting();
         #endregion
@@ -78,7 +82,7 @@ namespace HSM.Game
 
         #region [Init] Initialize
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public virtual void Initialize(float time, float GameTime)
+        public virtual void Initialize(float time, float GameTime, Vector3 pos)
         {
 
         }
@@ -86,7 +90,7 @@ namespace HSM.Game
 
         #region [Init] Start
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public virtual void Start()
+        public override void Start()
         {
 
         }
@@ -120,7 +124,7 @@ namespace HSM.Game
 
         #region [Clear] 
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public virtual void Destroy()
+        public override void Destroy()
         {
             Destroy(gameObject);
         }

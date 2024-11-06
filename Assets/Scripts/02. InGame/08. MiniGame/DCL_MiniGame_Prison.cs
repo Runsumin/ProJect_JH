@@ -27,6 +27,7 @@ namespace HSM.Game
         public class NMiniGame_PrisionSetting
         {
             public DecalProjector Decal_RangeEffect;
+            public Collider HitCollider;
         }
         public NMiniGame_PrisionSetting NMiniGame_PrisionSet = new NMiniGame_PrisionSetting();
         #endregion
@@ -39,7 +40,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] Base
-
+        public float InGameTimer;
         #endregion
 
 
@@ -63,7 +64,7 @@ namespace HSM.Game
 
         #region [Init] Initialize
         //------------------------------------------------------------------------------------------------------------------------------------------------------
-        public override void Initialize(float time, float GameTime)
+        public override void Initialize(float time, float GameTime, Vector3 pos)
         {
             Setting.GameStatus = MiniGameStatus.Start;
             Setting.GameType = MiniGameType.Prison;
@@ -71,7 +72,7 @@ namespace HSM.Game
             Setting.GameIngTime = GameTime;
             Setting.EventEndTime = Setting.EventStartTime + Setting.GameIngTime;
             Setting.Explanation = "제한시간 동안 감옥 안에서 살아남으세요!";
-            Setting.Position = Vector3.zero;
+            Setting.Position = pos;
         }
         #endregion
 
@@ -79,7 +80,8 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Start()
         {
-
+            Setting.MiniGameEnd = false;
+            Setting.MiniGameClear = false;
         }
         #endregion
 
@@ -88,11 +90,26 @@ namespace HSM.Game
         //
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        #region [Update] Start
+        #region [Update] Update
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Update()
         {
+            if(MiniGameTimer() == true)
+            {
+                Setting.MiniGameEnd = true;
+                Setting.MiniGameClear = true;
+            }
+        }
+        #endregion
 
+        #region [Update] GameTimer
+        public bool MiniGameTimer()
+        {
+            Setting.GameIngTime -= Time.deltaTime;
+            if (Setting.GameIngTime < 0)
+                return true;
+            else
+                return false;
         }
         #endregion
 
@@ -106,6 +123,33 @@ namespace HSM.Game
         public void ChangeDecalSize(float w, float h)
         {
             NMiniGame_PrisionSet.Decal_RangeEffect.size = new Vector3(w, h, 1);
+        }
+        #endregion
+
+        #region [Decal] ChangeColliderSize
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void ChangeColliderSize(float r)
+        {
+            NMiniGame_PrisionSet.HitCollider.GetComponent<SphereCollider>().radius = r;
+        }
+        #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 3. Collider
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Collider] 
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.layer == PLAYERCOLLIDER)
+            {
+                // 실패
+                //Destroy();
+                Setting.MiniGameEnd = true;
+                Debug.Log("아웃");
+            }
         }
         #endregion
 

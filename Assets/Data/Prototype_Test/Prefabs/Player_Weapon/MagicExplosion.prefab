@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 865220006275331720}
   - component: {fileID: 7812784274950787953}
   - component: {fileID: 8146156864914060438}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MagicExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4867,7 +4867,7 @@ GameObject:
   - component: {fileID: 5548797662603154270}
   - component: {fileID: 582597114816363390}
   - component: {fileID: 1773153318549863831}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9675,7 +9675,7 @@ GameObject:
   - component: {fileID: 6017628221000252456}
   - component: {fileID: 2554093229556729334}
   - component: {fileID: 128223557334810386}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CentralOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14528,7 +14528,7 @@ GameObject:
   - component: {fileID: 8507388497052798223}
   - component: {fileID: 2444922185380196408}
   - component: {fileID: 7111971360517607012}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
