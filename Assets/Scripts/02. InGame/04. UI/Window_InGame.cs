@@ -392,7 +392,7 @@ namespace HSM.Game
             {
                 time += Time.deltaTime;
 
-                if(time > 8f)
+                if(time > 2)
                 {
                     InGame_MiniGame.Root.SetActive(false);  
                     InGame_MiniGame.ExplainText.gameObject.SetActive(true);
@@ -400,9 +400,8 @@ namespace HSM.Game
                     StageData.MiniGameSet.nowData.Destroy();
                     break;
                 }
+                yield return null;
             }
-
-            yield return null;
         }
         #endregion
 
