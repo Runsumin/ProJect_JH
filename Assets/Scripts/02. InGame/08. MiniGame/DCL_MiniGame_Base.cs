@@ -21,7 +21,7 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [enum] GameType
-        public enum MiniGameType { Flag, Prison }
+        public enum MiniGameType { Flag, Prison, Cleaning }
         public enum MiniGameStatus { Start, Ing, Clear, Fail }
         #endregion
 
