@@ -19,7 +19,7 @@ namespace HSM.Game
     //  - 서브 퀘스트 종류
     //  - 서브 퀘스트 발생 시간
     //
-    //  이벤트 - 게임 내 큰 분기점
+    //  이벤트 - 게임 내 큰 분기점x`c``~~~`zzzzzzzzzzzzzzzzzzz
     //  웨이브 - 게임 내 몬스터 생성 패턴
     //
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -117,7 +117,6 @@ namespace HSM.Game
             public DCL_MiniGame_Base nowData;
             ///
             public GameObject MiniGame_Item;
-            public GameObject[] MiniGame_Arr;
         }
         public NMiniGameSetting MiniGameSet = new NMiniGameSetting();
         #endregion
@@ -338,8 +337,8 @@ namespace HSM.Game
         public void Create_MiniGame(Vector3 pos)
         {
             GameObject minigame = Instantiate(MiniGameSet.PrisionPrefab, MiniGameSet.Root.transform);
-            minigame.GetComponent<DCL_MiniGame_Base>().Initialize(Setting.StageTime.StageStreamNowTime, 25, pos);
-            MiniGameSet.nowData = minigame.GetComponent<DCL_MiniGame_Base>();
+            minigame.GetComponent<DCL_MiniGame_Prison>().Initialize(Setting.StageTime.StageStreamNowTime, 30, pos);
+            MiniGameSet.nowData = minigame.GetComponent<DCL_MiniGame_Prison>();
 
             CM_CallBack();
         }

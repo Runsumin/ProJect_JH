@@ -60536,11 +60536,10 @@ MonoBehaviour:
     NowMonsterWaveType: 0
   MiniGameSet:
     Root: {fileID: 239768224}
-    PrisionPrefab: {fileID: 8494657303892111682, guid: 3354eaa3b288e36478ab1d9dc2679281,
+    PrisionPrefab: {fileID: 4127730274998497230, guid: 072d3690f429d7d4185e033bc4b164b6,
       type: 3}
     nowData: {fileID: 0}
     MiniGame_Item: {fileID: 0}
-<<<<<<< HEAD
 --- !u!4 &1507755635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4041392968632078, guid: 03228befdc5ef264bb7862832d88f161,
@@ -60608,11 +60607,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03228befdc5ef264bb7862832d88f161, type: 3}
-=======
-    MiniGame_Arr:
-    - {fileID: 8494657303892111682, guid: 3354eaa3b288e36478ab1d9dc2679281, type: 3}
-    - {fileID: 4127730274998497230, guid: 072d3690f429d7d4185e033bc4b164b6, type: 3}
->>>>>>> 96cf95b95789c45ab10a71162353aad373204fe9
 --- !u!1001 &1511951370
 PrefabInstance:
   m_ObjectHideFlags: 0
