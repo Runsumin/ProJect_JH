@@ -94,7 +94,7 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Update()
         {
-            if(MiniGameTimer() == true)
+            if (MiniGameTimer() == true)
             {
                 Setting.MiniGameEnd = true;
                 Setting.MiniGameClear = true;
