@@ -26,12 +26,8 @@ namespace HSM.Game
         [Serializable]
         public class NMiniGame_CleaningSetting
         {
-            public Collider HitCollider;
             public Transform Trash_Root;
             public GameObject Trash_Prefab;
-            public List<GameObject> Item_Trasharr;
-            public float Item_MaxCount;
-            public float Item_NowCount;
         }
         public NMiniGame_CleaningSetting NMiniGame_CleaningSet = new NMiniGame_CleaningSetting();
         #endregion
@@ -44,7 +40,9 @@ namespace HSM.Game
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         #region [Variable] Base
-        public float InGameTimer;        
+        public float InGameTimer;
+        public int Item_MaxCount;
+        public int Item_NowCount;
         #endregion
 
 
@@ -71,14 +69,14 @@ namespace HSM.Game
         public override void Initialize(float time, float GameTime, Vector3 pos)
         {
             Setting.GameStatus = MiniGameStatus.Start;
-            Setting.GameType = MiniGameType.Flag;
+            Setting.GameType = MiniGameType.Cleaning;
             Setting.EventStartTime = time;
             Setting.GameIngTime = GameTime;
             Setting.EventEndTime = Setting.EventStartTime + Setting.GameIngTime;
             Setting.Explanation = "제한시간 안에 쓰레기를 청소하세요!";
             Setting.Position = pos;
-            NMiniGame_CleaningSet.Item_MaxCount = 10;   // 나중에 외부로 빼서 난이도 조절에 추가 필요...
-            NMiniGame_CleaningSet.Item_NowCount = 0;
+            Item_MaxCount = 5;   // 나중에 외부로 빼서 난이도 조절에 추가 필요...
+            Item_NowCount = 0;
 
         }
         #endregion
@@ -89,7 +87,8 @@ namespace HSM.Game
         {
             Setting.MiniGameEnd = false;
             Setting.MiniGameClear = false;
-            ItemSpread(NMiniGame_CleaningSet.Item_MaxCount, 30);
+            NMiniGame_CleaningSet.Trash_Root = gameObject.transform;
+            ItemSpread(Item_MaxCount, 20);
         }
         #endregion
 
@@ -98,10 +97,10 @@ namespace HSM.Game
         {
             for (int i = 0; i < count; i++)
             {
+                // 쓰레기 위치 추후에 변경 필요
                 Vector3 pos = UnityEngine.Random.insideUnitSphere * range;
                 pos.y = 0;
                 GameObject trash = Instantiate(NMiniGame_CleaningSet.Trash_Prefab, pos, Quaternion.identity, NMiniGame_CleaningSet.Trash_Root);
-                NMiniGame_CleaningSet.Item_Trasharr.Add(trash);
             }
         }
         #endregion
@@ -117,8 +116,24 @@ namespace HSM.Game
         {
             if (MiniGameTimer() == true)
             {
-                Setting.MiniGameEnd = true;
-                Setting.MiniGameClear = true;
+                if(Item_NowCount < Item_MaxCount)
+                {
+                    Setting.MiniGameEnd = true;
+                    Setting.MiniGameClear = false;
+                }
+                else
+                {
+                    Setting.MiniGameEnd = true;
+                    Setting.MiniGameClear = true;
+                }
+            }
+            else
+            {
+                if(Item_NowCount >= Item_MaxCount)
+                {
+                    Setting.MiniGameEnd = true;
+                    Setting.MiniGameClear = true;
+                }
             }
         }
         #endregion
@@ -156,7 +171,10 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Clear()
         {
-
+            foreach(Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
         }
         #endregion
 

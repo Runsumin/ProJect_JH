@@ -97,6 +97,7 @@ namespace HSM.Game
         {
             if (coll.gameObject.layer == PLAYERCOLLIDER)
             {
+                minigamedata.GetComponent<DCL_MiniGame_Cleaning>().Item_NowCount++;
                 Destroy(gameObject);
             }
         }
@@ -119,7 +120,7 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public override void Death()
         {
-            Window_InGame.Instance.Show_ChoiceList();
+           // Window_InGame.Instance.Show_ChoiceList();
             Destroy(gameObject);
         }
         #endregion

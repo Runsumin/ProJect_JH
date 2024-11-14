@@ -101,6 +101,7 @@ namespace HSM.Game
             public TextMeshProUGUI ExplainText;
             public TextMeshProUGUI Timer;
             public TextMeshProUGUI Result;
+            public TextMeshProUGUI QuestTable;
             public bool MiniGameStart;
 
         }
@@ -361,8 +362,20 @@ namespace HSM.Game
         {
             InGame_MiniGame.Root.SetActive(true);
             InGame_MiniGame.ExplainText.text = StageData.MiniGameSet.nowData.Setting.Explanation;
-            InGame_MiniGame.Timer.text = StageData.MiniGameSet.nowData.Setting.GameIngTime.ToString();
+            InGame_MiniGame.Timer.text = ((int)StageData.MiniGameSet.nowData.Setting.GameIngTime).ToString();
             InGame_MiniGame.MiniGameStart = true;
+            switch (StageData.MiniGameSet.nowData.Setting.GameType)
+            {
+                case DCL_MiniGame_Base.MiniGameType.Flag:
+                    InGame_MiniGame.QuestTable.gameObject.SetActive(true);
+                    break;
+                case DCL_MiniGame_Base.MiniGameType.Prison:
+                    InGame_MiniGame.QuestTable.gameObject.SetActive(false);
+                    break;
+                case DCL_MiniGame_Base.MiniGameType.Cleaning:
+                    InGame_MiniGame.QuestTable.gameObject.SetActive(true);
+                    break;
+            }
         }
         #endregion
 
@@ -373,7 +386,7 @@ namespace HSM.Game
             InGame_MiniGame.ExplainText.gameObject.SetActive(false);
             InGame_MiniGame.Timer.gameObject.SetActive(false);
             InGame_MiniGame.Result.gameObject.SetActive(true);
-            if(result)
+            if (result)
                 InGame_MiniGame.Result.text = "성공";
             else
                 InGame_MiniGame.Result.text = "실패";
@@ -388,15 +401,16 @@ namespace HSM.Game
         IEnumerator Hide_MiniGame()
         {
             float time = 0;
-            while(true)
+            while (true)
             {
                 time += Time.deltaTime;
 
-                if(time > 2)
+                if (time > 2)
                 {
-                    InGame_MiniGame.Root.SetActive(false);  
+                    InGame_MiniGame.Root.SetActive(false);
                     InGame_MiniGame.ExplainText.gameObject.SetActive(true);
                     InGame_MiniGame.Timer.gameObject.SetActive(true);
+                    InGame_MiniGame.Result.gameObject.SetActive(false);
                     StageData.MiniGameSet.nowData.Destroy();
                     break;
                 }
@@ -409,7 +423,22 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void MiniGame_TimeCheck()
         {
-            InGame_MiniGame.Timer.text = StageData.MiniGameSet.nowData.Setting.GameIngTime.ToString();
+            InGame_MiniGame.Timer.text = ((int)StageData.MiniGameSet.nowData.Setting.GameIngTime).ToString();
+            switch (StageData.MiniGameSet.nowData.Setting.GameType)
+            {
+                case DCL_MiniGame_Base.MiniGameType.Flag:
+                    int all = StageData.MiniGameSet.nowData.GetComponent<DCL_MiniGame_Flag>().Item_MaxCount;
+                    int now = StageData.MiniGameSet.nowData.GetComponent<DCL_MiniGame_Flag>().Item_NowCount;
+                    InGame_MiniGame.QuestTable.text = string.Format("{0} / {1}", now, all);
+                    break;
+                case DCL_MiniGame_Base.MiniGameType.Prison:
+                    break;
+                case DCL_MiniGame_Base.MiniGameType.Cleaning:
+                    int all2 = StageData.MiniGameSet.nowData.GetComponent<DCL_MiniGame_Cleaning>().Item_MaxCount;
+                    int now2 = StageData.MiniGameSet.nowData.GetComponent<DCL_MiniGame_Cleaning>().Item_NowCount;
+                    InGame_MiniGame.QuestTable.text = string.Format("{0} / {1}", now2, all2);
+                    break;
+            }
             // GameEndCheck
             if (StageData.MiniGameSet.nowData.Setting.MiniGameEnd == true &&
                 StageData.MiniGameSet.nowData.Setting.MiniGameClear == false)

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 425171425584278193}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8035269491833535771}
   - component: {fileID: 4756481896803213983}
   - component: {fileID: 6129096281192523891}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Trash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 5074459104944182755}
   - component: {fileID: 5066157601740834775}
   - component: {fileID: 5115143738314575515}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SM_Env_Obelisk_Glow_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 3452252389964812446}
   - component: {fileID: 5534994182468785566}
   - component: {fileID: 4222975971109657232}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Trash_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 6646393353755283501}
   - component: {fileID: 5021953331025947893}
   - component: {fileID: 8203883938432980946}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,8 +369,6 @@ MonoBehaviour:
   TrashSetting:
     Trash_State: 0
     Inter_Range: {fileID: 0}
-    Inter_Maxtime: 0
-    Inter_DelayTime: 0
     InGameWorldUI: {fileID: 7110915376492672094}
 --- !u!65 &8203883938432980946
 BoxCollider:

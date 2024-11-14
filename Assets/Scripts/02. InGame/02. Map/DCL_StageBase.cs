@@ -113,7 +113,6 @@ namespace HSM.Game
         public class NMiniGameSetting
         {
             public GameObject Root;
-            public GameObject PrisionPrefab;
             public DCL_MiniGame_Base nowData;
             ///
             public GameObject MiniGame_Item;
@@ -337,8 +336,21 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Create_MiniGame(Vector3 pos)
         {
-            GameObject minigame = Instantiate(MiniGameSet.PrisionPrefab, MiniGameSet.Root.transform);
-            minigame.GetComponent<DCL_MiniGame_Base>().Initialize(Setting.StageTime.StageStreamNowTime, 25, pos);
+            int ran = UnityEngine.Random.Range(0, 3);
+            GameObject minigame = Instantiate(MiniGameSet.MiniGame_Arr[ran], MiniGameSet.Root.transform);
+            switch (ran)
+            {
+                case 0:
+                    minigame.name = "Flag";
+                    break;
+                case 1:
+                    minigame.name = "Cleaning";
+                    break;
+                case 2:
+                    minigame.name = "Prision";
+                    break;
+            }
+            minigame.GetComponent<DCL_MiniGame_Base>().Initialize(Setting.StageTime.StageStreamNowTime, 30, pos);
             MiniGameSet.nowData = minigame.GetComponent<DCL_MiniGame_Base>();
 
             CM_CallBack();
