@@ -59,11 +59,13 @@ namespace HSM.Game
         #region [Variable] Animation State
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public eRobinState Robin_State;
+        #endregion
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         #region [Variable] Animation
-        protected Animator TankAnimation;
+        protected Animator RobinAnimation;
         protected eRobinState BeForeRobinState = eRobinState.IDLE;   // 이전 행동
         protected eRobinState RobinState = eRobinState.IDLE;         // 현재 행동
-        #endregion
+        public bool bAniEndTrigger;
         #endregion
 
         #region [Variable] BT
@@ -91,7 +93,7 @@ namespace HSM.Game
         {
             base.Start();
             Robin_State = eRobinState.IDLE;
-            TankAnimation = GetComponent<Animator>();
+            RobinAnimation = GetComponent<Animator>();
             Nav_Agent.speed = Mon_Status.Move_Speed;
         }
         #endregion
@@ -170,8 +172,8 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void ChangeAnimationByTrigger(eRobinState robinstate, eRobinState beforerobinstate)
         {
-            TankAnimation.ResetTrigger(beforerobinstate.ToString());
-            TankAnimation.SetTrigger(robinstate.ToString());
+            RobinAnimation.ResetTrigger(beforerobinstate.ToString());
+            RobinAnimation.SetTrigger(robinstate.ToString());
         }
         #endregion
 
@@ -184,6 +186,16 @@ namespace HSM.Game
             ChangeAnimationByTrigger(RobinState, BeForeRobinState);
         }
         #endregion
+
+        #region [Animation] OnNormalAttackEnd
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnNormalAttackEnd()
+        {
+            RobinAnimation.SetTrigger("BackToIdle");
+            bAniEndTrigger = true;
+        }
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 99. Death
         //

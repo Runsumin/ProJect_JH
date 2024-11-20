@@ -194,7 +194,7 @@ namespace HSM.Game
         public override void Update()
         {
             base.Update();
-            //_BTRunner.Operate();
+            _BTRunner.Operate();
         }
         #endregion
 
