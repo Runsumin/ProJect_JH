@@ -9,20 +9,18 @@ using Unity.Properties;
 public partial class BackToIdleAction : Action
 {
     [SerializeReference] public BlackboardVariable<SelfStatus> Idle;
+
+    public Animator ani;
     protected override Status OnStart()
     {
+        ani = this.GameObject.GetComponent<Animator>();
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
-        bool end = this.GameObject.GetComponent<HSM.Game.DCL_Monster_Boss_Robin>().bAniEndTrigger;
-        if (end == true)
-        {
-            Idle.Value = SelfStatus.IDLE;
-            end = false;
+        if (ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !ani.IsInTransition(0))
             return Status.Success;
-        }
         else
             return Status.Running;
     }
