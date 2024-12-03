@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hero_Mat_Head
+  m_Name: Hero_Mat_Weapon
   m_Shader: {fileID: -6465566751694194690, guid: 122ce928207ad5f41a908f23d3a05130,
     type: 3}
   m_Parent: {fileID: 0}
@@ -87,21 +87,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_147A751B: 4.72
-    - Vector1_28C8683: 4.56
-    - Vector1_6AEDE23: 4.64
+    - Vector1_147A751B: 4.16
+    - Vector1_28C8683: 3.92
+    - Vector1_6AEDE23: 3.44
     - Vector1_D15D16DF: 8
-    - Vector1_D682A6C5: 4.32
-    - Vector1_E784DED5: 8.1
+    - Vector1_D682A6C5: 3.68
+    - Vector1_E784DED5: 7.4
     - _Color01Power: 3.1
     - _Color02Power: 3.4
     - _Color03Power: 3
     - _Color04Power: 3
     - _Color05Power: 3
     - _Color06Power: 3
-    - _Color07Power: 2.08
-    - _Color08Power: 5.52
-    - _Color09Power: 3.36
+    - _Color07Power: 4.96
+    - _Color08Power: 3.84
+    - _Color09Power: 6.32
     - _QueueControl: 0
     - _QueueOffset: 0
     - __dirty: 1
@@ -120,7 +120,7 @@ Material:
     - _Color04: {r: 0.2702128, g: 0.10849059, b: 1, a: 0}
     - _Color05: {r: 0.21016884, g: 0, b: 1, a: 0}
     - _Color06: {r: 0.1724813, g: 0.37539005, b: 0.7169812, a: 0}
-    - _Color07: {r: 0.6037736, g: 0.36739054, b: 0.36739054, a: 0}
+    - _Color07: {r: 0.3962264, g: 0.14017443, b: 0.14017443, a: 0}
     - _Color08: {r: 1, g: 1, b: 1, a: 0}
     - _Color09_SKIN: {r: 0.20870416, g: 0.26778442, b: 0.6603774, a: 0}
     - _Color09_Skin: {r: 0.5377358, g: 0.49948716, b: 0.47432357, a: 0}
