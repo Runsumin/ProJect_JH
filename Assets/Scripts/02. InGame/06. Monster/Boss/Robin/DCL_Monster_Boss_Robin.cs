@@ -130,6 +130,18 @@ namespace HSM.Game
         }
         #endregion
 
+
+        #region [BT] TargetDistance
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public float GetTargetDistance()
+        {
+            Vector3 dirvec = PlayerPos.position - transform.position;
+            float length = Mathf.Sqrt(Mathf.Pow(dirvec.x, 2) + Mathf.Pow(dirvec.y, 2) + Mathf.Pow(dirvec.z, 2));
+
+            return length;
+        }
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 97. Collider
         //
@@ -187,12 +199,19 @@ namespace HSM.Game
         }
         #endregion
 
+        #region [Animation] OnNormalAttackStart
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void OnNormalAttackStart()
+        {
+            
+        }
+        #endregion
+
         #region [Animation] OnNormalAttackEnd
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnNormalAttackEnd()
         {
-            RobinAnimation.SetTrigger("BackToIdle");
-            bAniEndTrigger = true;
+
         }
         #endregion
 

@@ -19,12 +19,12 @@ public partial class AttackStartAction : Action
 
     protected override Status OnUpdate()
     {
-        if (Animator.Value.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
-            return Status.Running;
-        else
-        {
+        //if (Animator.Value.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        //    return Status.Running;
+        //else
+        //{
             return Status.Success;
-        }
+        //}
     }
 
     protected override void OnEnd()
