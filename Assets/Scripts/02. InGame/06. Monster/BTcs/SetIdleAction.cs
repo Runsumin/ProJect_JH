@@ -12,7 +12,7 @@ public partial class SetIdleAction : Action
     protected override Status OnStart()
     {
         this.GameObject.GetComponent<HSM.Game.DCL_Monster_Boss_Robin>().Nav_Move_Stop();
-        return Status.Success;
+        return Status.Running;
     }
 
 }

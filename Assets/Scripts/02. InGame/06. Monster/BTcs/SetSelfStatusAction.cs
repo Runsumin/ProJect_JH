@@ -10,19 +10,11 @@ public partial class SetSelfStatusAction : Action
 {
     [SerializeReference] public BlackboardVariable<SelfStatus> SelfStatus;
     [SerializeReference] public BlackboardVariable<SelfStatus> SettingStatus;
-
     protected override Status OnStart()
     {
+        SelfStatus.Value = SettingStatus.Value;
         return Status.Running;
     }
 
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }
 
