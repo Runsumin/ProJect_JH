@@ -36861,138 +36861,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4284887229523225519, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 77f73a5085cd8d549b9bd94e02a55d1d, type: 2}
-    - target: {fileID: 4284887229523225519, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 77f73a5085cd8d549b9bd94e02a55d1d, type: 2}
-    - target: {fileID: 4284887229523225519, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[2]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 77f73a5085cd8d549b9bd94e02a55d1d, type: 2}
-    - target: {fileID: 4284887229523225519, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[3]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 77f73a5085cd8d549b9bd94e02a55d1d, type: 2}
-    - target: {fileID: 4284887229523225519, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[4]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 77f73a5085cd8d549b9bd94e02a55d1d, type: 2}
-    - target: {fileID: 4284887229523225519, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[5]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 77f73a5085cd8d549b9bd94e02a55d1d, type: 2}
-    - target: {fileID: 6461014291048898575, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 146ca486924177b48b85db63cfd5d7ab, type: 2}
-    - target: {fileID: 6732866723800993734, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: dd6fd1f85e2412a4e92a8df97972991a, type: 2}
-    - target: {fileID: 6732866723800993734, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: dd6fd1f85e2412a4e92a8df97972991a, type: 2}
-    - target: {fileID: 6732866723800993734, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[2]'
-      value: 
-      objectReference: {fileID: 2100000, guid: dd6fd1f85e2412a4e92a8df97972991a, type: 2}
-    - target: {fileID: 6732866723800993734, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_Materials.Array.data[3]'
-      value: 
-      objectReference: {fileID: 2100000, guid: dd6fd1f85e2412a4e92a8df97972991a, type: 2}
     - target: {fileID: 7418972733239544203, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
         type: 3}
       propertyPath: m_Name
       value: Boss_Robin
       objectReference: {fileID: 0}
-    - target: {fileID: 7418972733239544203, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'managedReferences[367942843742028030]'
-      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.Animator,
-        UnityEngine.AnimationModule]]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'managedReferences[367942848813204416]'
-      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.Animator,
-        UnityEngine.AnimationModule]]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: managedReferences[367942843742028030].Name
-      value: RobinAni
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: managedReferences[367942848813204416].Name
-      value: RobinAnimator
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: m_BlackboardVariableOverridesList.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: managedReferences[367942843742028030].m_Value
-      value: 
-      objectReference: {fileID: 1327674655}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: managedReferences[367942848813204416].m_Value
-      value: 
-      objectReference: {fileID: 1327674655}
     - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
         type: 3}
       propertyPath: managedReferences[8567230114146288116].m_Value
       value: 
       objectReference: {fileID: 1955626577}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[2]'
-      value: 367942848813204416
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: managedReferences[367942843742028030].GUID.m_Value0
-      value: 4842718389523665348
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: managedReferences[367942843742028030].GUID.m_Value1
-      value: 6964665065801250742
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: managedReferences[367942848813204416].GUID.m_Value0
-      value: 7057463882233432209
-      objectReference: {fileID: 0}
-    - target: {fileID: 9132009346242418337, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-        type: 3}
-      propertyPath: managedReferences[367942848813204416].GUID.m_Value1
-      value: 6039683095656201910
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37806,12 +37684,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4427348796447190, guid: 63baf9dc330c3de4b8989173c035ef37,
     type: 3}
   m_PrefabInstance: {fileID: 1318747819}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1327674655 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3610283636626692879, guid: 30bf0b515a6cc2146ab872b508b4fdfc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1288556479}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1328111139
 PrefabInstance:
@@ -85254,11 +85126,12 @@ MonoBehaviour:
     Monster_Level: 0
     EXP: {fileID: 0}
   PlayerPos: {fileID: 0}
-  Tank_Setting:
+  Robin_Setting:
     Box_Effect: {fileID: 0}
     Circle_Effect: {fileID: 0}
     Model: {fileID: 0}
     AttactCoolTime: 0
+    AttackRangeSetting: 0
   Robin_State: 0
   bAniEndTrigger: 0
 --- !u!4 &6132768975801947656

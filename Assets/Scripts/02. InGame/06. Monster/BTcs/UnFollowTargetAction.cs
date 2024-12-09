@@ -19,6 +19,12 @@ public partial class UnFollowTargetAction : Action
 
         this.GameObject.GetComponent<Animator>().SetFloat("Speed", 0);
         return Status.Success;
-    }   
+    }
+
+    protected override Status OnUpdate()
+    {
+        this.GameObject.GetComponent<HSM.Game.DCL_Monster_Boss_Robin>().Nav_Move_Stop();
+        return Status.Running;
+    }
 }
 

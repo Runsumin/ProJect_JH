@@ -47,8 +47,9 @@ namespace HSM.Game
             public DecalProjector Circle_Effect;
             public GameObject Model;
             public float AttactCoolTime;
+            public float AttackRangeSetting;
         }
-        public Boss_Robin_Setting Tank_Setting = new Boss_Robin_Setting();
+        public Boss_Robin_Setting Robin_Setting = new Boss_Robin_Setting();
         #endregion
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -71,6 +72,15 @@ namespace HSM.Game
         #region [Variable] BT
         BehaviorTreeRunner _BTRunner = null;
         #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Property
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        public void SetCircleAttackRangeAble(bool b) => Robin_Setting.Circle_Effect.gameObject.SetActive(b);
+        public void SetCircleAttackRangePosition(Vector3 pos) => Robin_Setting.Circle_Effect.transform.position = pos;
+        public void SetBoxAttackRangeAble(bool b) => Robin_Setting.Box_Effect.gameObject.SetActive(b);
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 0. Base Methods
@@ -95,6 +105,8 @@ namespace HSM.Game
             Robin_State = eRobinState.IDLE;
             RobinAnimation = GetComponent<Animator>();
             Nav_Agent.speed = Mon_Status.Move_Speed;
+
+            Robin_Setting.AttackRangeSetting = 10f;
         }
         #endregion
 
@@ -139,6 +151,14 @@ namespace HSM.Game
             float length = Mathf.Sqrt(Mathf.Pow(dirvec.x, 2) + Mathf.Pow(dirvec.y, 2) + Mathf.Pow(dirvec.z, 2));
 
             return length;
+        }
+        #endregion
+
+        #region [BT] AttackRange Setting
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void SetCircle_AttackRange(Vector3 Size)
+        {
+            Robin_Setting.Circle_Effect.size = Size;
         }
         #endregion
 
@@ -203,7 +223,7 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void OnNormalAttackStart()
         {
-            
+
         }
         #endregion
 

@@ -15,9 +15,9 @@ public partial class SetActionStateAction : Action
 
     protected override Status OnStart()
     {
-        float grade = HSM.Game.RandomMaker.Choose(Pattern_1);
+        float grade = HSM.Game.RandomMaker.Choose(Pattern_2);
         AttackState.Value = (AttackPattern)grade;
-        return Status.Success;
+        return Status.Running;
     }
 
     //protected override Status OnUpdate()
