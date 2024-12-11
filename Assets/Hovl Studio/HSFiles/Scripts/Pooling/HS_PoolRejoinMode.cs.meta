@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 01ba9e4bb4faca74dbdd294a723b62e1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 130378
+  packageName: AAA Stylized Projectiles Vol.1
+  packageVersion: 4.0.1
+  assetPath: Assets/Hovl Studio/HSFiles/Scripts/Pooling/HS_PoolRejoinMode.cs
+  uploadId: 714163

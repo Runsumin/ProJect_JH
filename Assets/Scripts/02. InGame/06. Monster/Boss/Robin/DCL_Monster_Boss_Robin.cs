@@ -52,6 +52,17 @@ namespace HSM.Game
         public Boss_Robin_Setting Robin_Setting = new Boss_Robin_Setting();
         #endregion
 
+        #region [NestedClass] Effect
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        [Serializable]
+        public class Boss_Robin_Effect
+        {
+            public Transform Root;
+            public GameObject NormalAttack_Effect;
+        }
+        public Boss_Robin_Effect Robin_Effect = new Boss_Robin_Effect();
+        #endregion
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // Variable
         //
@@ -161,6 +172,23 @@ namespace HSM.Game
             Robin_Setting.Circle_Effect.size = Size;
         }
         #endregion
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 3. Attack
+        //
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        #region [Attack] Create_Arrow
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        public void Create_Arrow(Vector3 Size)
+        {
+            GameObject InstantMagicball = Instantiate(Robin_Effect.NormalAttack_Effect, Robin_Effect.Root);
+            // 古送瑳 実特
+            InstantMagicball.transform.rotation = Quaternion.LookRotation(transform.forward);
+            //InstantMagicball.GetComponent<DCL_Staff_MagicBall>().Set_Direction(Vector3.forward, PlayerStatus.Attack_Power);
+        }
+        #endregion
+
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // 97. Collider

@@ -326,12 +326,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070781619404014101}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2957467890355341318}
+  m_Father: {fileID: 3442640221652582452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3815049195930383142
 MonoBehaviour:
@@ -544,12 +544,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667964479380169738}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2957467890355341318}
+  m_Father: {fileID: 3442640221652582452}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &269810046152746567
 MonoBehaviour:
@@ -1726,6 +1726,39 @@ Transform:
   - {fileID: 3529561046187621973}
   m_Father: {fileID: 9018919693361033657}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6117521500057835580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3442640221652582452}
+  m_Layer: 0
+  m_Name: Effect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3442640221652582452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6117521500057835580}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8693771526772877250}
+  - {fileID: 7610969704924241481}
+  m_Father: {fileID: 2957467890355341318}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6255489260524885821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,8 +2081,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8054839056326130868}
-  - {fileID: 8693771526772877250}
-  - {fileID: 7610969704924241481}
+  - {fileID: 3442640221652582452}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -172.02, z: 0}
 --- !u!95 &3610283636626692879
@@ -2099,6 +2131,10 @@ MonoBehaviour:
     Model: {fileID: 0}
     AttactCoolTime: 0
     AttackRangeSetting: 0
+  Robin_Effect:
+    Root: {fileID: 3442640221652582452}
+    NormalAttack_Effect: {fileID: 5884748981858460098, guid: fecba3aee3ffbc84291c32277c28525e,
+      type: 3}
   Robin_State: 0
   bAniEndTrigger: 0
 --- !u!195 &421632937448493371
