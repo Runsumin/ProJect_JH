@@ -51,6 +51,7 @@ namespace HSM.Game
 
         #region[Variable] Player Data
         private DCL_Status Player_Status;
+        private Rigidbody Player_RigidBody;
         #endregion
 
         #region [Variable] Animation
@@ -70,6 +71,8 @@ namespace HSM.Game
         {
             Player_Status = this.GetComponent<DCL_PlayerBase>().PL_Status;
 
+            Player_RigidBody = this.GetComponent<Rigidbody>();
+
             camforward = Camera.main.transform.forward;
             camforward.y = 0f;
 
@@ -84,16 +87,13 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void Update()
         {
-            // 일단 이런식으로 받아오기... 추후에 다른 방법 고려 필요해보임
-            Player_Status = this.GetComponent<DCL_PlayerBase>().PL_Status;
-
-            //moveDirection = SetDirction(moveDirection);
-
             bool hasControl = (moveDirection != Vector3.zero);
             if (hasControl)
             {
+                //transform.Translate(Vector3.forward * Player_Status.Move_Speed * Time.deltaTime);
+
                 transform.rotation = Quaternion.LookRotation(moveDirection);
-                transform.Translate(Vector3.forward * Player_Status.Move_Speed * Time.deltaTime);
+                Player_RigidBody.MovePosition(transform.position + moveDirection.normalized * Time.deltaTime * Player_Status.Move_Speed);
             }
 
         }
@@ -103,15 +103,14 @@ namespace HSM.Game
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         public void FixedUpdate()
         {
-            //// 일단 이런식으로 받아오기... 추후에 다른 방법 고려 필요해보임
-            //Player_Status = this.GetComponent<DCL_PlayerBase>().PL_Status;
+            bool hasControl = (moveDirection != Vector3.zero);
+            if (hasControl)
+            {
+                //transform.Translate(Vector3.forward * Player_Status.Move_Speed * Time.deltaTime);
 
-            //bool hasControl = (moveDirection != Vector3.zero);
-            //if (hasControl)
-            //{
-            //    transform.rotation = Quaternion.LookRotation(moveDirection);
-            //    transform.Translate(Vector3.forward * Player_Status.Move_Speed * Time.deltaTime);
-            //}
+                transform.rotation = Quaternion.LookRotation(moveDirection);
+                Player_RigidBody.MovePosition(transform.position + moveDirection.normalized * Time.deltaTime * Player_Status.Move_Speed);
+            }
         }
         #endregion
 
